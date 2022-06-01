@@ -1,25 +1,17 @@
-% TODO: Navedite tip rada (diplomski, zavrsni, seminar). Vidi docs folder za upute ili templates/template.cls.
 \documentclass[times, utf8, diplomski, numeric]{templates/template}
 \usepackage{booktabs}
 
 \begin{document}
 
-% TODO: Dodaj imena sveucilista i fakulteta
-\sveuciliste{SVEUČILIŠTE U ZAGORJU}
-\fakultet{FAKULTET ELEKTROTEHNIKE I DOSADE}
+\sveuciliste{SVEUČILIŠTE U ZAGREBU}
+\fakultet{FAKULTET ELEKTROTEHNIKE I RAČUNARSTVA}
 
-% TODO: Dodaj ime i prezime voditelja. 
-% Samo ako pisete seminar (inace ignorirajte ili izbrisite)
-\voditelj{Ime i prezime voditelja}
-
-% TODO: Dodaj naslov rada
-\title{Ovo je naslov rada}
+\title{Programska podrška sustava za određivanje i upravljanje orijentacijom satelita}
 
 % TODO: Dodaj broj rada (ignoriraj ako pisete seminar)
 \thesisnumber{001}
 
-% TODO: Dodaj ime i prezime (ili vise njih odvojene zarezima)
-\author{Ime i prezime autora}
+\author{Ivan Vnučec}
 
 \maketitle
 
@@ -37,7 +29,7 @@
 
 % TODO: Dodaj Uvod
 \chapter{Uvod}
-Ovdje ide uvod.
+Nanosateliti CubeSat formata postaju sve popularniji u komercijalnim i znanstvenim misijama. Broj lansiranih nanosatelita raste iz godine u godinu. Sustav za određivanje i upravljanje orijentacijom satelita jedan je od najvažnijih sustava odgovoran za stabilno i ispravno usmjeravanje satelita i njegovog korisnog tereta (antene, kamere, senzori i sl.). Zadatak ovog sustava je pomoću dostupnih senzora odrediti orijentaciju satelita te je automatski ispraviti s obzirom na željenu orijentaciju koristeći se dostupnim aktuatorima. Tema diplomskog rada je razvoj programske podrške za model satelita koja omogućuje pouzdano određivanje i upravljanje orijentacijom satelita i njegovom kutnom brzinom. U radu je potrebno opisati korištene senzore i aktuatore, način matematičkog zapisa orijentacije satelita te odabranu metodu upravljanja orijentacijom i kutnom brzinom satelita. Potrebno je implementirati programsku podršku za određivanje i upravljanje orijentacijom na ugradbenom računalnom sustavu te objasniti osnovne blokove programskog koda uz pripadne grafove i dijagrame toka. U radu je također potrebno razviti osnovni kinematički model satelita, opisati optimizaciju PID regulatora za kontrolu orijentacije te izložiti rezultate eksperimentalne verifikacije implementiranih algoritama.
 
 % Citate dodaj u `literatura.bib' file
 \chapter{Kako citirati}

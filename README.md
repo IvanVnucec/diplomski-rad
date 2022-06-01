@@ -1,27 +1,3 @@
-[![Test LaTex templates](https://github.com/IvanVnucec/predlozak-za-diplomski-zavrsni-ili-seminarski-rad/actions/workflows/test_latex_templates.yml/badge.svg)](https://github.com/IvanVnucec/predlozak-za-diplomski-zavrsni-ili-seminarski-rad/actions/workflows/test_latex_templates.yml)
-
-# Predlozak za Diplomski, Zavrsni ili Seminarski rad
-
-<p align="middle">
-  <img src=".github/misc/dipl.png" height="280"/>
-  <img src=".github/misc/zavr.png" height="280" /> 
-  <img src=".github/misc/sem.png"  height="280" />
-</p>
-
-## About
-Ovo je projekt koji sadrzi predlozak (template) u Latexu za Diplomski, Zavrsni ili Seminarski rad.
-Idealno za brzo pisanje i jednostavno pretvaranje u PDF.  
-
-Predlozak se sastoji od:
-- prikladne prve (naslovne) stranice
-- stranica zahvale
-- sadrzaj
-- literatura
-- sazetak (na hrvatskom i engleskom jeziku)
-- i jos mnogo toga...
-
-Sve to je moguce generirati pomocu jedne jedine komande (vidi ispod instrukcije).
-
 ## Installing
 ```
 NOTE: Recommended OS for developing is Ubuntu 21.10 (also Ubuntu 20.04).
@@ -33,20 +9,12 @@ NOTE: Recommended OS for developing is Ubuntu 21.10 (also Ubuntu 20.04).
 
 ## Writing
 1. Make changes in `rad.tex` and `literatura.bib`, other files leave unchanged. 
-    - For template usage see [Help](##Help).
+    - For template usage see [Help](#help).
 
 ## Building
 1. Run `make build` to build PDF document in `build/rad.pdf`.
 2. (optional) If you fork the repository, check out GH Actions: on every push
 GH Actions will build the LaTex document and upload it as Actions build artifact.
-
-
-## Testing
-```
-NOTE: for developers only.
-```
-To test if all the templates are valid, run `make test`. This command will create test folder under `build/tests` and it
-will try to build all the templates into its own subdirectories.
 
 ## Files
 ```
@@ -67,4 +35,4 @@ will try to build all the templates into its own subdirectories.
 For Latex Template help see [docs/LaTeX_template_upute.pdf](docs/LaTeX_template_upute.pdf).
 
 ## References
-LaTex Predlozak i Upute smo preuzeli sa FER-ove stranice i blago modificirali (vidi git log).
+[Predlozak za Diplomski, Zavrsni ili Seminarski rad](https://github.com/IvanVnucec/predlozak-za-diplomski-zavrsni-ili-seminarski-rad)
