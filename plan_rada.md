@@ -1,0 +1,165 @@
+# Rastava Uvoda
+1. Nanosateliti CubeSat formata postaju sve popularniji u komercijalnim i znanstvenim misijama. 
+    - Nanosateliti
+        - podjela satelita prema velicini
+        - sto su Nanosateliti
+        - zasto postoje, 
+            - za sto se koriste
+        - tko ih koristi
+    - cubesat format satelita
+        - sto je cubesat satelit
+        - kojih sve verzije cubesat satelita postoje
+        - zasto bas kocka
+        - od cega se sastoji, 
+            - gradja, 
+            - nacin slaganja dodatnih modula
+        - prednosti i mane cubesat satelita
+    - sve veca popularnost cubesat formata satelita
+        - navesti negdje brojke o udijelu cubesat sateltia u ostalim satelitima kroz godine
+        - zasto je popularan cubesat format
+    - komercijalne i znanstvene misije cubesat satelita
+        - navesti neke komercijalne primjene do sada
+        - navesti znanstvene misije do sada
+
+    2. Broj lansiranih nanosatelita raste iz godine u godinu. 
+    - lansiranje nanosatelita
+        - objasniti kako se sateliti lansiraju
+            - objasni da oni nisu glavni payload
+            - objasni kako su pakirani
+            - objasni u koje orbite mogu ici
+            - objasni tvrtke koje se bave lansiranjem
+        - navedi koliko najcesce kosta lansiranje
+        - navedi kako najlakse iznajmit lansiranje
+    - rast lansiranja nanosateltia iz godine u godinu
+        - pronaci negdje neke brojke o lansiranju cubesat satelita po godinama
+
+3. Sustav za određivanje i upravljanje orijentacijom satelita jedan je od najvažnijih sustava odgovoran za stabilno i ispravno usmjeravanje satelita i njegovog korisnog tereta (antene, kamere, senzori i sl.). 
+    - orijentacija satelita
+        - sto je orijentacija satelita
+        - zasto nam je orijentacija satelita bitna
+        - kako ju najcesce reprezentiramo
+            - eulerovi kutevi (ili kutovi)
+            - kvaternioni
+            - prednost i mane jedne naspram druge reprezentacije
+    - sustav za odredjivanje i upravljanje orijentacijom satelita
+        - sto je sustav za odredjivanje i upravljanje orijentacijom satelita
+        - od cega se sastoji
+        - koja je zadaca sustava za odredjivanje a koja sustava za upravljanje orijentacijom satelita
+        - zasto je on jedan od najvaznijih sustava satelita
+            - sto se desava ako sustav prestane raditi ili radi nenormalno
+                - navesti neke primjere
+    - korisni teret satelita
+        - navesti neke korisne terete/sustave koji ovise o orijentaciji satelita
+        - u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)
+
+4. Zadatak ovog sustava je pomoću dostupnih senzora odrediti orijentaciju satelita te je automatski ispraviti s obzirom na željenu orijentaciju koristeći se dostupnim aktuatorima. 
+    - senzori za odredjivanje orijentacije
+        - koji sve postoje
+        - na kojem principima rade
+        - navesti neke tehnicke podatke svakog
+        - napraviti usporedbu izmedju njih
+            - cijena
+            - preciznost
+            - uvijeti rada
+            - dostupnost
+            - jednostavnost
+            - potrosnja
+    - aktuatori
+        - koji sve postoje
+        - na kojim principima rade
+        - tehnicki podatci
+        - usporedba izmedju njih
+            - cijena
+            - preciznost
+            - uvijeti rada
+            - dostupnost
+            - jednostavnost
+            - potrosnja
+
+5. Tema diplomskog rada je razvoj programske podrške za model satelita koja omogućuje pouzdano određivanje i upravljanje orijentacijom satelita i njegovom kutnom brzinom. 
+    - razvoj programske podrske
+        - objasniti za koji sustav programiramo
+        - objasniti koji compiler koristimo
+        - objasniti koji programski jezik koristimo
+        - objasniti kako debugiramo
+        - objasniti organizaciju koda
+        - objasniti koje sve alate koristimo prilikom razvoja SW
+            - clang format i slicno
+            - vscode
+            - openocd
+        - objasniti da je cijeli kod na githubu
+        - slikati graf razvoja programskog koda kroz vrijeme
+    - model satelita
+        - objasniti kinematicki model satelita
+        - objasniti pojednostavljenja
+        - navesti jednadzbe
+    - kutna brzina satelita
+        - sto je kutna brzina satelita
+        - kako ju mjerimo
+            - ziroskop
+            - sto je ziroskop
+            - problemi ziroskopa
+        - kako ju reprezentiramo
+            - promjena eulerovih kuteva
+            - promjena kvaterniona
+        - kako ju kontroliramo
+    - pouzdano odredjivanje orijentacije satelita
+        - kako to mozemo izracunati
+            - razlika eulerovi kutova
+                - staviti formulu iz matlaba
+            - razlka kvaterniona
+        - kako mozemo izmjeriti orijentaciju satelita
+    - upravljanje orijentacijom satelita
+    - upravljanje kutnom brzinom satelita
+
+6. U radu je potrebno opisati korištene senzore i aktuatore, način matematičkog zapisa orijentacije satelita te odabranu metodu upravljanja orijentacijom i kutnom brzinom satelita. 
+    - navesti koristene senzore
+        - zasto koristimo IMU
+            - napisati da akcelerometar ne moze raditi u svemiru
+    - navesti koristene aktuatore
+        - zasto koristimo bas taj aktuator a ne magnetorqer npr
+            - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
+            - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj
+    - matematicki zapis orijentacije satelita koju koristimo unutar SW
+        - jednadzbe
+    - odabrana metoda upravljanja orientacijom
+    - odabrana metoda upravljanja kutnom brzinom
+
+7. Potrebno je implementirati programsku podršku za određivanje i upravljanje orijentacijom na ugradbenom računalnom sustavu te objasniti osnovne blokove programskog koda uz pripadne grafove i dijagrame toka. 
+    - opisati programsku podrsku
+        - koje biblioteke koristimo i zasto
+    - ugradbeno racunalo
+        - koje ugradbeno racunalo koristimo
+        - zasto smo bas to odabrali
+    - osnovni opis programskog koda
+        - opisati da koristimo FreeRTOS
+        - opisati koje sve dretve imamo
+            - za svaku dretvu napisati dijagram toka
+            - opisati funkciju dretve
+            - opisati vrijeme izvodjenja dretvi
+            - opisati na koji nacin dretve medjusobno komuniciraju
+
+8. U radu je također potrebno razviti osnovni kinematički model satelita, opisati optimizaciju PID regulatora za kontrolu orijentacije te izložiti rezultate eksperimentalne verifikacije implementiranih algoritama.
+    - opisati kako smo razvili osnovni kinematicki model satelita
+        - ovo ne znam sta je ali je vjv vezano za Cubesat na Arduinu
+        - odredjivanje parametara satelita
+        - vidi Arduino dokumente
+    - PID regulator za kontrolu orijentacije satelita
+        - opisati sto je PID regulator
+        - opisati kako ga mi koristimo
+        - opisati na koji nacin optimiziramo njegove parametre
+    - objasniti na koji nacin radimo senzor fuzion
+        - optimal request
+            - napisati nesto kratko o OR algoritmu
+            - navesti referencu na svu popratnu dokumentaciju
+    - verifijacija algoritama
+        - opisati zracni lezaj
+        - opisati kuglu
+        - opisati kako satelit stoji u kugli
+        - navesti reference za zracne lezaje
+        - parser
+        - program za iscrtavanje
+        - bluetooth modul za komunikaciju
+        - iscrtavanje orijentacije papirnatog avioncica u Octave programu
+        - izloziti rezultate verifikacije algoritama
+            - ovo nezz
