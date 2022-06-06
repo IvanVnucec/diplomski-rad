@@ -56,6 +56,10 @@
                 - navesti problem zasicenja zamasnjaka
             - regulacija
                 - navesti PID regulator kao regulator
+                - opisati sto je PID regulator
+                - navesti quaternion regulator kao regulator
+                    - jednadzbe
+                    - dodaj referencu na paper
     - Kutna brzina satelita
         - sto je kutna brzina satelita
         - kako ju mjerimo
@@ -126,11 +130,12 @@
                 - navesti referencu na svu popratnu dokumentaciju
     - Metoda upravljanja orijentacijom
         - odabrana metoda upravljanja orijentacijom
+            - spomeni quaternion regulator
         - odabrana metoda upravljanja kutnom brzinom
-        - kako upravljamo onim zamasnjakom
+            - spomeni zamasnjak
             - pwm
+            - spomeni PID regulator
             - PID regulator za kontrolu orijentacije satelita
-                - opisati sto je PID regulator
                 - opisati kako ga mi koristimo
                 - ovo isto pokupi od Arduino projekta
     - Sklopovlje
