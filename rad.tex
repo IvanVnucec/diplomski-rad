@@ -63,6 +63,38 @@
     }
 }
 
+
+\chapter{Osnovni kinematički model satelita}{
+    \section{Matematički zapis}{
+        - objasniti sve parametre kinematickog modela satelita
+        - objasniti pojednostavljenja
+        - objasniti odredjivanje parametara
+    }
+    
+    \section{Orijentacija satelita}{   
+        \subsection{Vrste reprezentacija}{
+            \subsubsection{eulerovi kutevi (ili kutovi)}{
+
+            }
+
+            \subsubsection{kvaternioni}{
+
+            }
+        }
+
+        \subsection{Usporedba vrsta reprezentacija}{
+
+        }
+    }
+    
+    \section{Kutna brzina satelita}{
+        - sto je kutna brzina satelita
+        - kako ju reprezentiramo
+            - promjena eulerovih kuteva
+            - promjena kvaterniona
+    }
+}
+    
 \chapter{Sustav za odredjivanje i upravljanje orijentacijom satelita}{
     \section{Uvod}{
         - sto je sustav za odredjivanje i upravljanje orijentacijom satelita
@@ -71,67 +103,20 @@
         - zasto je on jedan od najvaznijih sustava satelita
             - sto se desava ako sustav prestane raditi ili radi nenormalno
                 - navesti neke primjere
-    }
-
-    \section{Orijentacija satelita}{
-        \subsection{Zasto nam je bitna}{
+        - Zasto nam je bitna orijentacija
             - korisni teret satelita
                 - navesti neke korisne terete/sustave koji ovise o orijentaciji satelita
                 - u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)
-        }
-
-        \subsection{Vrste reprezentacija}{
-            - eulerovi kutevi (ili kutovi)
-            - kvaternioni
-            - prednost i mane jedne naspram druge reprezentacije
-        }
-
-        \subsection{Odredjivanje orijentacije}{
-            - kako mozemo estimirati orijentaciju satelita
-                - senzor fusion
-        }
-
-        \subsection{Upravljanje orijentacijom}{
-            - ukratko o upravljanju orijentacijom
-            - navesti aktuatore
-                - zamasnjake, magnetorqere
-                - navesti problem zasicenja zamasnjaka
-            - regulacija
-                - navesti PID regulator kao regulator
-                - opisati sto je PID regulator
-                - navesti quaternion regulator kao regulator
-                    - jednadzbe
-                    - dodaj referencu na paper
-        }
     }
 
-    \section{Kutna brzina satelita}{
-        - sto je kutna brzina satelita
-        - kako ju mjerimo
-            - ziroskop
-            - sto je ziroskop
-            - problemi ziroskopa
-        - kako ju reprezentiramo
-            - promjena eulerovih kuteva
-            - promjena kvaterniona
-        - upravljanje kutnom brzinom satelita
-            - ukratko o upravljanju kutnom brzinom
-            - navesti aktuatore
-    }
-
-    \section{Osnovni kinematicki model satelita}{
-        - Matematički zapis modela
-        - objasniti sve parametre kinematickog modela satelita
-        - objasniti pojednostavljenja
-        - objasniti odredjivanje parametara
-    }
-
-    \section{Od cega se sastoji ADCS sustav}{
-        - racunalni sustav
+    \section{Osnovni dijelovi}{
+        \subsection{Računalo}{
             - prikupljanje podataka
             - obrada podataka
             - kontrola orijentacije
-        - senzori za odredjivanje orijentacije
+        }
+
+        \subsection{Senzori}{
             - koji sve postoje
             - na kojem principima rade
             - navesti neke tehnicke podatke svakog
@@ -142,7 +127,9 @@
                 - dostupnost
                 - jednostavnost
                 - potrosnja
-        - aktuatori za kontrolu orijentacije
+        }
+
+        \subsection{Aktuatori}{
             - koji sve postoje
             - na kojim principima rade
             - tehnicki podatci
@@ -153,6 +140,32 @@
                 - dostupnost
                 - jednostavnost
                 - potrosnja
+        }
+    }
+
+    \section{Određivanje orijentacije}{
+        - kako mozemo estimirati orijentaciju satelita
+            - senzor fusion
+        - kako mjerimo kutnu brzinu
+            - ziroskop
+            - sto je ziroskop
+            - problemi ziroskopa
+    }
+
+    \section{Upravljanje orijentacijom}{
+        - ukratko o upravljanju orijentacijom
+        - ukratko o upravljanju kutnom brzinom
+
+        - navesti aktuatore
+            - zamasnjake, magnetorqere
+            - navesti problem zasicenja zamasnjaka
+
+        - regulacija
+            - navesti PID regulator kao regulator
+            - opisati sto je PID regulator
+            - navesti quaternion regulator kao regulator
+                - jednadzbe
+                - dodaj referencu na paper
     }
 }
 
