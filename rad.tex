@@ -25,14 +25,17 @@
 \nocite{*}
 \chapter{Nanosateliti}{
     \section{Uvod}{
+        \iffalse
         - sto su Nanosateliti
         - zasto postoje, 
             - za sto se koriste
             - tko ih koristi
+        \fi
     }
 
     \section{Podjela prema veličini}{
         \subsection{Cubesat format}{
+            \iffalse
             - sto je cubesat satelit
             - od cega se sastoji, 
                 - gradja, 
@@ -42,10 +45,12 @@
             - prednosti i mane cubesat satelita
             - navesti negdje brojke o udijelu cubesat sateltia u ostalim satelitima kroz godine
             - zasto je popularan cubesat format
+            \fi
         }
     }
 
     \section{Metode lansiranja}{
+        \iffalse
         - objasniti kako se sateliti lansiraju
             - objasni da oni nisu glavni payload
             - objasni kako su pakirani
@@ -55,48 +60,56 @@
         - navedi kako najlakse iznajmit lansiranje
         - rast lansiranja nanosateltia iz godine u godinu
             - pronaci negdje neke brojke o lansiranju cubesat satelita po godinama
+        \fi
     }
 
     \section{Povijesni pregled misija}{
+        \iffalse
         - navesti neke komercijalne primjene do sada
         - navesti znanstvene misije do sada
+        \fi
     }
 }
 
 
 \chapter{Osnovni kinematički model satelita}{
     \section{Matematički zapis}{
+        \iffalse
         - objasniti sve parametre kinematickog modela satelita
         - objasniti pojednostavljenja
         - objasniti odredjivanje parametara
+        \fi
     }
     
     \section{Orijentacija satelita}{   
         \subsection{Vrste reprezentacija}{
-            \subsubsection{eulerovi kutevi (ili kutovi)}{
+            \subsubsection{Eulerovi kutevi (ili kutovi)}{
 
             }
 
-            \subsubsection{kvaternioni}{
+            \subsubsection{Kvaternioni}{
 
             }
-        }
 
-        \subsection{Usporedba vrsta reprezentacija}{
-
+            \subsubsection{Usporedba vrsta reprezentacija}{
+    
+            }
         }
     }
     
     \section{Kutna brzina satelita}{
+        \iffalse
         - sto je kutna brzina satelita
         - kako ju reprezentiramo
             - promjena eulerovih kuteva
             - promjena kvaterniona
+        \fi
     }
 }
     
-\chapter{Sustav za odredjivanje i upravljanje orijentacijom satelita}{
+\chapter{Sustav za odredjivanje i upravljanje orijentacijom satelita (ADCS)}{
     \section{Uvod}{
+        \iffalse
         - sto je sustav za odredjivanje i upravljanje orijentacijom satelita
             - navesti englesku skracenicu (koristi eng u latexu, vidi dokumentaciju pri dnu)
         - koja je zadaca sustava za odredjivanje a koja sustava za upravljanje orijentacijom satelita
@@ -107,16 +120,21 @@
             - korisni teret satelita
                 - navesti neke korisne terete/sustave koji ovise o orijentaciji satelita
                 - u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)
+        \fi
     }
 
     \section{Osnovni dijelovi}{
         \subsection{Računalo}{
+            \iffalse
             - prikupljanje podataka
             - obrada podataka
             - kontrola orijentacije
+            - komunikacija
+            \fi
         }
 
         \subsection{Senzori}{
+            \iffalse
             - koji sve postoje
             - na kojem principima rade
             - navesti neke tehnicke podatke svakog
@@ -127,9 +145,11 @@
                 - dostupnost
                 - jednostavnost
                 - potrosnja
+            \fi
         }
 
         \subsection{Aktuatori}{
+            \iffalse
             - koji sve postoje
             - na kojim principima rade
             - tehnicki podatci
@@ -140,19 +160,28 @@
                 - dostupnost
                 - jednostavnost
                 - potrosnja
+            \fi
         }
     }
 
     \section{Određivanje orijentacije}{
+        \iffalse
         - kako mozemo estimirati orijentaciju satelita
             - senzor fusion
+            - navesti neke od algoritama
+            - rekurzivni
+            - ne rekurzivni
+            - vidi s josipom jos neke koje je on razvijao
+            - karla je jedan razvijala (stavi referencu)
         - kako mjerimo kutnu brzinu
             - ziroskop
             - sto je ziroskop
             - problemi ziroskopa
+        \fi
     }
 
     \section{Upravljanje orijentacijom}{
+        \iffalse
         - ukratko o upravljanju orijentacijom
         - ukratko o upravljanju kutnom brzinom
 
@@ -166,12 +195,22 @@
             - navesti quaternion regulator kao regulator
                 - jednadzbe
                 - dodaj referencu na paper
+        \fi
     }
 }
 
 \chapter{Razvijeni ADCS sustav}{
-    \section{Senzori}{
-        - zasto koristimo IMU
+    \section{Sklopovlje}{
+        \subsection{Tiskana pločica}{
+            \iffalse
+            - ukratko o razvijenoj plocici
+            - staviti kakvu shemu
+            \fi
+        }
+
+        \subsection{Senzori}{
+            \iffalse
+            - zasto koristimo IMU
             - napisati da akcelerometar ne moze raditi u svemiru
             - mane ziroskopa
                 - bias
@@ -180,84 +219,111 @@
             - magnetometar
                 - model magnetskog polja zemlje
                     - mijenja se s vremenom
-    }
+            \fi
+        }
 
-    \section{Aktuatori}{
+        \subsection{Aktuatori}{
+        \iffalse
         - zasto koristimo bas (stavi ime) aktuator 
             - a ne magnetorqer npr
             - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
             - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj
-    }
-
-    \section{Matematicki zapis orijentacije}{
-        - jednadzbe koje koristimo u SW
-    }
-
-    \section{Metoda estimacije orijentacije}{
-        - objasniti na koji nacin radimo senzor fuzion
-            - optimal request
-                - napisati nesto kratko o OR algoritmu
-                - navesti referencu na svu popratnu dokumentaciju
-    }
-
-    \section{Metoda upravljanja orijentacijom}{
-        - odabrana metoda upravljanja orijentacijom
-            - spomeni quaternion regulator
-        - odabrana metoda upravljanja kutnom brzinom
-            - spomeni zamasnjak
-            - pwm
-            - spomeni PID regulator
-            - PID regulator za kontrolu orijentacije satelita
-                - opisati kako ga mi koristimo
-                - ovo isto pokupi od Arduino projekta
-    }
-
-    \section{Sklopovlje}{
-        - ukratko o razvijenoj plocici
-        - staviti kakvu shemu
-    }
-
-    \section{Programska podrška}{
-        \subsection{Opis ugradbenog racunala}{
-            - koje ugradbeno racunalo koristimo
-            - zasto smo bas to odabrali
+        \fi
         }
 
-        \subsection{Opis programskog koda}{
+        \subsection{Komunikacija}{
+            \iffalse
+            - zasto koristimo bluetooth komunikaciju
+            - navest ime modula
+            - kako radi modul
+            - kako komuniciramo s njime
+            \fi
+        }
+    }
+    
+    \section{Programska podrška}{
+        \subsection{Opis ugradbenog računala}{
+            \iffalse
+            - koje ugradbeno racunalo koristimo
+            - zasto smo bas to odabrali
+            \fi
+        }
+
+        \subsection{Organizacija projekta}{
+            \iffalse
+            - objasniti organizaciju koda
+            \fi
+        }
+        
+        \subsection{Funkcionalnost}{
+            \subsubsection{Korištene biblioteke}{
+                \iffalse
+                - koje biblioteke koristimo i zasto
+                \fi
+            }
+
+            \subsubsection{Operacijski sustav}{
+                \iffalse
+                - opisati da koristimo FreeRTOS
+                - opisati koje sve dretve imamo
+                    - za svaku dretvu napisati dijagram toka
+                    - opisati funkciju dretve
+                    - opisati vrijeme izvodjenja dretvi
+                    - opisati na koji nacin dretve medjusobno komuniciraju
+                \fi
+            }
+
+            \subsubsection{Matematički zapis orijentacije}{
+                \iffalse
+                - jednadzbe koje koristimo u SW
+                \fi
+            }
+        
+            \subsubsection{Izabrana metoda određivanja orijentacije}{
+                \iffalse
+                - objasniti na koji nacin radimo senzor fuzion
+                    - optimal request
+                        - napisati nesto kratko o OR algoritmu
+                        - navesti referencu na svu popratnu dokumentaciju
+                \fi
+            }
+        
+            \subsubsection{Izabrana metoda upravljanja orijentacijom}{
+                \iffalse
+                - odabrana metoda upravljanja orijentacijom
+                    - spomeni quaternion regulator
+                - odabrana metoda upravljanja kutnom brzinom
+                    - spomeni zamasnjak
+                    - pwm
+                    - spomeni PID regulator
+                    - PID regulator za kontrolu orijentacije satelita
+                        - opisati kako ga mi koristimo
+                        - ovo isto pokupi od Arduino projekta
+                \fi
+            }
+        }
+
+        \subsection{Razvoj}{
+            \iffalse
             - objasniti koji compiler koristimo
             - objasniti koji programski jezik koristimo
             - objasniti da je cijeli kod na githubu
             - broj linija koda
                 - vidi kako to dobiti u linux-u sa nekom komandom
-        }
-
-        \subsection{Organizacija}{
-            - objasniti organizaciju koda
-        }
-
-        \subsection{Funkcionalnost}{
-            - koje biblioteke koristimo i zasto
-            - opisati da koristimo FreeRTOS
-            - opisati koje sve dretve imamo
-                - za svaku dretvu napisati dijagram toka
-                - opisati funkciju dretve
-                - opisati vrijeme izvodjenja dretvi
-                - opisati na koji nacin dretve medjusobno komuniciraju
-        }
-
-        \subsection{Razvoj}{
             - objasniti koje sve alate koristimo prilikom razvoja SW
                 - clang format i slicno
                 - vscode
                 - openocd
             - objasniti kako debugiramo
             - slikati graf razvoja programskog koda kroz vrijeme
+            \fi
         }
     }
 }
 
 \chapter{Eksperimentalna verifikacija ADCS sustava}{
     \section{Opis sustava}{
+        \iffalse
         - opisati zracni lezaj
         - opisati kuglu
         - opisati kako satelit stoji u kugli
@@ -266,21 +332,36 @@
         - program za iscrtavanje
         - bluetooth modul za komunikaciju
         - iscrtavanje orijentacije papirnatog avioncica u Octave programu
+        \fi
     }
 
-    \section{Odredjivanje parametara kinematickog modela satelita}{
-        - objasni kako smo dobili parametre
+    \section{Određivanje parametara}{
+        \subsection{Kinematički model}{
+            \iffalse
+            - objasni kako smo dobili parametre
+            \fi
+        }
+    
+        \subsection{PID regulator}{
+            \iffalse
+            - vidi cubesat na arduinu
+            - objasni kako smo dobili parametre PID regulatora
+            \fi
+        }
     }
 
-    \section{Optimizacija PID regulatora}{
-        - vidi cubesat na arduinu
-        - objasni kako smo dobili parametre PID regulatora
-    }
-
-    \section{Qkako racunamo razlike trenutne i zeljene orijentacije}{
-        - razlika eulerovi kutova
+    \section{Računanje razlike trenutne i željene orijentacije}{
+        \subsection{Eulerovi kutovi (ili kutevi)}{
+            \iffalse
             - staviti formulu iz matlaba
-        - razlka kvaterniona
+            \fi
+        }
+
+        \subsection{Kvaternioni}{
+            \iffalse
+            - staviti formule iz onog papera od josipa
+            \fi
+        }
     }
 
     \section{Rezultati verifikacije}{
