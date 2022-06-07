@@ -31,7 +31,7 @@ define export_to_pdf
 	pdflatex $(4) -output-directory $(1) $(2)
 endef
 
-.PHONY: all setup build spellcheck test clean help
+.PHONY: all setup build spellcheck interactive_spellcheck test clean help
 
 all: build
 
@@ -42,7 +42,10 @@ build:
 	$(call export_to_pdf,$(SRC_BUILD_DIR),$(SRC_TEX),$(SRC_AUX),$(FLAGS))
 
 spellcheck:
-	@bash scripts/spellcheck.sh -d $(DICT_FILENAME) -s $(SRC_TEX)
+	@bash scripts/spellcheck.sh -i false -d $(DICT_FILENAME) -s $(SRC_TEX)
+
+interactive_spellcheck:
+	@bash scripts/spellcheck.sh -i true -d $(DICT_FILENAME) -s $(SRC_TEX)
 
 test:
 	$(call export_to_pdf,$(TEST_BUILD_DIR_DPL),$(TEST_TEX_DPL),$(TEST_AUX_DPL),$(FLAGS))
@@ -53,4 +56,13 @@ clean:
 	rm -rf $(BUILD_DIR)
 
 help:
-	@echo all setup build spellcheck test clean help
+	@echo "make [option]"
+	@echo "  option:"
+	@echo "     all                     - build (default)"
+	@echo "     setup                   - install all the tools needed for building LaTex"
+	@echo "     build                   - build LaTex document"
+	@echo "     spellcheck              - run interactive spellcheck (Croatian language)"
+	@echo "     interactive_spellcheck  - run spellcheck (Croatian language)"
+	@echo "     test                    - run LaTex template tests"
+	@echo "     clean                   - clean LaTex build artifacts"
+	@echo "     help                    - print this message"
