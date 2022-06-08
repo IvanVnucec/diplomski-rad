@@ -26,77 +26,102 @@
 \nocite{*}
 
 \chapter{Uvod}{
-    \section{Nanosateliti}{
-        - sto su Nanosateliti\\
-        - zasto postoje, \\
-            - za sto se koriste\\
-            - tko ih koristi\\
+    \section{Mali sateliti}{
+        %- sto su mali sateliti
+        Mali sateliti su skupina satelita koji su, u usporedbi sa konvencionalnim satelitima, uvelike ograničeni prema masi, cijeni, kao i prema vremenu potrebnom da ih se razvije. Sve je to izravan rezultat revolucije u elektronici i računarstvu.\cite{hrvatskiVojnik}.
+
+        %- tko ih koristi
+        Primjene malih satelita nalazimo u svim granama svemirske industrije: u telekomunikaciji, navigaciji, opservaciji Zemlje, znanstvenim istraživanjima i dr.
         
-        \subsection{Podjela prema veličini}{
+        %- zasto ih koristimo
+        Njihova zastupljenost na tržištu raste iz godine u godinu jer pružaju jeftin i brz razvoj uz relativno male tehničke zahtjeve \cite{rastMalihSatelita}. Primjenom većeg broja malih satelita povezanih u konstelaciju, moguće je primjerice pokriti veću površinu zemlje i tako stvoriti uvijek dostupni internet ili navigacijski sustav.
+        
+        \subsection{Podjela}{
+            Iako postoje više vrsta podjela satelita u ovisnosti od izvora do izvora, navest ćemo podjelu prema FAA \engl{Federal Aviation Administration} koja uključuje satelite sa najvećom, pa sve do satelita sa najmanjom masom \cite{podjelaPremaMasi}. Podjelu je moguće vidjeti u tablici \ref{tbl:podjelaSatelita}.
+
+            \begin{table}[htb]
+            \caption{Podjela malih satelita prema masi}
+            \label{tbl:podjelaSatelita}
+            \centering
+            \begin{tabular}{ll} \toprule
+            Naziv kategorije satelita & Masa (kg) \\ \midrule
+            Small & 601 - 1200 \\
+            Mini & 201 - 600 \\
+            Micro & 11 - 200 \\
+            Nano & 1.1 - 10 \\
+            Pico & 0.09 - 1 \\
+            Femto & 0.01 - 0.1 \\ \bottomrule
+            \end{tabular}
+            \end{table}
+
+            Maleni sateliti \engl{Small} teže manje od 1200 kilograma, cijena im je nešto manje od 30 milijuna GBP (britanskih funti) za izradu i lansiranje te je potrebno od 2 do 3 godine za njihov razvoj. Mini sateliti teže do 600 kilograma i njihov razvoj traje dvije godine po cijeni do 30 milijuna GBP. Micro sateliti su teški manje od 200 kilograma i koštaju manje od 10 milijuna GBP. Ispod te klase nalaze se Nano sateliti, težine do 10 kilograma, te Pico i Femto sateliti težine manje od 1 kilograma \cite{hrvatskiVojnik}.
+
             \subsubsection{Cubesat format}{
-                - sto je cubesat satelit\\
-                - od cega se sastoji, \\
-                    - građa, \\
-                    - nacin slaganja dodatnih modula\\
-                - kojih sve verzije cubesat satelita postoje\\
-                - zasto bas kocka\\
-                - prednosti i mane cubesat satelita\\
-                - navesti negdje brojke o udijelu cubesat sateltia u ostalim satelitima kroz godine\\
-                - zasto je popularan cubesat format\\
+                %- sto su Nanosateliti
+                %    - za sto se koriste
+                %- sto je cubesat satelit
+                %- od cega se sastoji, 
+                %    - građa, 
+                %    - nacin slaganja dodatnih modula
+                %- kojih sve verzije cubesat satelita postoje
+                %- zasto bas kocka
+                %- prednosti i mane cubesat satelita
+                %- navesti negdje brojke o udijelu cubesat sateltia u ostalim satelitima kroz godine
+                %- zasto je popularan cubesat format
             }
         }
         
         \subsection{Metode lansiranja}{
-            - objasniti kako se sateliti lansiraju\\
-                - objasni da oni nisu glavni payload\\
-                - objasni kako su pakirani\\
-                - objasni u koje orbite mogu ici\\
-                - objasni tvrtke koje se bave lansiranjem\\
-            - navedi koliko najcesce kosta lansiranje\\
-            - navedi kako najlakse iznajmit lansiranje\\
-            - rast lansiranja nanosateltia iz godine u godinu\\
-                - pronaci negdje neke brojke o lansiranju cubesat satelita po godinama\\
+            %- objasniti kako se sateliti lansiraju
+            %    - objasni da oni nisu glavni payload
+            %    - objasni kako su pakirani
+            %    - objasni u koje orbite mogu ici
+            %    - objasni tvrtke koje se bave lansiranjem
+            %- navedi koliko najcesce kosta lansiranje
+            %- navedi kako najlakse iznajmit lansiranje
+            %- rast lansiranja nanosateltia iz godine u godinu
+            %    - pronaci negdje neke brojke o lansiranju cubesat satelita po godinama
         }
         
         \subsection{Povijesni pregled misija}{
-            - navesti neke komercijalne primjene do sada\\
-            - navesti znanstvene misije do sada\\
+            %- navesti neke komercijalne primjene do sada
+            %- navesti znanstvene misije do sada
         }
     }
 
-    \section{Orijentacija satelita}{
-        \subsection{Korisni teret}{
-            - navesti korisne terete koje satelit ima u ovisnosti o tipu misije\\
-            - navesti kako pravilna funkcionalnost korisnog tereta ovisi o orijentaciji  \\
-            - navesti neke korisne terete/sustave koji ovise o orijentaciji satelita\\
-            - u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)\\
+    \section{Korisni teret satelita}{
+        \subsection{Vrste tereta}{
+            %- navesti korisne terete koje satelit ima u ovisnosti o tipu misije
+            %- navesti kako pravilna funkcionalnost korisnog tereta ovisi o orijentaciji  
+            %- navesti neke korisne terete/sustave koji ovise o orijentaciji satelita
+            %- u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)
         }
     
-        \subsection{Kako određujemo i kontroliramo orijentaciju}{
-            - navesti kraticu adcs\\
-            - ukratko objasniti kako estimiramo orijentaciju\\
-                - algoritmi\\
-                - senzori\\
-            - ukratko objasniti kako kontroliramo orijentaciju\\
-                - algoritmi\\
-                - aktuatori\\
-            - zasto je on jedan od najvaznijih sustava satelita\\
-            - sto se desava ako sustav prestane raditi ili radi nenormalno\\
-                - navesti neke primjere\\
+        \subsection{Važnost kontrolirane orijentacije}{
+            %- navesti kraticu adcs
+            %- ukratko objasniti kako estimiramo orijentaciju
+            %    - algoritmi
+            %    - senzori
+            %- ukratko objasniti kako kontroliramo orijentaciju
+            %    - algoritmi
+            %    - aktuatori
+            %- zasto je on jedan od najvaznijih sustava satelita
+            %- sto se desava ako sustav prestane raditi ili radi nenormalno
+            %    - navesti neke primjere
         }
     }
 }
 
 \chapter{Osnovni kinematički model satelita}{
     \section{Matematički zapis modela}{
-        - objasniti sve parametre kinematickog modela satelita\\
-        - objasniti pojednostavljenja\\
-        - objasniti određivanje parametara\\
+        %- objasniti sve parametre kinematickog modela satelita
+        %- objasniti pojednostavljenja
+        %- objasniti određivanje parametara
     }
     
     \section{Orijentacija satelita}{   
         \subsection{Vrste reprezentacija}{
-            \subsubsection{Eulerovi kutevi (ili kutovi)}{
+            \subsubsection{Eulerovi kutovi}{
 
             }
 
@@ -111,223 +136,223 @@
     }
     
     \section{Kutna brzina satelita}{
-        - sto je kutna brzina satelita\\
-        - kako ju reprezentiramo\\
-            - promjena eulerovih kuteva\\
-            - promjena kvaterniona\\
+        %- sto je kutna brzina satelita
+        %- kako ju reprezentiramo
+        %    - promjena eulerovih kuteva
+        %    - promjena kvaterniona
     }
 }
     
 \chapter{Sustav za određivanje i upravljanje orijentacijom satelita (ADCS)}{
     \section{Uvod}{
-        - sto je sustav za određivanje i upravljanje orijentacijom satelita\\
-            - navesti englesku skracenicu (koristi eng u latexu, vidi dokumentaciju pri dnu)\\
-        - koja je zadaca sustava za određivanje a koja sustava za upravljanje orijentacijom satelita\\
+        %- sto je sustav za određivanje i upravljanje orijentacijom satelita
+        %    - navesti englesku skracenicu (koristi eng u latexu, vidi dokumentaciju pri dnu)
+        %- koja je zadaca sustava za određivanje a koja sustava za upravljanje orijentacijom satelita
     }
 
     \section{Osnovni dijelovi}{
         \subsection{Računalo}{
-            - prikupljanje podataka\\
-            - obrada podataka\\
-            - kontrola orijentacije\\
-            - komunikacija\\
+            %- prikupljanje podataka
+            %- obrada podataka
+            %- kontrola orijentacije
+            %- komunikacija
         }
 
         \subsection{Senzori}{
-            - koji sve postoje\\
-            - na kojem principima rade\\
-            - navesti neke tehnicke podatke svakog\\
-            - napraviti usporedbu između njih\\
-                - cijena\\
-                - preciznost\\
-                - uvijeti rada\\
-                - dostupnost\\
-                - jednostavnost\\
-                - potrosnja\\
+            %- koji sve postoje
+            %- na kojem principima rade
+            %- navesti neke tehnicke podatke svakog
+            %- napraviti usporedbu između njih
+            %    - cijena
+            %    - preciznost
+            %    - uvijeti rada
+            %    - dostupnost
+            %    - jednostavnost
+            %    - potrosnja
         }
 
         \subsection{Aktuatori}{
-            - koji sve postoje\\
-            - na kojim principima rade\\
-            - tehnicki podatci\\
-            - usporedba između njih\\
-                - cijena\\
-                - preciznost\\
-                - uvijeti rada\\
-                - dostupnost\\
-                - jednostavnost\\
-                - potrosnja\\
+            %- koji sve postoje
+            %- na kojim principima rade
+            %- tehnicki podatci
+            %- usporedba između njih
+            %    - cijena
+            %    - preciznost
+            %    - uvijeti rada
+            %    - dostupnost
+            %    - jednostavnost
+            %    - potrosnja
         }
     }
 
     \section{Određivanje orijentacije}{
         \subsection{Korišteni senzori}{
-            - kako mjerimo kutnu brzinu\\
-                - ziroskop\\
-                - sto je ziroskop\\
-                - problemi ziroskopa\\
+            %- kako mjerimo kutnu brzinu
+            %    - ziroskop
+            %    - sto je ziroskop
+            %    - problemi ziroskopa
         }
 
         \subsection{Algoritmi}{
-            - kako mozemo estimirati orijentaciju satelita\\
-                - senzor fusion\\
-                - navesti neke od algoritama\\
-                - rekurzivni\\
-                - ne rekurzivni\\
-                - vidi s josipom jos neke koje je on razvijao\\
-                - karla je jedan razvijala (stavi referencu)\\
+            %- kako mozemo estimirati orijentaciju satelita
+            %    - senzor fusion
+            %    - navesti neke od algoritama
+            %    - rekurzivni
+            %    - ne rekurzivni
+            %    - vidi s josipom jos neke koje je on razvijao
+            %    - karla je jedan razvijala (stavi referencu)
         }
     }
 
     \section{Upravljanje orijentacijom}{
         \subsection{Korišteni aktuatori}{
-            - navesti aktuatore\\
-            - zamasnjake, magnetorqere\\
-            - navesti problem zasicenja zamasnjaka\\
+            %- navesti aktuatore
+            %- zamasnjake, magnetorqere
+            %- navesti problem zasicenja zamasnjaka
         }
 
         \subsection{Algoritmi}{
-            - ukratko o upravljanju orijentacijom\\
-            - ukratko o upravljanju kutnom brzinom\\
-            - regulacija\\
-                - navesti PID regulator kao regulator\\
-                - opisati sto je PID regulator\\
-                - navesti quaternion regulator kao regulator\\
-                    - jednadzbe\\
-                    - dodaj referencu na paper\\
+            %- ukratko o upravljanju orijentacijom
+            %- ukratko o upravljanju kutnom brzinom
+            %- regulacija
+            %    - navesti PID regulator kao regulator
+            %    - opisati sto je PID regulator
+            %    - navesti quaternion regulator kao regulator
+            %        - jednadzbe
+            %        - dodaj referencu na paper
         }
     }
 
     \section{Sklopovlje}{
         \subsection{Tiskana pločica}{
-            - ukratko o razvijenoj plocici\\
-            - staviti kakvu shemu\\
+            %- ukratko o razvijenoj plocici
+            %- staviti kakvu shemu
         }
 
         \subsection{Senzori}{
-            - zasto koristimo IMU\\
-            - napisati da akcelerometar ne moze raditi u svemiru\\
-            - mane ziroskopa\\
-                - bias\\
-            - mane akcelerometra\\
-                - sum\\
-            - magnetometar\\
-                - model magnetskog polja zemlje\\
-                    - mijenja se s vremenom\\
+            %- zasto koristimo IMU
+            %- napisati da akcelerometar ne moze raditi u svemiru
+            %- mane ziroskopa
+            %    - bias
+            %- mane akcelerometra
+            %    - sum
+            %- magnetometar
+            %    - model magnetskog polja zemlje
+            %        - mijenja se s vremenom
         }
 
         \subsection{Aktuatori}{
-            - zasto koristimo bas (stavi ime) aktuator \\
-                - a ne magnetorqer npr\\
-                - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir\\
-                - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj\\
+            %- zasto koristimo bas (stavi ime) aktuator 
+            %    - a ne magnetorqer npr
+            %    - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
+            %    - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj
         }
 
         \subsection{Komunikacija}{
-            - zasto koristimo bluetooth komunikaciju\\
-            - navest ime modula\\
-            - kako radi modul\\
-            - kako komuniciramo s njime\\
+            %- zasto koristimo bluetooth komunikaciju
+            %- navest ime modula
+            %- kako radi modul
+            %- kako komuniciramo s njime
         }
     }
     
     \section{Programska podrška}{
         \subsection{Ugradbeno računalo}{
-            - koje ugradbeno racunalo koristimo\\
-            - zasto smo bas to odabrali\\
+            %- koje ugradbeno racunalo koristimo
+            %- zasto smo bas to odabrali
         }
 
         \subsection{Organizacija projekta}{
-            - objasniti organizaciju koda\\
+            %- objasniti organizaciju koda
         }
         
         \subsection{Korištene biblioteke}{
-            - koje biblioteke koristimo i zasto\\
+            %- koje biblioteke koristimo i zasto
         }
 
         \subsection{Operacijski sustav}{
-            - opisati da koristimo FreeRTOS\\
-            - opisati koje sve dretve imamo\\
-                - za svaku dretvu napisati dijagram toka\\
-                - opisati funkciju dretve\\
-                - opisati vrijeme izvođenja dretvi\\
-                - opisati na koji nacin dretve međusobno komuniciraju\\
+            %- opisati da koristimo FreeRTOS
+            %- opisati koje sve dretve imamo
+            %    - za svaku dretvu napisati dijagram toka
+            %    - opisati funkciju dretve
+            %    - opisati vrijeme izvođenja dretvi
+            %    - opisati na koji nacin dretve međusobno komuniciraju
         }
 
         \subsection{Matematički zapis orijentacije}{
-            - jednadzbe koje koristimo u SW\\
+            %- jednadzbe koje koristimo u SW
         }
     
         \subsection{Izabrana metoda određivanja orijentacije}{
-            - objasniti na koji nacin radimo senzor fuzion\\
-                - optimal request\\
-                    - napisati nesto kratko o OR algoritmu\\
-                    - navesti referencu na svu popratnu dokumentaciju\\
+            %- objasniti na koji nacin radimo senzor fuzion
+            %    - optimal request
+            %        - napisati nesto kratko o OR algoritmu
+            %        - navesti referencu na svu popratnu dokumentaciju
         }
     
         \subsection{Izabrana metoda upravljanja orijentacijom}{
-            - odabrana metoda upravljanja orijentacijom\\
-                - spomeni quaternion regulator\\
-            - odabrana metoda upravljanja kutnom brzinom\\
-                - spomeni zamasnjak\\
-                - pwm\\
-                - spomeni PID regulator\\
-                - PID regulator za kontrolu orijentacije satelita\\
-                    - opisati kako ga mi koristimo\\
-                    - ovo isto pokupi od Arduino projekta\\
+            %- odabrana metoda upravljanja orijentacijom
+            %    - spomeni quaternion regulator
+            %- odabrana metoda upravljanja kutnom brzinom
+            %    - spomeni zamasnjak
+            %    - pwm
+            %    - spomeni PID regulator
+            %    - PID regulator za kontrolu orijentacije satelita
+            %        - opisati kako ga mi koristimo
+            %        - ovo isto pokupi od Arduino projekta
         }
 
         \subsection{Razvoj}{
-            - objasniti koji compiler koristimo\\
-            - objasniti koji programski jezik koristimo\\
-            - objasniti da je cijeli kod na githubu\\
-            - broj linija koda\\
-                - vidi kako to dobiti u linux-u sa nekom komandom\\
-            - objasniti koje sve alate koristimo prilikom razvoja SW\\
-                - clang format i slicno\\
-                - vscode\\
-                - openocd\\
-            - objasniti kako debugiramo\\
-            - slikati graf razvoja programskog koda kroz vrijeme\\
+            %- objasniti koji compiler koristimo
+            %- objasniti koji programski jezik koristimo
+            %- objasniti da je cijeli kod na githubu
+            %- broj linija koda
+            %    - vidi kako to dobiti u linux-u sa nekom komandom
+            %- objasniti koje sve alate koristimo prilikom razvoja SW
+            %    - clang format i slicno
+            %    - vscode
+            %    - openocd
+            %- objasniti kako debugiramo
+            %- slikati graf razvoja programskog koda kroz vrijeme
         }
     }
 }
 
 \chapter{Eksperimentalna verifikacija ADCS sustava}{
     \section{Opis sustava}{
-        - opisati zracni lezaj\\
-        - opisati kuglu\\
-        - opisati kako satelit stoji u kugli\\
-        - navesti reference za zracne lezaje\\
-        - parser\\
-        - program za iscrtavanje\\
-        - bluetooth modul za komunikaciju\\
-        - iscrtavanje orijentacije papirnatog avioncica u Octave programu\\
+        %- opisati zracni lezaj
+        %- opisati kuglu
+        %- opisati kako satelit stoji u kugli
+        %- navesti reference za zracne lezaje
+        %- parser
+        %- program za iscrtavanje
+        %- bluetooth modul za komunikaciju
+        %- iscrtavanje orijentacije papirnatog avioncica u Octave programu
     }
 
     \section{Određivanje parametara}{
         \subsection{Kinematički model}{
-            - objasni kako smo dobili parametre\\
+            %- objasni kako smo dobili parametre
         }
     
         \subsection{PID regulator}{
-            - vidi cubesat na arduinu\\
-            - objasni kako smo dobili parametre PID regulatora\\
+            %- vidi cubesat na arduinu
+            %- objasni kako smo dobili parametre PID regulatora
         }
     }
 
     \section{Računanje razlike trenutne i željene orijentacije}{
-        \subsection{Eulerovi kutovi (ili kutevi)}{
-            - staviti formulu iz matlaba\\
+        \subsection{Eulerovi kutovi}{
+            %- staviti formulu iz matlaba
         }
 
         \subsection{Kvaternioni}{
-            - staviti formule iz onog papera od josipa\\
+            %- staviti formule iz onog papera od josipa
         }
     }
 
     \section{Rezultati verifikacije}{
-        - ovo nezz\\
+        %- ovo nezz
     }
 }
 
