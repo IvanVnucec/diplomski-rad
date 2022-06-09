@@ -57,8 +57,6 @@
             Maleni sateliti \engl{Small} teže manje od 1200 kilograma, cijena im je nešto manje od 30 milijuna GBP (britanskih funti) za izradu i lansiranje te je potrebno od 2 do 3 godine za njihov razvoj. Mini sateliti teže do 600 kilograma i njihov razvoj traje dvije godine po cijeni do 30 milijuna GBP. Micro sateliti su teški manje od 200 kilograma i koštaju manje od 10 milijuna GBP. Ispod te klase nalaze se Nano sateliti, težine do 10 kilograma, te Pico i Femto sateliti težine manje od 1 kilograma \cite{hrvatskiVojnik}.
 
             \subsubsection{Cubesat format}{
-                %- sto su Nanosateliti
-                %    - za sto se koriste
                 %- sto je cubesat satelit
                 %- od cega se sastoji, 
                 %    - građa, 
@@ -90,24 +88,42 @@
     }
 
     \section{Korisni teret satelita}{
+        % sto je korisni teret satelita
+        Korisni teret satelita \engl{payload} jest podsustav, ili skupina podsustava, koji imaju za cilj ispuniti zadaću koja im je dodijeljena (misija). Primjerice, ako je cilj satelita fotografiranje Zemljine površine, onda će njegov koristan teret biti sustav za fotografiranje (kamera). Ili primjerice ako želimo uspostaviti komunikaciju sa satelitom, što je gotovo uvijek slučaj, onda će njegov korisni sustav biti sustav za komunikaciju.
+
         \subsection{Vrste tereta}{
             %- navesti korisne terete koje satelit ima u ovisnosti o tipu misije
-            %- navesti kako pravilna funkcionalnost korisnog tereta ovisi o orijentaciji  
-            %- navesti neke korisne terete/sustave koji ovise o orijentaciji satelita
-            %- u ovisnosti o teretu, objasniti koje vrste orijentacije koristimo (npr antena prati zemlju, itd)
-        }
-    
-        \subsection{Važnost kontrolirane orijentacije}{
-            %- navesti kraticu adcs
-            %- ukratko objasniti kako estimiramo orijentaciju
-            %    - algoritmi
-            %    - senzori
-            %- ukratko objasniti kako kontroliramo orijentaciju
-            %    - algoritmi
-            %    - aktuatori
-            %- zasto je on jedan od najvaznijih sustava satelita
-            %- sto se desava ako sustav prestane raditi ili radi nenormalno
-            %    - navesti neke primjere
+            Ovisno o tipu misije, razlikujemo podsustave koje je moguće svrstati u nekoliko sljedećih kategorija:
+
+            \begin{itemize}
+                \item Opservacija Zemlje
+                \item Komunikacija
+                \item Navigacija
+                \item Znanost i tehnologija
+            \end{itemize}
+
+            Sustavi za opservaciju Zemlje sadrže uređaje koji promatraju Zemljinu površinu ili atmosferu. Najčešće takav sustav sadrži kameru koja fotografira u odabranom dijelu spektra. Zbog toga što na takvom sustavu osim kamere imamo i objektive koji omogućuju velika uvećanja, potrebno je da posjedujemo mogućnost preciznog usmjeravanja kamere. Također, sustav za komunikaciju, osim sklopovlja za obradu signala, sadrži i antene. Kako bi pospješili prijem i odašiljanje, potrebno je usmjeriti antenu prema drugoj anteni na Zemlji \cite{sattelitePayload}.
+
+            \subsection{Važnost kontrolirane orijentacije}{
+                \subsubsection{Detumbling}{
+                    Osim gore opisanih sustava kojima je važna kontrola orijentacije, navest ćemo još jedan primjer gdje nam je kontrola orijentacije važna. Naime, prilikom izbacivanja satelita iz samog prijevoznog sredstva u svemir, događa se nekontrolirana rotacija satelita. Kako bi satelit zaustavio rotaciju, aktivni sustav za determinaciju i kontrolu orijentacije \engl{Attitude Control and Determination System - ADCS} ulazi u posebni način rada \engl{detumbling} u kojem će zaustaviti nekontroliranu rotaciju. Takav zahvat može potrajati tjednima ili mjesecima, ovisno o tipu satelita \cite{fersat}.
+                }
+
+                \subsubsection{Ukratko o ADCS sustavu}{
+                    %- ukratko objasniti kako estimiramo orijentaciju
+                    %    - algoritmi
+                    %    - senzori
+                    %- ukratko objasniti kako kontroliramo orijentaciju
+                    %    - algoritmi
+                    %    - aktuatori
+                    }
+
+                    \subsubsection{Važnost ADCS sustava u radu satelita}{
+                        %- zasto je on jedan od najvaznijih sustava satelita
+                        %- sto se desava ako sustav prestane raditi ili radi nenormalno
+                        %    - navesti neke primjere
+                    }
+            }
         }
     }
 }

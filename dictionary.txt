@@ -12,6 +12,7 @@ kinematički
 ugradbeno
 aktuatori
 Sklopovlje
+sklopovlja
 Ivan
 Vnučec
 ADCS
@@ -29,3 +30,13 @@ Aviation
 Federal
 FAA
 internet
+fotografira
+payload
+razlikujemo
+detumbling
+system
+determination
+and
+Control
+Attitude
+prijevoznog
