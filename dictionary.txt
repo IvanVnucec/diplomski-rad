@@ -11,6 +11,7 @@ PID
 kinematički
 ugradbeno
 aktuatori
+aktuatora
 Sklopovlje
 sklopovlja
 Ivan
@@ -46,3 +47,14 @@ estimira
 estimirane
 estimacijske
 estimacijskih
+paneli
+solarni
+rotirat
+nekontrolirano
+započeo
+lansirana
+Lewis
+Navigation
+Guidance
+navigacijsko
+ino
