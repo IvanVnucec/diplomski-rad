@@ -128,36 +128,153 @@
 }
 
 \chapter{Osnovni kinematički model satelita}{
-    \section{Matematički zapis modela}{
-        %- objasniti sve parametre kinematickog modela satelita
-        %- objasniti pojednostavljenja
-        %- objasniti određivanje parametara
+    Kako bi matematički prikazali rotacijsko gibanje satelita, satelit je prvo potrebno modelirati kao kruto tijelo. Mi ćemo u nastavku navesti samo osnovne izraze potrebne za modeliranje satelita, a potpune matematičke izraze i izvode moguće je pronaći u popratnoj literaturi \cite{adcsKnjiga}.
+
+    \section{Osnovni parametri satelita}{
+        Inercijska matrica \engl{Moment of inertia tensor} u pojednostavljenom smislu označava moment tromosti krutog tijela oko pojedine osi rotacije. Naglašavamo da je u pitanju pojednostavljena definicija i da ona nije strogo točna, no za naše potrebe je ona dovoljna. Inercijsku matricu predstavljamo kao:
+
+        \begin{equation}
+        \textbf{J} = 
+        \begin{bmatrix}
+            J_{xx} & J_{xy} & J_{xz} \\
+            J_{yx} & J_{yy} & J_{yz} \\
+            J_{zx} & J_{zy} & J_{zz}
+        \end{bmatrix}
+        .
+        \end{equation}
+
+        Moguće je pokazati da za svako kruto tijelo možemo pojednostaviti Inercijsku matricu te tako dobiti dijagonalnu inercijsku matricu. Takva matrica nam omogućuje izvedbu jednostavnijih izraza za rotaciju krutog tijela. Zbog nepotrebnog ulaženja u detalje kako je moguće dobiti dijagonalnu matricu, navest ćemo samo izraz kao:
+
+        \begin{equation}
+        \textbf{I} = 
+        \begin{bmatrix}
+            I_{xx} & 0      & 0 \\
+            0      & I_{yy} & 0 \\
+            0      & 0      & I_{zz} \\
+        \end{bmatrix}
+        .
+        \end{equation}
     }
-    
-    \section{Orijentacija satelita}{   
-        \subsection{Vrste reprezentacija}{
-            \subsubsection{Eulerovi kutovi}{
 
-            }
+    \section{Eulerovi kutovi}{
+        Eulerovi kutovi predstavljaju 3 kuta između nekog vektora i ortogonalnih osi koje razapinju Kartezijev koordinatni sustav. Ako želimo predstaviti rotaciju između jednog proizvoljnog vektora i nekog drugog vektora, onda to možemo napraviti na nekoliko načina. Jedan primjer takve rotacije navest ćemo u sljedećem primjeru:
 
-            \subsubsection{Kvaternioni}{
+        \begin{enumerate}
+            \item Rotacija za kut $\psi$ oko orginalne z-osi \engl{yaw}.
+            \item Rotacija za kut $\theta$ oko tranzicijske y-osi \engl{pitch}.
+            \item Rotacija za kut $\phi$ oko transformirane x-osi \engl{roll}.
+        \end{enumerate}
 
-            }
+        Uzmemo li za primjer 3 uzastopne rotacije: prve oko orginalne z-osi, zatim druge oko tranzicijske y-osi i na kraju treće oko transformirane x-osi dobivamo rotaciju prikazanu na slici ispod: 
 
-            \subsubsection{Usporedba vrsta reprezentacija}{
-    
-            }
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1.0\textwidth]{images/eulerovi_kutovi.jpg}
+        \caption{Tri uzastopne rotacije oko z-osi, y-osi i x-osi za kut $\psi$, $\theta$, i $\phi$}
+        \label{fig:euler_rotacija}
+        \end{figure}
+    }
+
+    \section{Kvaternioni}{
+        - definicija kvaterniona
+    }
+
+    \section{Rotacijska matrica}{
+        - definicija rotacijske matrice naslov 1.3.1
+
+        \subsection{Prikaz pomoću Eulerovih kutova}{
+            Takva sekvenca rotacija je jako česta u zrakoplovno-svemirskoj industriji i označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko orginalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
+
+            Matrica koja transformira jedan skup triju međusobno ortogonalnih vektora u drugi skup triju međusobno ortogonalnih vektora moguće je prikazati pomoću Eulerovih kutova kao:
+
+            \begin{equation}
+            \label{eq:euler_rot_mat}
+            \begin{array}{rcl}
+            \textbf{C}_{21}(\phi, \theta, \psi) & = & \textbf{C}_{x}(\phi) \textbf{C}_{y}(\theta) \textbf{C}_{z}(\psi) \\
+            & = &
+            \begin{bmatrix}
+                c_{\theta}c_{\psi}                            & c_{\theta}s_{\psi}                            & -s_{\theta} \\
+                s_{\phi}s_{\theta}c_{\psi} - c_{\phi}s_{\psi} & s_{\phi}s_{\theta}s_{\psi} + c_{\phi}c_{\psi} & s_{\phi}c_{\theta} \\
+                c_{\phi}s_{\theta}c_{\psi} + s_{\phi}s_{\psi} & c_{\phi}s_{\theta}s_{\psi} - s_{\phi}c_{\psi} & c_{\phi}c_{\theta}
+            \end{bmatrix}
+            \end{array}
+            ,
+            \end{equation}
+
+            gdje radi preglednosti vrijedi $s_{b}=\sin(b)$ i $c_{b}=\sin(b)$.
+
+            Jedna mana reprezentacije rotacije pomoću Eulerovih kutova je tzv. singularnost. Može se pokazati da za svaku parametrizaciju rotacije može doći do singulariteta. Za naš primjer 3-2-1 sekvence singularitet nastaje kada je $\theta=\pm90^{\circ}$. Za takav slučaj rotacijska matrica postaje:
+
+            \begin{equation}
+            \textbf{C}_{21}(\phi, 90^{\circ}, \psi) =
+            \begin{bmatrix}
+                0                 & 0                  & -1 \\
+                \sin(\phi - \psi) & \cos(\phi - \psi)  &  0 \\
+                \cos(\phi - \psi) & -\sin(\phi - \psi) &  0
+            \end{bmatrix}
+            .
+            \end{equation}
+
+            Fizikalno, zbog singulariteta prva i treća rotacija unutar 3-2-1 sekvence se odvijaju oko jedne te iste osi. U tom slučaju roll i yaw ($\phi$ i $\psi$) su zapravo jednaki kutovi i ne mogu se jednoznačno odrediti. 
+
+            Izvan singulariteta, moguće je jednoznačno odrediti sva tri Eulerova kuta. Ako rotacijsku matricu označimo kao:
+
+            \begin{equation}
+            \textbf{C} =
+            \begin{bmatrix}
+                c_{11} & c_{12} & c_{13} \\
+                c_{21} & c_{22} & c_{23} \\
+                c_{31} & c_{32} & c_{33} \\
+            \end{bmatrix}
+            ,
+            \end{equation}
+
+            iz jednadžbe \ref{eq:euler_rot_mat} moguće je dobiti Eulerove kutove kao:
+
+            \begin{equation}
+            \begin{array}{rcl}
+                \phi   & = & \tan^{-1}(c_{23}/c_{33}),\\
+                \theta & = & -\sin^{-1}(c_{13}),\\
+                \psi   & = & \tan^{-1}(c_{12}/c_{11}).
+            \end{array}
+            \end{equation}
+
+            \textbf{Naglašavamo kako je iznimno važno da prilikom definicije rotacije pomoću Eulerovih kutova naglasimo o kojoj sekvenci rotacije se radi (npr. 3-2-1) jer rotacijske sekvence ne komutiraju!}
+        }
+
+        \subsection{Prikaz pomoću kvaterniona}{
+            %- TODO: nadji u knjizi
         }
     }
-    
-    \section{Kutna brzina satelita}{
-        %- sto je kutna brzina satelita
-        %- kako ju reprezentiramo
-        %    - promjena eulerovih kuteva
-        %    - promjena kvaterniona
+
+    \section{Rotacija}{
+        \subsection{Prikaz pomoću Eulerovih kutova}{
+            %- definicija rotacije preko eulerovih kuteva 1.59
+        }
+
+        \subsection{Prikaz pomoću kvaterniona}{
+            %- TODO: nadji u knjizi
+        }
+    }
+
+    \section{Jednadžba rotacijskog gibanja}{
+        \subsection{Prikaz pomoću Eulerovih kutova}{
+            %- cijelovita jednadzva rotacije cvrstog tijela 2.30
+            %- pojednostavljene eulerove jednadzbe 2.42
+        }
+
+        \subsection{Prikaz pomoću kvaterniona}{
+            %- TODO: nadji u knjizi
+        }
+
+        \section{Usporedba Eulerovih kutova i kvaterniona}{
+            %- problemi neodredjenosti eulerovih kuteva
+            %- prednost jednadzbi sa kvaternionima jer nema sin cos vec su algebarske
+            %- mana sto na kraju krajeva nam je zgodno imati priakz u eulerovim
+        }
     }
 }
-    
+
 \chapter{Sustav za određivanje i upravljanje orijentacijom satelita (ADCS)}{
     \section{Uvod}{
         %- sto je sustav za određivanje i upravljanje orijentacijom satelita
