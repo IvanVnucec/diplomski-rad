@@ -40,3 +40,9 @@ and
 Control
 Attitude
 prijevoznog
+estimacija
+naposlijetku
+estimira
+estimirane
+estimacijske
+estimacijskih

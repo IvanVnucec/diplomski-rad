@@ -110,13 +110,12 @@
                 }
 
                 \subsubsection{Ukratko o ADCS sustavu}{
-                    %- ukratko objasniti kako estimiramo orijentaciju
-                    %    - algoritmi
-                    %    - senzori
-                    %- ukratko objasniti kako kontroliramo orijentaciju
-                    %    - algoritmi
-                    %    - aktuatori
-                    }
+                    ADCS sustav određuje orijentaciju pomoću podataka iz senzora. Senzori najčešće ne daju direktno vrijednost orijentacije već se orijentacija estimira pomoću estimacijskih algoritama. Problem senzora općenito je njihova neodređenost koja onda doprinosi da je estimacija orijentacije pogrešna. Zbog toga smo razvili estimacijske algoritme koje uzimaju grešku senzora u obzir te tako smanjuju neodređenost estimirane orijentacije.
+
+                    Nakon što smo odredili orijentaciju, i ako ta orijentacija nije jednaka željenoj, slijedi postupak korekcije (kontrole). Postupak korekcije počinje računanjem razlike željene orijentacije i trenutno estimirane. Regulator orijentacije će pomoću te razlike orijentacije izračunati optimalnu korekciju koju je potrebno izvršiti kako bi došli u željenu orijentaciju. Korekciju orijentacije izvršavaju mehanički odnosno električni aktuatori. Aktuatori će stvoriti korekcijski moment koji satelit naposlijetku dovodi u željenu orijentaciju.
+
+                    Opisana estimacija i kontrola orijentacije ADCS sustava događa se u stvarnom vremenu kroz cijeli radni vijek satelita. Ni u jednom trenu se ne smije dopustiti da satelit posjeduje neželjenu ili nekontroliranu orijentaciju jer to može značiti kraj misije.
+                }
 
                     \subsubsection{Važnost ADCS sustava u radu satelita}{
                         %- zasto je on jedan od najvaznijih sustava satelita
