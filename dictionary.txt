@@ -21,8 +21,10 @@ Eulerovi
 Eulerove
 Eulerova
 Eulerovih
+Eulerovim
 Cubesat
 kvaternioni
+kvaternion
 kvaterniona
 Nano
 Femto
@@ -85,3 +87,10 @@ kartezijev
 tensor
 inertia
 ino
+Josip
+definiranog
+skalarnog
+trace
+ortogonalne
+axis
+dimenzionalni

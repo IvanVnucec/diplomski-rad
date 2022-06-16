@@ -18,7 +18,7 @@
 \izvornik
 
 % TODO: Dodaj zahvalu
-\zahvala{Ovdje ide zahvala}
+\zahvala{Josip, Karla}
 
 \tableofcontents
 
@@ -127,7 +127,7 @@
     }
 }
 
-\chapter{Osnovni kinematički model satelita}{
+\chapter{Opis orijentacije satelita}{
     Kako bi matematički prikazali rotacijsko gibanje satelita, satelit je prvo potrebno modelirati kao kruto tijelo. Mi ćemo u nastavku navesti samo osnovne izraze potrebne za modeliranje satelita, a potpune matematičke izraze i izvode moguće je pronaći u popratnoj literaturi \cite{adcsKnjiga}.
 
     \section{Osnovni parametri satelita}{
@@ -176,11 +176,36 @@
     }
 
     \section{Kvaternioni}{
-        - definicija kvaterniona
+        Kvaternion je četvero-dimenzionalni vektor s kojim je moguće opisati orijentaciju tijela. Kvaternion u usporedbi sa Eulerovim kutovima posjeduje dvije prednosti (o kojima nešto više u nastavku): prva je da ne posjeduje singularnost, i druga da matematičke relacije modeliranja orijentacije više nisu trigonometrijske već algebarske prirode, što ih dodatno čini pogodnima za računanje.
+
+        Kvaternion opisuje dvije stvari potrebne za opis rotacije: glavnu os rotacije \engl{principal axis} $\overrightarrow{\textbf{a}}$ i kuta rotacije $\phi$ kao što je vidljivo na slici \ref{fig:principal_axis_rotation}. Zbog toga, razlikujemo vektorski i skalarni dio koje definiramo kao:
+
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.2\textwidth]{images/principal_axis_rotation.png}
+        % TODO: dodaj strelice iznad vektora (oprez: latex zeza nesto)
+        \caption{Prikaz rotacije vektora $\textbf{b}$ oko glavne osi rotacije $\textbf{a}$ za kut $\phi$.}
+        \label{fig:principal_axis_rotation}
+        \end{figure}
+
+        \begin{equation}
+        \begin{array}{rcl}
+            \boldsymbol\epsilon &  = & \overrightarrow{\textbf{a}}\sin\frac{\phi}{2} = \left[\epsilon_{x} \; \epsilon_{y} \; \epsilon_{z} \right], \\
+            \eta & = & \cos\frac{\phi}{2}
+        \end{array}
+        \end{equation}
+
+
+        U praksi postoje dvije interpretacije kvaterniona u ovisnosti o tome ide li skalarni dio kao prvi element kvaterniona ili kao posljednji. U našem radu pretpostavit ćemo oblik kvaterniona gdje je skalarni dio prvi:
+
+        \begin{equation}
+            \textbf{q}=
+            \left[\eta \; \boldsymbol\epsilon \right] = \left[q_{0} \; q_{1} \; q_{2} \; q_{3}\right]
+        \end{equation}
     }
 
     \section{Rotacijska matrica}{
-        - definicija rotacijske matrice naslov 1.3.1
+        Rotacijska matrica opisuje transformaciju rotacije vektora. U suštini postoje tri oblika rotacijske matrice gdje svaka označava rotaciju oko jedne ortogonalne osi (x, y, ili z). U nastavku ćemo navesti rotacijske matrice koje određujemo pomoću Eulerovih kutova i pomoću kvaterniona.
 
         \subsection{Prikaz pomoću Eulerovih kutova}{
             Takva sekvenca rotacija je jako česta u zrakoplovno-svemirskoj industriji i označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko orginalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
@@ -215,39 +240,90 @@
             .
             \end{equation}
 
-            Fizikalno, zbog singulariteta prva i treća rotacija unutar 3-2-1 sekvence se odvijaju oko jedne te iste osi. U tom slučaju roll i yaw ($\phi$ i $\psi$) su zapravo jednaki kutovi i ne mogu se jednoznačno odrediti. 
+            Fizikalno, zbog singulariteta prva i treća rotacija unutar 3-2-1 sekvence se odvijaju oko jedne te iste osi. U tom slučaju roll i yaw ($\phi$ i $\psi$) su zapravo jednaki kutovi i ne mogu se jednoznačno odrediti. Izvan singulariteta, moguće je jednoznačno odrediti sva tri Eulerova kuta. 
+            
+            \subsubsection{Određivanje Eulerovih kutova iz rotacijske matrice}{
+                Ako rotacijsku matricu označimo kao:
 
-            Izvan singulariteta, moguće je jednoznačno odrediti sva tri Eulerova kuta. Ako rotacijsku matricu označimo kao:
+                \begin{equation}
+                \label{eq:rotation_matrix}
+                \textbf{C} =
+                \begin{bmatrix}
+                    c_{11} & c_{12} & c_{13} \\
+                    c_{21} & c_{22} & c_{23} \\
+                    c_{31} & c_{32} & c_{33} \\
+                \end{bmatrix}
+                ,
+                \end{equation}
 
-            \begin{equation}
-            \textbf{C} =
-            \begin{bmatrix}
-                c_{11} & c_{12} & c_{13} \\
-                c_{21} & c_{22} & c_{23} \\
-                c_{31} & c_{32} & c_{33} \\
-            \end{bmatrix}
-            ,
-            \end{equation}
+                iz jednadžbe \ref{eq:euler_rot_mat} moguće je odrediti Eulerove kutove kao:
 
-            iz jednadžbe \ref{eq:euler_rot_mat} moguće je dobiti Eulerove kutove kao:
+                \begin{equation}
+                \begin{array}{rcl}
+                    \phi   & = & \tan^{-1}(c_{23}/c_{33}),\\
+                    \theta & = & -\sin^{-1}(c_{13}),\\
+                    \psi   & = & \tan^{-1}(c_{12}/c_{11}).
+                \end{array}
+                \end{equation}
+            }
 
-            \begin{equation}
-            \begin{array}{rcl}
-                \phi   & = & \tan^{-1}(c_{23}/c_{33}),\\
-                \theta & = & -\sin^{-1}(c_{13}),\\
-                \psi   & = & \tan^{-1}(c_{12}/c_{11}).
-            \end{array}
-            \end{equation}
-
-            \textbf{Naglašavamo kako je iznimno važno da prilikom definicije rotacije pomoću Eulerovih kutova naglasimo o kojoj sekvenci rotacije se radi (npr. 3-2-1) jer rotacijske sekvence ne komutiraju!}
+            \textbf{Naglašavamo kako je iznimno važno da prilikom definiranja rotacije pomoću Eulerovih kutova naglasimo o kojoj sekvenci rotacije se radi (npr. 3-2-1) jer rotacijske sekvence ne komutiraju!}
         }
 
         \subsection{Prikaz pomoću kvaterniona}{
-            %- TODO: nadji u knjizi
+            Rotacijsku matricu pomoću kvaterniona definiranog ranije označavamo kao:
+
+            \begin{equation}
+                \textbf{C} = (2\eta^2-1)\textbf{1} + 2\boldsymbol\epsilon\boldsymbol\epsilon^{T}-2\eta\boldsymbol\epsilon^{\times},
+            \end{equation}
+
+            gdje je $\boldsymbol\epsilon^{\times}$ definiran kao:
+
+            \begin{equation}
+                \boldsymbol\epsilon^{\times} =
+                \begin{bmatrix}
+                    0 & -\epsilon_{z} & \epsilon_{y} \\
+                    \epsilon_{z} & 0 & -\epsilon_{x} \\
+                    -\epsilon_{y} & \epsilon_{x} & 0 \\
+                \end{bmatrix}
+                .
+            \end{equation}
+
+            \subsubsection{Određivanje kvaterniona iz rotacijske matrice}{
+                Pomoću rotacijske matrice definirane u jednadžbi \ref{eq:rotation_matrix} moguće je odrediti sva 4 člana kvaterniona na način da prvo odredimo skalarni član kao:
+                
+                \begin{equation}
+                    \eta = \pm\frac{(\text{trace}[\textbf{C}] + 1)^{\frac{1}{2}}}{2}.
+                \end{equation}
+
+                Predznak skalarnog člana nije bitan jer on fizikalno samo označava smjer rotacije. Pozitivan ili negativan predznak daju istu rotaciju.
+
+                Jednom kada smo odredili $\eta$, moguće je odrediti $\boldsymbol\epsilon$. Može se pokazati da za $\eta \neq 0$ vrijedi:
+
+                \begin{equation}
+                \begin{array}{rcl}
+                    \epsilon_{x} & = & \frac{c_{23} - c_{32}}{4\eta}, \\
+                    \epsilon_{y} & = & \frac{c_{31} - c_{13}}{4\eta}, \\
+                    \epsilon_{z} & = & \frac{c_{12} - c_{21}}{4\eta}.
+                \end{array}
+                \end{equation}
+
+                Za slučaj kada je $\eta=0$, vrijedi da je kut zakretanja jednak $\phi=\pm\pi$. Da se pokazati da je moguće izračunati elemente $\boldsymbol\epsilon$ vektora kao:
+
+                \begin{equation}
+                \begin{array}{rcl}
+                    |\epsilon_{x}| & = & (\frac{c_{11} + 1}{2})^{\frac{1}{2}}, \\
+                    |\epsilon_{y}| & = & (\frac{c_{22} + 1}{2})^{\frac{1}{2}}, \\
+                    |\epsilon_{z}| & = & (\frac{c_{33} + 1}{2})^{\frac{1}{2}}.
+                \end{array}
+                \end{equation}
+
+                Za odabir predznaka svakog elementa $\boldsymbol\epsilon$ vektora čitatelja se savjetuje da pogleda u izvor \cite{adcsKnjiga}.
+            }
         }
     }
 
-    \section{Rotacija}{
+    \section{Rotacija vektora}{
         \subsection{Prikaz pomoću Eulerovih kutova}{
             %- definicija rotacije preko eulerovih kuteva 1.59
         }
@@ -387,66 +463,67 @@
             %- kako komuniciramo s njime
         }
     }
+}
+
+
+\chapter{Programska podrška ADCS sustava}{
+    \section{Ugradbeno računalo}{
+        %- koje ugradbeno racunalo koristimo
+        %- zasto smo bas to odabrali
+    }
+
+    \section{Organizacija projekta}{
+        %- objasniti organizaciju koda
+    }
     
-    \section{Programska podrška}{
-        \subsection{Ugradbeno računalo}{
-            %- koje ugradbeno racunalo koristimo
-            %- zasto smo bas to odabrali
-        }
+    \section{Korištene biblioteke}{
+        %- koje biblioteke koristimo i zasto
+    }
 
-        \subsection{Organizacija projekta}{
-            %- objasniti organizaciju koda
-        }
-        
-        \subsection{Korištene biblioteke}{
-            %- koje biblioteke koristimo i zasto
-        }
+    \section{Operacijski sustav}{
+        %- opisati da koristimo FreeRTOS
+        %- opisati koje sve dretve imamo
+        %    - za svaku dretvu napisati dijagram toka
+        %    - opisati funkciju dretve
+        %    - opisati vrijeme izvođenja dretvi
+        %    - opisati na koji nacin dretve međusobno komuniciraju
+    }
 
-        \subsection{Operacijski sustav}{
-            %- opisati da koristimo FreeRTOS
-            %- opisati koje sve dretve imamo
-            %    - za svaku dretvu napisati dijagram toka
-            %    - opisati funkciju dretve
-            %    - opisati vrijeme izvođenja dretvi
-            %    - opisati na koji nacin dretve međusobno komuniciraju
-        }
+    \section{Matematički zapis orijentacije}{
+        %- jednadzbe koje koristimo u SW
+    }
 
-        \subsection{Matematički zapis orijentacije}{
-            %- jednadzbe koje koristimo u SW
-        }
-    
-        \subsection{Izabrana metoda određivanja orijentacije}{
-            %- objasniti na koji nacin radimo senzor fuzion
-            %    - optimal request
-            %        - napisati nesto kratko o OR algoritmu
-            %        - navesti referencu na svu popratnu dokumentaciju
-        }
-    
-        \subsection{Izabrana metoda upravljanja orijentacijom}{
-            %- odabrana metoda upravljanja orijentacijom
-            %    - spomeni quaternion regulator
-            %- odabrana metoda upravljanja kutnom brzinom
-            %    - spomeni zamasnjak
-            %    - pwm
-            %    - spomeni PID regulator
-            %    - PID regulator za kontrolu orijentacije satelita
-            %        - opisati kako ga mi koristimo
-            %        - ovo isto pokupi od Arduino projekta
-        }
+    \section{Izabrana metoda određivanja orijentacije}{
+        %- objasniti na koji nacin radimo senzor fuzion
+        %    - optimal request
+        %        - napisati nesto kratko o OR algoritmu
+        %        - navesti referencu na svu popratnu dokumentaciju
+    }
 
-        \subsection{Razvoj}{
-            %- objasniti koji compiler koristimo
-            %- objasniti koji programski jezik koristimo
-            %- objasniti da je cijeli kod na githubu
-            %- broj linija koda
-            %    - vidi kako to dobiti u linux-u sa nekom komandom
-            %- objasniti koje sve alate koristimo prilikom razvoja SW
-            %    - clang format i slicno
-            %    - vscode
-            %    - openocd
-            %- objasniti kako debugiramo
-            %- slikati graf razvoja programskog koda kroz vrijeme
-        }
+    \section{Izabrana metoda upravljanja orijentacijom}{
+        %- odabrana metoda upravljanja orijentacijom
+        %    - spomeni quaternion regulator
+        %- odabrana metoda upravljanja kutnom brzinom
+        %    - spomeni zamasnjak
+        %    - pwm
+        %    - spomeni PID regulator
+        %    - PID regulator za kontrolu orijentacije satelita
+        %        - opisati kako ga mi koristimo
+        %        - ovo isto pokupi od Arduino projekta
+    }
+
+    \section{Razvoj}{
+        %- objasniti koji compiler koristimo
+        %- objasniti koji programski jezik koristimo
+        %- objasniti da je cijeli kod na githubu
+        %- broj linija koda
+        %    - vidi kako to dobiti u linux-u sa nekom komandom
+        %- objasniti koje sve alate koristimo prilikom razvoja SW
+        %    - clang format i slicno
+        %    - vscode
+        %    - openocd
+        %- objasniti kako debugiramo
+        %- slikati graf razvoja programskog koda kroz vrijeme
     }
 }
 
