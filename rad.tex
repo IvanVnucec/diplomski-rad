@@ -105,23 +105,7 @@
             Sustavi za opservaciju Zemlje sadrže uređaje koji promatraju Zemljinu površinu ili atmosferu. Najčešće takav sustav sadrži kameru koja fotografira u odabranom dijelu spektra. Zbog toga što na takvom sustavu osim kamere imamo i objektive koji omogućuju velika uvećanja, potrebno je da posjedujemo mogućnost preciznog usmjeravanja kamere. Također, sustav za komunikaciju, osim sklopovlja za obradu signala, sadrži i antene. Kako bi pospješili prijem i odašiljanje, potrebno je usmjeriti antenu prema drugoj anteni na Zemlji \cite{sattelitePayload}.
 
             \subsection{Važnost kontrolirane orijentacije}{
-                \subsubsection{Detumbling}{
-                    Osim gore opisanih sustava kojima je važna kontrola orijentacije, navest ćemo još jedan primjer gdje nam je kontrola orijentacije važna. Naime, prilikom izbacivanja satelita iz samog prijevoznog sredstva u svemir, događa se nekontrolirana rotacija satelita. Kako bi satelit zaustavio rotaciju, aktivni sustav za determinaciju i kontrolu orijentacije \engl{Attitude Control and Determination System - ADCS} ulazi u posebni način rada \engl{detumbling} u kojem će zaustaviti nekontroliranu rotaciju. Takav zahvat može potrajati tjednima ili mjesecima, ovisno o tipu satelita \cite{fersat}.
-                }
-
-                \subsubsection{Ukratko o ADCS sustavu}{
-                    ADCS sustav određuje orijentaciju pomoću podataka iz senzora. Senzori najčešće ne daju direktno vrijednost orijentacije već se orijentacija estimira pomoću estimacijskih algoritama. Problem senzora općenito je njihova neodređenost koja onda doprinosi da je estimacija orijentacije pogrešna. Zbog toga smo razvili estimacijske algoritme koje uzimaju grešku senzora u obzir te tako smanjuju neodređenost estimirane orijentacije.
-
-                    Nakon što smo odredili orijentaciju, i ako ta orijentacija nije jednaka željenoj, slijedi postupak korekcije (kontrole). Postupak korekcije počinje računanjem razlike željene orijentacije i trenutno estimirane. Regulator orijentacije će pomoću te razlike orijentacije izračunati optimalnu korekciju koju je potrebno izvršiti kako bi došli u željenu orijentaciju. Korekciju orijentacije izvršavaju mehanički odnosno električni aktuatori. Aktuatori će stvoriti korekcijski moment koji satelit naposlijetku dovodi u željenu orijentaciju.
-                }
-
-                \subsubsection{Važnost ADCS sustava u radu satelita}{
-                    Opisana estimacija i kontrola orijentacije ADCS sustava događa se u stvarnom vremenu kroz cijeli radni vijek satelita i ni u jednom trenu se ne smije dogoditi da satelit posjeduje neželjenu ili nekontroliranu orijentaciju jer to može značiti kraj misije.
-
-                    NASA-ino istraživanje je pokazalo da je ADCS sustav zaslužan za 23\% grešaka na navigacijsko-kontrolnim sustavima \engl{Guidance, Navigation and Control - GN\&C}, i da je većina tih anomalija uzrokovala kraj misije \cite{greskeNaAdcsPostotak}. U nastavku ćemo navest jedan primjer greške na ADCS sustavu.
-
-                    Lewis svemirska letjelica \cite{lewis} lansirana je 1997. godine s predviđenim radnim vijekom od 5 godina. Nakon postizanja uspješne orbite satelit je započeo sa normalnim radom i nije ga više bilo potrebno aktivno kontrolirati. U normalnom radu solarni paneli su bili upereni prema Suncu kako bi prikupili maksimalnu količinu energije. Zbog greške prilikom rada, jedan od aktuatora je stvarao konstantni moment oko jedne osi koju senzori nisu mogli prepoznati. Nakon nekoliko dana, satelit se je počeo nekontrolirano rotirat i solarni paneli nisu prikupljali dovoljno energije. Naposlijetku su inženjeri sa Zemlje uočili nekontroliranu orijentaciju ali je već bilo kasno jer se je baterija satelita potpuno ispraznila i komunikacija sa satelitom je bila zauvijek prekinuta \cite{greskeNaAdcsSlucajevi}.
-                }
+                Osim gore opisanih sustava kojima je važna kontrola orijentacije, navest ćemo još jedan primjer gdje nam je kontrola orijentacije važna. Naime, prilikom izbacivanja satelita iz samog prijevoznog sredstva u svemir, događa se nekontrolirana rotacija satelita. Kako bi satelit zaustavio rotaciju, aktivni sustav kontrolu orijentacije ulazi u posebni način rada \engl{detumbling} u kojem će zaustaviti nekontroliranu rotaciju. Takav zahvat može potrajati tjednima ili mjesecima, ovisno o tipu satelita \cite{fersat}.
             }
         }
     }
@@ -129,6 +113,14 @@
 
 \chapter{Opis orijentacije satelita}{
     Kako bi matematički prikazali rotacijsko gibanje satelita, satelit je prvo potrebno modelirati kao kruto tijelo. Mi ćemo u nastavku navesti samo osnovne izraze potrebne za modeliranje satelita, a potpune matematičke izraze i izvode moguće je pronaći u popratnoj literaturi \cite{adcsKnjiga}.
+
+    Ako govorimo o orijentaciji, važno je objasniti pojam referentnog sustava \engl{reference plane}. Referentni sustav je skup 3 međusobno ortogonalnih vektora prema kojima određujemo sve ostale vektore, bilo njihovu orijentaciju, bilo pomak. Jedan možda najpoznatiji primjer takvog referentnog sustava je Kartezijev referentni sustav gdje smo kao referentne vektore izabrali 3 jedinična vektora $\textbf{i}$, $\textbf{j}$ i $\textbf{k}$ prema kojima onda određujemo sve ostale vektore koje definiramo u Kartezijevom prostoru. 
+
+    Moguće je imati više referentnih sustava. Prelazak iz jednog u drugi referentni sustav moguće je ostvariti transformacijama sa rotacijskim matricama o kojima ćemo govoriti kasnije. Referentne sustave najčešće označavamo kao npr. $\mathcal{F}_a$ ili $\mathcal{F}_b$. Rotacijska matrica koja bi određivala orijentaciju $\mathcal{F}_a$ referentnog sustava naspram $\mathcal{F}_b$ referentnog sustava označavamo kao $\textbf{C}_{ab}$.
+
+    Da bi definirali orijentaciju satelita, prvo moramo definirati referentne sustave. Prvi referentni sustav kojeg definiramo je inercijski referentni sustav $\mathcal{F}_G$. U klasičnoj fizici, inercijski sustav označava referentni sustav koji ne posjeduje akceleraciju \cite{inertialFrame}. Drugi referentni sustav kojeg definiramo je tzv. \emph{body} referentni sustav $\mathcal{F}_b$ koji je nepomičan s obzirom na gibanje čvrstog tijela (satelita).
+
+    Orijentacija satelita u referentnom sustavu $\mathcal{F}_b$ naspram inercijskog referentnog sustava $\mathcal{F}_G$ označavamo rotacijskom matricom $\textbf{C}_{bG}$.
 
     \section{Osnovni parametri satelita}{
         Inercijska matrica \engl{Moment of inertia tensor} u pojednostavljenom smislu označava moment tromosti krutog tijela oko pojedine osi rotacije. Naglašavamo da je u pitanju pojednostavljena definicija i da ona nije strogo točna, no za naše potrebe je ona dovoljna. Inercijsku matricu predstavljamo kao:
@@ -189,12 +181,12 @@
         \end{figure}
 
         \begin{equation}
+        \label{eq:kvaternion}
         \begin{array}{rcl}
             \boldsymbol\epsilon &  = & \overrightarrow{\textbf{a}}\sin\frac{\phi}{2} = \left[\epsilon_{x} \; \epsilon_{y} \; \epsilon_{z} \right], \\
             \eta & = & \cos\frac{\phi}{2}
         \end{array}
         \end{equation}
-
 
         U praksi postoje dvije interpretacije kvaterniona u ovisnosti o tome ide li skalarni dio kao prvi element kvaterniona ili kao posljednji. U našem radu pretpostavit ćemo oblik kvaterniona gdje je skalarni dio prvi:
 
@@ -205,43 +197,102 @@
     }
 
     \section{Rotacijska matrica}{
-        Rotacijska matrica opisuje transformaciju rotacije vektora. U suštini postoje tri oblika rotacijske matrice gdje svaka označava rotaciju oko jedne ortogonalne osi (x, y, ili z). U nastavku ćemo navesti rotacijske matrice koje određujemo pomoću Eulerovih kutova i pomoću kvaterniona.
+        Rotacijska matrica opisuje transformaciju vektora iz orginalnog u rotirani, za neku poznatu rotaciju. U nastavku ćemo navesti rotacijske matrice koje određujemo pomoću Eulerovih kutova i pomoću kvaterniona i dati ćemo primjer rotacije vektora.
 
         \subsection{Prikaz pomoću Eulerovih kutova}{
-            Takva sekvenca rotacija je jako česta u zrakoplovno-svemirskoj industriji i označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko orginalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
+            U nastavku ćemo navesti prikaze rotacijskih matrica pomoću Eulerovih kutova. Prvo ćemo navesti kako izgledaju rotacijske matrice kada imamo rotacije samo oko glavnih osi, a zatim ćemo navesti izraz za rotacijsku matricu za 3-2-1 uzastopnu rotacijsku sekvencu.
 
-            Matrica koja transformira jedan skup triju međusobno ortogonalnih vektora u drugi skup triju međusobno ortogonalnih vektora moguće je prikazati pomoću Eulerovih kutova kao:
+            \subsubsection{Rotacije oko glavnih osi}{
+                Bez ulaženja u detalje, navest ćemo redom kako izgledaju rotacijske matrice za rotacije oko z, y i x osi. Prikaze tih rotacija moguće je vidjeti na slici \ref{fig:principal_rotations}.
 
-            \begin{equation}
-            \label{eq:euler_rot_mat}
-            \begin{array}{rcl}
-            \textbf{C}_{21}(\phi, \theta, \psi) & = & \textbf{C}_{x}(\phi) \textbf{C}_{y}(\theta) \textbf{C}_{z}(\psi) \\
-            & = &
-            \begin{bmatrix}
-                c_{\theta}c_{\psi}                            & c_{\theta}s_{\psi}                            & -s_{\theta} \\
-                s_{\phi}s_{\theta}c_{\psi} - c_{\phi}s_{\psi} & s_{\phi}s_{\theta}s_{\psi} + c_{\phi}c_{\psi} & s_{\phi}c_{\theta} \\
-                c_{\phi}s_{\theta}c_{\psi} + s_{\phi}s_{\psi} & c_{\phi}s_{\theta}s_{\psi} - s_{\phi}c_{\psi} & c_{\phi}c_{\theta}
-            \end{bmatrix}
-            \end{array}
-            ,
-            \end{equation}
+                Rotacija oko z-osi:
 
-            gdje radi preglednosti vrijedi $s_{b}=\sin(b)$ i $c_{b}=\sin(b)$.
+                \begin{equation}
+                \label{eq:principal_rot_z}
+                \textbf{C}_{z}(\theta_{z}) = 
+                \begin{bmatrix}
+                    \cos\theta_{z}   & \sin\theta_{z}    &  0 \\
+                    -\sin\theta_{z}  & \cos\theta_{z}    &  0 \\
+                    0                & 0                 &  1
+                \end{bmatrix}
+                .
+                \end{equation}
 
-            Jedna mana reprezentacije rotacije pomoću Eulerovih kutova je tzv. singularnost. Može se pokazati da za svaku parametrizaciju rotacije može doći do singulariteta. Za naš primjer 3-2-1 sekvence singularitet nastaje kada je $\theta=\pm90^{\circ}$. Za takav slučaj rotacijska matrica postaje:
+                Rotacija oko y-osi:
 
-            \begin{equation}
-            \textbf{C}_{21}(\phi, 90^{\circ}, \psi) =
-            \begin{bmatrix}
-                0                 & 0                  & -1 \\
-                \sin(\phi - \psi) & \cos(\phi - \psi)  &  0 \\
-                \cos(\phi - \psi) & -\sin(\phi - \psi) &  0
-            \end{bmatrix}
-            .
-            \end{equation}
+                \begin{equation}
+                \label{eq:principal_rot_y}
+                \textbf{C}_{y}(\theta_{y}) = 
+                \begin{bmatrix}
+                    \cos\theta_{y}   &    0    &  -\sin\theta_{y} \\
+                    0                &    1    &  0               \\
+                    \sin\theta_{y}   &    0    &  \cos\theta_{y}
+                \end{bmatrix}
+                .
+                \end{equation}
 
-            Fizikalno, zbog singulariteta prva i treća rotacija unutar 3-2-1 sekvence se odvijaju oko jedne te iste osi. U tom slučaju roll i yaw ($\phi$ i $\psi$) su zapravo jednaki kutovi i ne mogu se jednoznačno odrediti. Izvan singulariteta, moguće je jednoznačno odrediti sva tri Eulerova kuta. 
-            
+                Rotacija oko x-osi:
+
+                \begin{equation}
+                \label{eq:principal_rot_x}
+                \textbf{C}_{x}(\theta_{x}) = 
+                \begin{bmatrix}
+                    1    &      0           &  0 \\
+                    0    & \cos\theta_{x}   &  \sin\theta_{x} \\
+                    0    & -\sin\theta_{x}  &  \cos\theta_{x}
+                \end{bmatrix}
+                .
+                \end{equation}
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=1.0\textwidth]{images/principal_rotations.png}
+                \caption{Prikaz rotacija oko glavnih osi.}
+                \label{fig:principal_rotations}
+                \end{figure}
+            }
+
+            \subsubsection{3-2-1 rotacijska sekvenca}{
+                Rotacija sekvenca koja je jako česta u zrakoplovno-svemirskoj industriji označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko orginalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
+
+                3-2-1 rotacijsku matricu moguće je prikazati pomoću Eulerovih kutova kao:
+
+                \begin{equation}
+                \label{eq:euler_rot_mat}
+                \begin{array}{rcl}
+                \textbf{C}_{21}(\phi, \theta, \psi) & = & \textbf{C}_{x}(\phi) \textbf{C}_{y}(\theta) \textbf{C}_{z}(\psi) \\
+                & = &
+                \begin{bmatrix}
+                    c_{\theta}c_{\psi}                            & c_{\theta}s_{\psi}                            & -s_{\theta} \\
+                    s_{\phi}s_{\theta}c_{\psi} - c_{\phi}s_{\psi} & s_{\phi}s_{\theta}s_{\psi} + c_{\phi}c_{\psi} & s_{\phi}c_{\theta} \\
+                    c_{\phi}s_{\theta}c_{\psi} + s_{\phi}s_{\psi} & c_{\phi}s_{\theta}s_{\psi} - s_{\phi}c_{\psi} & c_{\phi}c_{\theta}
+                \end{bmatrix}
+                \end{array}
+                ,
+                \end{equation}
+
+                gdje radi preglednosti vrijedi $s_{b}=\sin(b)$ i $c_{b}=\sin(b)$.
+
+                Primijetimo kako smo 3-2-1 rotacijsku matricu dobili tako što smo množili pojedinačne matrice rotacija oko glavnih osi (vidi jednadžbe \ref{eq:principal_rot_z}, \ref{eq:principal_rot_y} i \ref{eq:principal_rot_x}). Važno je napomenuti kako u ovom slučaju ne vrijedi komutativnost i da je redoslijed umnoška matrica bitan.
+            }
+
+            \subsubsection{Singularnost Eulerovih kutova}{
+            \label{subsubsection:singularnost_eulerovih_kutova}
+                Jedna mana reprezentacije rotacije pomoću Eulerovih kutova je tzv. singularnost. Može se pokazati da za svaku parametrizaciju rotacije može doći do singulariteta. Za naš primjer 3-2-1 sekvence singularitet nastaje kada je $\theta=\pm90^{\circ}$. Za takav slučaj rotacijska matrica postaje:
+
+                \begin{equation}
+                \textbf{C}_{21}(\phi, 90^{\circ}, \psi) =
+                \begin{bmatrix}
+                    0                 & 0                  & -1 \\
+                    \sin(\phi - \psi) & \cos(\phi - \psi)  &  0 \\
+                    \cos(\phi - \psi) & -\sin(\phi - \psi) &  0
+                \end{bmatrix}
+                .
+                \end{equation}
+
+                Fizikalno, zbog singulariteta prva i treća rotacija unutar 3-2-1 sekvence se odvijaju oko jedne te iste osi. U tom slučaju roll i yaw ($\phi$ i $\psi$) su zapravo jednaki kutovi i ne mogu se jednoznačno odrediti. Izvan singulariteta, moguće je jednoznačno odrediti sva tri Eulerova kuta. 
+            }
+
             \subsubsection{Određivanje Eulerovih kutova iz rotacijske matrice}{
                 Ako rotacijsku matricu označimo kao:
 
@@ -271,7 +322,7 @@
         }
 
         \subsection{Prikaz pomoću kvaterniona}{
-            Rotacijsku matricu pomoću kvaterniona definiranog ranije označavamo kao:
+            Rotacijsku matricu pomoću kvaterniona definiranog ranije u radu označavamo kao:
 
             \begin{equation}
                 \textbf{C} = (2\eta^2-1)\textbf{1} + 2\boldsymbol\epsilon\boldsymbol\epsilon^{T}-2\eta\boldsymbol\epsilon^{\times},
@@ -289,9 +340,15 @@
                 .
             \end{equation}
 
+            Napominjemo da prilikom računanja rotacijske matrice kvaternion $\textbf{q}$ prvo normaliziramo na jediničnu duljinu jer tako garantiramo da množenje rotacijske matrice i vektora neće rezultirati promjenom duljine vektora, već samo promjenu smjera, a to je ono što želimo. Kvaternion normaliziramo na sljedeći način:
+
+            \begin{equation}
+                \textbf{q}_{norm} = \frac{\textbf{q}}{||\textbf{q}||} = \frac{\textbf{q}}{\sqrt{q_0^2 + q_1^2 + q_2^2 + q_3^2}}
+            \end{equation}
+
             \subsubsection{Određivanje kvaterniona iz rotacijske matrice}{
                 Pomoću rotacijske matrice definirane u jednadžbi \ref{eq:rotation_matrix} moguće je odrediti sva 4 člana kvaterniona na način da prvo odredimo skalarni član kao:
-                
+
                 \begin{equation}
                     \eta = \pm\frac{(\text{trace}[\textbf{C}] + 1)^{\frac{1}{2}}}{2}.
                 \end{equation}
@@ -321,49 +378,135 @@
                 Za odabir predznaka svakog elementa $\boldsymbol\epsilon$ vektora čitatelja se savjetuje da pogleda u izvor \cite{adcsKnjiga}.
             }
         }
-    }
 
-    \section{Rotacija vektora}{
-        \subsection{Prikaz pomoću Eulerovih kutova}{
-            %- definicija rotacije preko eulerovih kuteva 1.59
-        }
+        \subsection{Rotacija vektora pomoću rotacijske matrice}{
+            U nastavku ćemo navesti izraze za rotaciju vektora pomoću rotacijskih matrica. Prvi primjer se odnosi na rotaciju oko z-osi, a drugi primjer se odnosi na 3-2-1 rotaciju. 
 
-        \subsection{Prikaz pomoću kvaterniona}{
-            %- TODO: nadji u knjizi
+            Naglašavamo kako će rotacija biti izvedena u istom referentnom sustavu i nećemo se baviti transformacijama iz jednom u drugi koordinatni sustav. Za potrebe transformacija koordinatnih sustava čitatelj se upućuje na izvor \cite{adcsKnjiga}.
+
+            \subsubsection{Rotacija oko z-osi}{
+                Ako želimo vektor $\overrightarrow{\textbf{v}}=\left[ x \; y \; z \right]^T$ rotirati oko npr. z-osi za 30 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:principal_rot_z} kao:
+
+                \begin{equation}
+                \textbf{C}_{z}(30^{\circ}) = 
+                \begin{bmatrix}
+                    \cos30^{\circ}   & \sin30^{\circ}    &  0 \\
+                    -\sin30^{\circ}  & \cos30^{\circ}    &  0 \\
+                    0                & 0                 &  1
+                \end{bmatrix}
+                ,
+                \end{equation}
+
+                zatim pomnožimo vektor $\overrightarrow{\textbf{v}}$ i matricu $\textbf{C}_{z}$ da dobijemo rotirani vektor $\overrightarrow{\textbf{v}}'$:
+
+                \begin{equation}
+                \begin{array}{rcl}
+                    \overrightarrow{\textbf{v}}' & = & \textbf{C}_{z}(30^{\circ}) \overrightarrow{\textbf{v}} \\
+                    & = &
+                \begin{bmatrix}
+                    \cos30^{\circ}   & \sin30^{\circ}    &  0 \\
+                    -\sin30^{\circ}  & \cos30^{\circ}    &  0 \\
+                    0                & 0                 &  1
+                \end{bmatrix}
+                \begin{bmatrix}
+                    x \\
+                    y \\
+                    z
+                \end{bmatrix}
+                \end{array}
+                .
+                \end{equation}
+            }
+
+            \subsubsection{3-2-1 rotacija}{
+                Ako želimo vektor $\overrightarrow{\textbf{v}}$ definiran u prošlom primjeru rotirati prvo oko z-osi za 30 stupnjeva, tranzicijske y-osi za 20 stupnjeva i na kraju oko transformirane x-osi za 10 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:euler_rot_mat} kao:
+
+                \begin{equation}
+                \textbf{C}_{21}(10^\circ, 20^\circ, 30^\circ) = \textbf{C}_{x}(10^\circ) \textbf{C}_{y}(20^\circ) \textbf{C}_{z}(30^\circ),
+                \end{equation}
+
+                zatim pomnožimo vektor $\overrightarrow{\textbf{v}}$ i matricu $\textbf{C}_{21}$ da dobijemo rotirani vektor $\overrightarrow{\textbf{v}}'$:
+
+                \begin{equation}
+                    \overrightarrow{\textbf{v}}' = \textbf{C}_{21}(10^\circ, 20^\circ, 30^\circ) \overrightarrow{\textbf{v}}.
+                \end{equation}
+            }
         }
     }
 
     \section{Jednadžba rotacijskog gibanja}{
+        Ako govorimo o jednadžbi rotacije satelita, važno se prisjetiti definicija tzv. \emph{body} $\mathcal{F}_b
+        $ i inercijskog referentnog sustava $\mathcal{F}_G$. Orijentaciju između ta dva referentna sustava moguće je opisati orijentacijskom matricom $\textbf{C}_{bG}$ i to na barem dva načina: pomoću Eulerovih kutova ili pomoću kvaterniona kao što je opisano u prethodnim poglavljima.
+
+        Kako je $\mathcal{F}_b$ referentni sustav nepomičan s obzirom na tijelo satelita, kutnu brzinu \emph{body} referentnog sustava $\mathcal{F}_b$ s obzirom na $\mathcal{F}_G$ inercijskog sustava označavamo kao $\boldsymbol{\omega}_{bG}=\left[ \omega_1 \; \omega_2 \; \omega_2\right]^T$.
+
         \subsection{Prikaz pomoću Eulerovih kutova}{
-            %- cijelovita jednadzva rotacije cvrstog tijela 2.30
-            %- pojednostavljene eulerove jednadzbe 2.42
+            Jednadžbu rotacijskog gibanja pomoću Eulerovih kutova definiramo kao umnožak 3-2-1 rotacijske sekvence i kutne brzine kao:
+
+            \begin{equation}
+                \begin{bmatrix}
+                    \dot{\phi} \\
+                    \dot{\theta} \\
+                    \dot{\psi}
+                \end{bmatrix}
+                =
+                \begin{bmatrix}
+                    1 & \sin\phi\tan\theta & \cos\phi\tan\theta \\
+                    0 & \cos\phi & -\sin\phi \\
+                    0 & \sin\phi\sec\theta & \cos\phi\sec\theta
+                \end{bmatrix}
+                \boldsymbol{\omega}_{bG}.
+            \end{equation}
         }
 
         \subsection{Prikaz pomoću kvaterniona}{
-            %- TODO: nadji u knjizi
-        }
+            Jednadžbu rotacijskog gibanja pomoću kvaterniona i kutne brzine definiramo kao:
 
-        \section{Usporedba Eulerovih kutova i kvaterniona}{
-            %- problemi neodredjenosti eulerovih kuteva
-            %- prednost jednadzbi sa kvaternionima jer nema sin cos vec su algebarske
-            %- mana sto na kraju krajeva nam je zgodno imati priakz u eulerovim
+            \begin{equation}
+            \begin{array}{rcl}
+                \dot{\boldsymbol\epsilon} &  = & \frac{1}{2}(\eta\textbf{1} + \boldsymbol{\epsilon}^\times)\boldsymbol{\omega}_{bG}, \\
+                \dot{\eta} & = & -\frac{1}{2}\boldsymbol{\epsilon}^T\boldsymbol{\omega}_{bG}.
+            \end{array}
+            \end{equation}
         }
+    }
+
+    \section{Usporedba Eulerovih kutova i kvaterniona}{
+        Kao što smo već pisali u poglavlju \ref{subsubsection:singularnost_eulerovih_kutova}, dva su problema prikazivanja orijentacije pomoću Eulerovih kutova. Prvi problem je singularitet, gdje za neke kutove koje reprezentiraju istu orijentaciju (vidi poglavlje \ref{subsubsection:singularnost_eulerovih_kutova}) nije moguće jednoznačno odrediti Eulerove kutove iz rotacijske matrice. Drugi problem je što za opisivanje orijentacije koristimo trigonometrijske funkcije koje je teže izračunati na računalima nego primjerice algebarske.
+
+        Prikaz orijentacije kvaternionom rješava nas problema singulariteta zbog dodatnog četvrtog člana. Kvaternionom smo također riješili problem računanja trigonometrijskih funkcija jer jednadžbe sa kvaternionima su algebarskog tipa.
+
+        Pozitivna strana prikaza orijentacije pomoću Eulerovih kutova je njihova intuitivnost jer svaki kut označava kut orijentacije oko pojedine osi. Kod kvaterniona informacija o orijentaciji je ponešto sakrivena unutar kvaterniona. Skalarni član ne označava direktno kut zakreta oko osi rotacije već njegov kosinus kuta, a vektorski dio sadrži skaliranu os rotacije sinusom kuta (vidi jednadžbu \ref{eq:kvaternion}).
     }
 }
 
 \chapter{Sustav za određivanje i upravljanje orijentacijom satelita (ADCS)}{
+    U ovom poglavlju navest ćemo definiciju ADCS \engl{Attitude Determination and Control system} sustava. Navest ćemo osnovne dijelove sustava. Navest ćemo najčešće korištene senzore i aktuatore, objasnit njihove karakteristike, navest prednosti i mane. Također ćemo opisati načine i algoritme određivanja i kontrole orijentacije. Naposlijetku ćemo opisati sklopovlje koje smo razvili i navesti korištene senzore i aktuatore. 
+
     \section{Uvod}{
-        %- sto je sustav za određivanje i upravljanje orijentacijom satelita
-        %    - navesti englesku skracenicu (koristi eng u latexu, vidi dokumentaciju pri dnu)
-        %- koja je zadaca sustava za određivanje a koja sustava za upravljanje orijentacijom satelita
+        ADCS  sustav je sustav koji određuje orijentaciju satelita pomoću podataka iz senzora koji se nalaze na samom satelitu i na temelju tih podataka vrši korekciju orijentacije u željeni položaj. 
+
+        \subsection{Određivanje i upravljanje orijentacijom}{
+            Senzori koje koristi ADCS sustav za određivanje orijentacije najčešće ne daju direktno vrijednost orijentacije već se orijentacija estimira pomoću estimacijskih algoritama. Problem senzora općenito je njihova neodređenost koja onda doprinosi da je estimacija orijentacije pogrešna. Zbog toga smo razvili estimacijske algoritme koje uzimaju grešku senzora u obzir te tako smanjuju neodređenost estimirane orijentacije.
+
+            Nakon što smo odredili orijentaciju, i ako ta orijentacija nije jednaka željenoj, slijedi postupak korekcije (kontrole). Postupak korekcije počinje računanjem razlike željene orijentacije i trenutno estimirane. Regulator orijentacije će pomoću te razlike orijentacije izračunati optimalnu korekciju koju je potrebno izvršiti kako bi došli u željenu orijentaciju. Korekciju orijentacije izvršavaju mehanički odnosno električni aktuatori. Aktuatori će stvoriti korekcijski moment koji satelit naposlijetku dovodi u željenu orijentaciju.
+            Opisana estimacija i kontrola orijentacije ADCS sustava događa se u stvarnom vremenu kroz cijeli radni vijek satelita i ni u jednom trenu se ne smije dogoditi da satelit posjeduje neželjenu ili nekontroliranu orijentaciju jer to može značiti kraj misije.
+        }
+
+        \subsection{Važnost ADCS sustava}{
+            NASA-ino istraživanje je pokazalo da je ADCS sustav zaslužan za 23\% grešaka na navigacijsko-kontrolnim sustavima \engl{Guidance, Navigation and Control - GN\&C}, i da je većina tih anomalija uzrokovala kraj misije \cite{greskeNaAdcsPostotak}. U nastavku ćemo navest jedan primjer greške na ADCS sustavu.
+    
+            Lewis svemirska letjelica \cite{lewis} lansirana je 1997. godine s predviđenim radnim vijekom od 5 godina. Nakon postizanja uspješne orbite satelit je započeo sa normalnim radom i nije ga više bilo potrebno aktivno kontrolirati. U normalnom radu solarni paneli su bili upereni prema Suncu kako bi prikupili maksimalnu količinu energije. Zbog greške prilikom rada, jedan od aktuatora je stvarao konstantni moment oko jedne osi koju senzori nisu mogli prepoznati. Nakon nekoliko dana, satelit se je počeo nekontrolirano rotirat i solarni paneli nisu prikupljali dovoljno energije. Naposlijetku su inženjeri sa Zemlje uočili nekontroliranu orijentaciju ali je već bilo kasno jer se je baterija satelita potpuno ispraznila i komunikacija sa satelitom je bila zauvijek prekinuta \cite{greskeNaAdcsSlucajevi}.
+        }
     }
 
     \section{Osnovni dijelovi}{
+        Osnovni dijelovi ADCS sustava su računalo, senzori i aktuatori. U nastavku ćemo zasebno opisati svaki dio zasebno i navesti neke važne karakteristike.
+ 
         \subsection{Računalo}{
-            %- prikupljanje podataka
-            %- obrada podataka
-            %- kontrola orijentacije
-            %- komunikacija
+            Računalo je zaslužno za prikupljanje i obradu podataka koje dolaze sa senzora, te kontrolu aktuatora. Prikupljanje podataka sa senzora vrši se preko komunikacijskih kanala (sabirnica). Obrada podataka se u suštini zasniva na računanju zahtjevnih matematičkih operacija koje na koncu daju podatak o trenutnoj orijentaciji. Na temelju razlike trenutne i željene orijentacije, računalo će izračunati kontrolni signal koji šalje aktuatorima također preko predviđenih sabirnica. 
+
+            Neki od zahtjeva za ADCS računala su mala potrošnja, otpornost na radijaciju i kozmičke zrake, brzina izvođenja operacija, pouzdanost. U prilog ide i ako je računalo već korišteno u nekim prijašnjim misijama.
         }
 
         \subsection{Senzori}{
@@ -431,13 +574,13 @@
         }
     }
 
-    \section{Sklopovlje}{
-        \subsection{Tiskana pločica}{
+    \section{Razvijeni sustav}{
+        \subsection{Tiskana pločica i sklopovlje}{
             %- ukratko o razvijenoj plocici
             %- staviti kakvu shemu
         }
 
-        \subsection{Senzori}{
+        \subsection{Izabrani senzori}{
             %- zasto koristimo IMU
             %- napisati da akcelerometar ne moze raditi u svemiru
             %- mane ziroskopa
@@ -449,7 +592,7 @@
             %        - mijenja se s vremenom
         }
 
-        \subsection{Aktuatori}{
+        \subsection{Izabrani aktuatori}{
             %- zasto koristimo bas (stavi ime) aktuator 
             %    - a ne magnetorqer npr
             %    - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
