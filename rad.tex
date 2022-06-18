@@ -511,17 +511,26 @@
 
         \subsection{Senzori orijentacije}{
             Senzori orijentacije su elektroničke naprave iz kojih je moguće dobiti podatak o orijentaciji. Podatak o orijentaciji najčešće ne dolazi direktno iz senzora već se orijentacija estimira matematičkim algoritmima koji kao svoj rezultat daju estimiranu orijentaciju \cite{adcsKnjiga}. Za precizno određivanje orijentacije nekada je potrebno uzeti u obzir podatke iz više senzora odjednom. Takav način prikupljanja podataka zovemo engl. \emph{sensor fusion}. 
-            
+
             U nastavku ćemo navesti najkorištenije senzore, njihove karakteristike i način rada.
 
-            \subsubsection{Senzori Sunca}{
-                Senzore Sunca dijelimo u dvije skupine: analogne i digitalne. Analogni senzori Sunca rade na principu solarnih ćelija, a podatak o vektoru sunca moguće je dobiti iz generirane struje ćelija. Struja iz solarnih ćelija ovisna je o kutu $\theta$ što označava kut između normale senzora $\hat{\overrightarrow{\textbf{n}}}$ i vektora nadolazeće zrake Sunca $\hat{\overrightarrow{\textbf{v}}}$ (vidi sliku \ref{fig:sensor_sunca}) kao:
+            \subsubsection{Senzor Sunca}{
+                Senzore Sunca dijelimo u dvije skupine: analogne i digitalne. Analogni senzori Sunca rade na principu solarnih ćelija, a podatak o vektoru sunca moguće je dobiti iz generirane struje ćelija. Slika \ref{fig:sensor_sunca_industrija} prikazuje industrijsku izvedbu jednog takvog senzora.
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.6\textwidth]{images/sensor_sunca_industrija.jpg}
+                \caption{Prikaz industrijske izvedbe senzora Sunca tvrtke Bradford \cite{sunSensorBradford}.}
+                \label{fig:sensor_sunca_industrija}
+                \end{figure}
+
+                Struja iz solarnih ćelija ovisna je o kutu $\theta$ što označava kut između normale senzora $\hat{\overrightarrow{\textbf{n}}}$ i vektora nadolazeće zrake Sunca $\hat{\overrightarrow{\textbf{v}}}$ (vidi sliku \ref{fig:sensor_sunca}) kao:
 
                 \begin{equation}
                     i(\theta) = i(0)\cos\theta,
                 \end{equation}
 
-                Senzor Sunca ima konačni kut gledanja u obliku stošca. Sa samo jednim senzorom Sunca nije moguće odrediti vektor $\hat{\overrightarrow{\textbf{v}}}$ već se primjenjuje paradigma \emph{sensor fusion}-a gdje koristimo dodatni senzor Sunca (vidi sliku \ref{fig:sensor_sunca_sensor_fusion}).
+                Senzor Sunca ima konačni kut gledanja u obliku stošca. Sa samo jednim senzorom Sunca nije moguće odrediti vektor $\hat{\overrightarrow{\textbf{v}}}$ već se primjenjuje paradigma \emph{sensor fusion}-a gdje koristimo dodatni senzor Sunca (vidi sliku \ref{fig:sensor_sunca_sensor_fusion}) \cite{adcsKnjiga}.
 
                 \begin{figure}[htb]
                 \centering
@@ -536,19 +545,91 @@
                 \caption{Prikaz para senzora Sunca.}
                 \label{fig:sensor_sunca_sensor_fusion}
                 \end{figure}
-
-
             }
-            %- koji sve postoje
-            %- na kojem principima rade
-            %- navesti neke tehnicke podatke svakog
-            %- napraviti usporedbu između njih
-            %    - cijena
-            %    - preciznost
-            %    - uvijeti rada
-            %    - dostupnost
-            %    - jednostavnost
-            %    - potrosnja
+
+            \subsubsection{Troosni magnetometar}{
+                Troosni magnetometar mjeri vektor lokalnog magnetskog polja Zemlje u koordinatnom sustavu senzora. Magnetometri su relativno neprecizni senzori i za pouzdanija mjerenja potrebno ih je kalibrirati \cite{adcsKnjiga}.
+
+                Kalibracija ima za cilj smanjiti utjecaj tzv. engl. \emph{Hard} i \emph{Soft} efekata. Prije nego objasnimo što su spomenuti efekti, važno je objasniti postupak kalibracije magnetometra. 
+
+                Kalibracija magnetometra započinje prikupljanjem podataka iz senzora i to tako što ćemo magnetometar rotirati u svim smjerovima. Nakon što smo prikupili dovoljno podataka možemo prikazati izmjerene vektore magnetskog polja kao skupinu točaka gdje svaka točka prikazuje vrh vektora očitane vrijednosti. Prikaz očitanih vrijednosti kod idealnog magnetometra biti će raspoređeni po sferi radijusa duljine vektora (apsolutna vrijednost magnetskog polja) čije središte leži u centru koordinatnog sustava (vidi sliku \ref{fig:mag_ideal}).
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/mag_ideal.png}
+                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću idealnog magnetometra. Vrijednosti mjerenja su u jedinici $\mu T$.}
+                \label{fig:mag_ideal}
+                \end{figure}
+
+                Nakon što smo objasnili postupak prikupljanja podataka slijedi objašnjenje \emph{Hard} i \emph{Soft} efekata. \emph{Hard} efekt je pojava koja utječe na na mjerenja magnetskog polja i manifestira se kao translacija ishodišta svih vrijednosti mjerenog vektora magnetskog polja za neki fiksni vektor (vidi sliku \ref{fig:mag_hard}). Mogli bismo slobodno reći da su mjerenja pristrana, odnosno imaju tzv. engl. \emph{bias}. Uzrok \emph{Hard} efekta su najčešće stacionarne interferencije okolnih metalnih dijelova na samom magnetometru ili pripadajućoj elektronici. 
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/mag_hard.png}
+                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra sa tzv. \emph{Hard} efektom. Vrijednosti mjerenja su u jedinici $\mu T$.}
+                \label{fig:mag_hard}
+                \end{figure}
+
+                \emph{Soft} efekti nastaju zbog objekata u blizini magnetometra koji onda rade distorziju lokalnog magnetskog polja. \emph{Soft} efekt kolokvijalno rečeno razvlači i kosi sferu mjerenja koja zatim oblikom postaje nakošeni elipsoid (vidi sliku \ref{fig:mag_hard_soft}).
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/mag_hard_soft.png}
+                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra sa tzv. \emph{Hard} i \emph{Soft} efektima. Vrijednosti mjerenja su u jedinici $\mu T$.}
+                \label{fig:mag_hard_soft}
+                \end{figure}
+
+                Modeliranje spomenutih efekata opisujemo u sljedećoj jednadžbi:
+
+                \begin{equation}
+                    (x - b)R(x - b)^T = \beta^2,
+                \end{equation}
+
+                gdje je $R$ matrica tipa $3\times3$ i određuje oblik elipsoida (npr. za sferu jedinična matrica, a za elipsoid pozitivno definitna). $b$ je $1\times3$ vektor koji definira središte elipsoida, a $\beta$ je skalar koji opisuje duljinu vektora magnetskog polja. 
+
+                Kalibracija magnetometra vrši se pomoću sljedeće relacije:
+
+                \begin{equation}
+                    m = (x - b)A,
+                \end{equation}
+
+                gdje A matrica tipa $3\times3$ transformira oblik elipsoida u pravilnu sferu (eliminira utjecaj \emph{Soft} efekta), a već definirani vektor $b$ translatira elipsoid u ishodište koordinatnog sustava (eliminira utjecaj \emph{Hard} efekta).
+
+                Problem pronalaska $A$ i $b$ parametra rješavamo pomoću \texttt{magcal} MATLAB funkcije \cite{magcal}, a kalibraciju vršimo u programskom kodu netom nakon primitka nekalibrirane vrijednosti sa magnetometra \cite{kalibracijaMagKod}.
+
+                Dodatna objašnjenja u vezi kalibracije magnetometra možete pronaći ovdje \cite{kalibracijaMatlabStranica}.
+
+                Zbog vanjskog utjecaja na vrijednosti mjerenja magnetometra, magnetometar se može fizički udaljiti od satelita pomoću konstrukcije nazvane engl. \emph{boom} (vidi sliku \ref{fig:boom}) te tako smanjiti pogreške mjerenja \cite{adcsKnjiga}. 
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/boom.jpg}
+                \caption{Prikaz tzv. \emph{boom}-a na čijem vrhu se nalazi magnetometar. Izvor Ørsted misija \cite{boomCite}.}
+                \label{fig:boom}
+                \end{figure}
+            }
+
+            \subsubsection{Pratioci zvijezda \engl{Star Trackers}}{
+                Pratioci zvijezda odnosno \emph{Star Track}-eri pružaju najpreciznija mjerenja orijentacije iz dva razloga: prvi je što su svjetlosni izvori zvijezda točkaste prirode i tako pružaju precizna mjerenja. Drugi razlog je taj što se zvijezde, zbog svoje udaljenosti od senzora, doimaju stacionarne neovisno o položaju satelita unutar sunčevog sustava (čak i šire).
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/star_tracker.png}
+                \caption{Prikaz tzv. \emph{boom}-a na čijem vrhu se nalazi magnetometar. Izvor Redwire \cite{starTrackerCite}.}
+                \label{fig:star_tracker}
+                \end{figure}
+
+                Pratioci zvijezda mogu pratiti vektor smjera jedne zvijezde, i u ovisnosti o položaju senzora na satelitu, orijentacijskom matricom moguće dobiti podatak smjera zvijezde u referentnom sustavu satelita. Pomoću dodatnih senzora moguće je jednoznačno odrediti orijentaciju satelita. 
+
+                %TODO cini se kako bibtex nece citirat \cite{starCatalogs}
+                U praksi pratioci zvijezda prate više zvijezda odjednom i pomoću zvjezdanih kataloga \cite{starCatalogs} određuje direktno podatak o orijentaciji. Jednom kada je senzor odredio orijentaciju, svako sljedeće mjerenje zasniva se na praćenju istih zvijezda i metodom usrednjavanja moguće je postignuti veću preciznost. 
+
+                Zbog navedenih razloga, pratioci zvijezda su najprecizniji senzori orijentacije od svih do sad navedenih senzora. S druge strane su i najkompleksniji, najskuplji i najnepouzdaniji senzori \cite{adcsKnjiga}. 
+            }
+        }
+
+        \subsection{Senzori kutne brzine}{
+            %TODO 26.1.5 Rate Sensors
         }
 
         \subsection{Aktuatori}{
