@@ -703,14 +703,37 @@
     }
 
     \section{Određivanje orijentacije}{
+        U ovom dijelu navest ćemo senzore i algoritme za estimaciju orijentacije korištene u našem sustavu. 
+ 
         \subsection{Korišteni senzori}{
-            %- kako mjerimo kutnu brzinu
-            %    - ziroskop
-            %    - sto je ziroskop
-            %    - problemi ziroskopa
+            Zbog prirode algoritama za procjenu orijentacije (vidi poglavlje \ref{subsection:algoritmi_za_estimaciju}), potrebno je imati 2 neovisna troosna senzora. U praksi bi to npr. mogli biti senzor Sunca i magnetometar. U našem slučaju, radi jednostavnije izvedbe testnog sustava i samog testiranja algoritama za estimaciju, izabrali smo akcelerometar kao prvi, odnosno magnetometar kao drugi senzor. 
+
+            Oba troosna senzora (plus troosni žiroskop) nalaze se u jedinstvenom kućištu tzv. IMU \engl{Inertial Measurement Unit} senzora oznake \emph{MPU9250} \cite{mpu9250_datasheet}. U našem sustavu koristimo Arduino modul sa MPU9250 senzorom (slika \ref{fig:mpu9250}).
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=0.5\textwidth]{images/mpu9250.jpg}
+            \caption{Arduino modul sa MPU9250 senzorom \cite{wolles_mpu9250}.}
+            \label{fig:mpu9250}
+            \end{figure}
+
+            \subsubsection{Akcelerometar}{
+                Akcelerometar mjeri trenutnu akceleraciju na tijelo/senzor \cite{}. Ako tijelo miruje, akcelerometar će pokazivati akceleraciju od 9.81 $m/s^2$ u smjeru suprotno od središta Zemlje dok referentni vektor akceleracije Zemljine gravitacije $g$ gleda u suprotnom smjeru i jednakog je iznosa. Zbog te dvije činjenice moguće je akcelerometrom zamijeniti neki senzor koji bi se klasično koristio za estimaciju orijentacije (npr. senzor Sunca). Akcelerator donosi dva problema. Prvi problem je taj što se akcelerometar ne može koristiti u sustavima koji ne akceleriraju (npr. sateliti koji kruže oko Zemlje) jer u takvim sustavima ne postoji akceleracija. Drugi problem je što je akcelerometar senzor koji posjeduje relativno puno šuma, ali zato ne posjeduje tzv. \emph{bias}. 
+
+                Za estimacijske algoritme koje mi koristimo nije bitno koji je senzor u pitanju i na koji način radi već je za algoritam jedino potrebno trenutni podatak sa senzora i referentni podatak. 
+            }
+
+            \subsubsection{Magnetometar}{
+                Magnetometar nam za podatak daje vektor Zemljinog magnetskog polja. Pomoću dostupnih alata na internetu (vidi \cite{}), moguće je odrediti referentni vektor Zemljinog magnetskog polja za dato mjesto na Zemlji. Magnetometar nam je povoljan senzor utoliko što ga je moguće koristiti u Zemljinoj orbiti. Ako bi znali podatak o referentnom vektoru magnetskog polja Zemlje za svaku točku orbite i trenutnu vrijednost magnetskog polja koji bi dobili sa senzora, mogli bismo podatak dati algoritmu za estimaciju orijentacije i tako dobiti podatak o orijentaciji.
+            }
+
+            \subsubsection{Žiroskop}{
+                Unutar IMU senzora nalazi se i troosni žiroskop. Kao što smo ranije spomenuli u poglavlju \ref{}, za uspješniju estimaciju orijentacije koristimo i žiroskop. Žiroskop kojeg koristimo se također nalazi unutar IMU senzora.
+            }
         }
 
         \subsection{Algoritmi}{
+        \label{subsection:algoritmi_za_estimaciju}
             %- kako mozemo estimirati orijentaciju satelita
             %    - senzor fusion
             %    - navesti neke od algoritama

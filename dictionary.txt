@@ -111,6 +111,10 @@ inercijskog
 opisano
 komutativnost
 akceleraciju
+akceleracije
+akceleriraju
+akcelerometar
+akcelerometrom
 norm
 fusion
 sensor
@@ -148,9 +152,11 @@ translacija
 manifestira
 idealnog
 Troosni
+troosni
+troosno
+troosna
 Bradford
 NanoAvionics
-troosno
 magnetorkera
 Desaturaciju
 rotirajućem
@@ -181,3 +187,13 @@ nanostrukture
 žiroskopi
 žiroskopa
 MEMS
+IMU
+estimaciju
+dato
+klasično
+MPU
+Arduino
+Unit
+Measurement
+Inertial
+testnog
