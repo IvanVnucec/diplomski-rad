@@ -548,6 +548,7 @@
             }
 
             \subsubsection{Troosni magnetometar}{
+            \label{subsubsection:troosni_magnetometar}
                 Troosni magnetometar mjeri vektor lokalnog magnetskog polja Zemlje u koordinatnom sustavu senzora. Magnetometri su relativno neprecizni senzori i za pouzdanija mjerenja potrebno ih je kalibrirati \cite{adcsKnjiga}.
 
                 Kalibracija ima za cilj smanjiti utjecaj tzv. engl. \emph{Hard} i \emph{Soft} efekata. Prije nego objasnimo što su spomenuti efekti, važno je objasniti postupak kalibracije magnetometra. 
@@ -621,7 +622,6 @@
 
                 Pratioci zvijezda mogu pratiti vektor smjera jedne zvijezde, i u ovisnosti o položaju senzora na satelitu, orijentacijskom matricom moguće dobiti podatak smjera zvijezde u referentnom sustavu satelita. Pomoću dodatnih senzora moguće je jednoznačno odrediti orijentaciju satelita. 
 
-                %TODO cini se kako bibtex nece citirat \cite{starCatalogs}
                 U praksi pratioci zvijezda prate više zvijezda odjednom i pomoću zvjezdanih kataloga \cite{starCatalogs} određuje direktno podatak o orijentaciji. Jednom kada je senzor odredio orijentaciju, svako sljedeće mjerenje zasniva se na praćenju istih zvijezda i metodom usrednjavanja moguće je postignuti veću preciznost. 
 
                 Zbog navedenih razloga, pratioci zvijezda su najprecizniji senzori orijentacije od svih do sad navedenih senzora. S druge strane su i najkompleksniji, najskuplji i najnepouzdaniji senzori \cite{adcsKnjiga}. 
@@ -629,20 +629,76 @@
         }
 
         \subsection{Senzori kutne brzine}{
-            %TODO 26.1.5 Rate Sensors
+            Senzori kutne brzine mjere kutnu brzinu satelita. Kao što ćemo vidjeti u nastavku rada, većina algoritama za procjenu orijentacije koriste kutnu brzinu kao dodatnu informaciju. Kutna brzina može se izračunati kao vremenska derivacija orijentacije, ali takav izračun unosi neodređenost u obliku šuma. Senzori kutne brzine nemaju izražen šum, ali zato imaju problem sa tzv. \emph{bias}-om - konstantnoj srednjoj vrijednosti koja unosi grešku u račun. 
+
+            Osim niskog šuma, druga prednost senzora kutne brzine je što ne zahtijevaju eksterni izvor informacije. Primjerice, senzor Sunca uvijek mora imati prisutno Sunce ne bi li izračunali orijentaciju satelita. U tim situacijama kada ne možemo dobiti direktno podatak o orijentaciji satelita, integracijom kutne brzine moguće je odrediti orijentaciju. Problem takvog načina određivanja orijentacije je konstantni \emph{bias} koji unosi grešku u integraciju. Zbog toga se takav način određivanja orijentacije ograničava na kratka vremenska razdoblja u kojima je greška zbog integracije konstantnog člana zanemariva.
+
+            Senzora kutne brzine ima više vrsta, a tradicionalno su najpopularniji mehanički žiroskopi. Mane mehaničkih žiroskopa su mehanički pokretni dijelovi koji stvaraju vibracije, s vremenom im raste nepouzdanost i relativno velika potrošnja energije. Zbog toga, nedavno su u primjenu ušli laserski žiroskopi koji ne posjeduju pokretne dijelove \cite{adcsKnjiga}. 
+
+            Osim mehaničkih i laserskih žiroskopa, postoje i tzv. \emph{MEMS} žiroskopi koji pomoću Coriolisovog efekta mjere kutnu brzinu. Takvi senzori najčešće se ugrađuju u integrirane sklopove i u svom radu koriste nanostrukture koje omogućavaju mjerenje Coriolisovog efekta \cite{memsGyro}.
         }
 
         \subsection{Aktuatori}{
-            %- koji sve postoje
-            %- na kojim principima rade
-            %- tehnicki podatci
-            %- usporedba između njih
-            %    - cijena
-            %    - preciznost
-            %    - uvijeti rada
-            %    - dostupnost
-            %    - jednostavnost
-            %    - potrosnja
+            Aktuatori su uređaji koji na temelju kontrolnog signala vrše korekciju orijentacije. Dijelimo ih u dvije skupine: one koji mijenjaju kutnu količinu gibanja satelita i one koji ne mijenjaju. Potisnici i magnetorkeri spadaju u prvu skupinu, a zamašnjaci u drugu skupinu \cite{adcsKnjiga}. Slijedi opis svakog spomenutog aktuatora. 
+
+            \subsubsection{Potisnici \engl{Thrusters}}{
+                Potisnici su aktuatori koji rade na principu izbacivanja mase ne bi li stvorili potisnu silu. Ako potisni vektor ne prolazi kroz centar mase satelita, u trenutku izbacivanja mase doći će do generiranja momenta. Kao što se može vidjeti na slici \ref{fig:thruster_img}, potisnik koji generira silu $F$ na udaljenosti $r$ od centra mase, uzrokuje moment $T$ definiran kao $T=Fr$.
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/thruster_img.png}
+                \caption{Princip rada potisnika.}
+                \label{fig:thruster_img}
+                \end{figure}
+
+                Zbog toga što potisnik nije u stanju generiranja sile $F$ u oba smjera (naravni i suprotni smjer), za stvaranje pozitivnog i negativnog momenta potrebno je imati dva potisnika koja su međusobno suprotno orijentirana. Sukladno tomu, za troosno upravljanje orijentacijom potrebno je imati 6 potisnika \cite{adcsKnjiga}.
+            }
+
+            \subsubsection{Magnetorkeri \engl{magnetic torquers}}{
+                Magnetorkeri su aktuatori koji generiraju moment pomoću magnetske sprege lokalno generiranog magnetskog polja i magnetskog polja Zemlje. Magnetorker je u suštini zavojnica. Kao što nalaže Amperov zakon, prolaskom struje kroz namotaje zavojnice dolazi do stvaranja lokalnog magnetskog polja (magnetski dipol). Međusobnom interakcijom generiranog magnetskog dipola magnetorkera $\overrightarrow{\textbf{m}}$ i magnetskog dipola Zemlje $\overrightarrow{\textbf{b}}$ stvara se moment $\overrightarrow{\textbf{T}}$ koji je jednak:
+
+                \begin{equation}
+                    \label{eq:magnetorker_eq}
+                    \overrightarrow{\textbf{T}} = \overrightarrow{\textbf{m}} \times \overrightarrow{\textbf{b}}
+                \end{equation}
+
+                Moguće je pokazati kako je vektorski produkt u jednadžbi \ref{eq:magnetorker_eq} (isto vektor) uvijek okomit na magnetski dipol Zemlje $\overrightarrow{\textbf{b}}$. Zbog toga je nemoguće generirati moment kada je položaj dipola magnetorkera usmjeren kao i dipol magnetskog polja Zemlje.
+
+                Magnetorker omogućuje upravljanje orijentacijom samo u jedno osi, što znači da za troosno upravljanje orijentacijom tipično imamo 3 međusobno ortogonalna magnetorkera za svaku os zasebno (vidi sliku \ref{fig:magnetorquer_img}).
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/magnetorquer_img.jpg}
+                \caption{Magnetorker tvrtke NanoAvionics \cite{magnetorquer_cite}.}
+                \label{fig:magnetorquer_img}
+                \end{figure}
+
+                Zbog relativno slabe jakosti Zemljinog magnetskog polja, teško je generirati momente sa dovoljnom jačinom jakosti specificirane zahtjevima, pogotovo za satelite koji posjeduju velike momente tromosti. Zbog toga najčešće se kontrola orijentacije vrši pomoću zamašnjaka (vidi kasnije poglavlje) u sprezi sa magnetorkerima iz dva razloga. Prvi razlog je već spomenuta nedovoljna jakost generiranog momenta od strane magnetorkera, i drugi razlog, problem zasićenja zamašnjaka.
+
+                Valja skrenuti pažnju i na problem utjecaja magnetorkera na mjerenja senzora magnetskog polja. Ako prilikom korekcije orijentacije pomoću magnetorkera mjerimo magnetsko polje, doći će do magnetske interferencije magnetorkera i senzora magnetskog polja (vidi poglavlje \ref{subsubsection:troosni_magnetometar}). Samim time direktno unosimo grešku u estimaciji orijentacije. Rješenje problemu leži u tome da za vrijeme mjerenja magnetskog polja magnetorker ne vrši korekciju orijentacije \cite{adcsKnjiga}. 
+            }
+
+            \subsubsection{Zamašnjaci \engl{Momentum wheels}}{
+                Zamašnjaci su mehanički uređaji koji rade na principu očuvanja kutne količine gibanja. Zamašnjak se sastoji od rotirajuće mase i elektromotora. Naime, kada elektromotorom vršimo moment u jednom smjeru, radi očuvanja kutne količine gibanja, zamašnjak će generirati jednak moment po iznosu ali u suprotnom smjeru ne bi li ukupna kutna količina gibanja satelita ostala jednaka (vidi sliku \ref{fig:zamasnjak_fig}). U nominalnom stanju, zamašnjak ne posjeduje kutnu brzinu. Zamašnjaci kao aktuatori predstavljaju najprecizniju kontrolu orijentacije \cite{adcsKnjiga}.
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/zamasnjak.png}
+                \caption{Princip rada zamašnjaka.}
+                \label{fig:zamasnjak_fig}
+                \end{figure}
+
+                Problem zamašnjaka manifestira se s vremenom. Da bi objasnili problem pretpostavimo da satelitu želimo održavati jednaku orijentaciju bez obzira na vanjske utjecaje (ne ulazeći u uzroke). Svaki vanjski utjecaj (smetnja) na satelit uzrokuje generiranim momentom. Kako bismo satelitu održali jednaku orijentaciju, zamašnjakom upravljamo na način da ćemo generirati jednaki moment ali u suprotnu stranu (zamašnjak će se zarotirati u istu stranu kao i vanjski moment). Jednom kada smo pomoću zamašnjaka uveli jednaku kutnu količinu gibanja kao što ju je uvela vanjska smetnja, zamašnjaku moramo konstantno održavati kutnu brzinu. Bilo kakva promjena kutne brzine uzrokuje promjenu kutne količine gibanja odnosno promjenu orijentacije. Ako se s vremenom smetnje akumuliraju, dolazi do pojave tzv. saturacije zamašnjaka gdje se zamašnjak nastoji okretati sve većom i većom brzinom sve dok ne dosegne maksimalnu moguću kutnu brzinu. Drugi suptilni problem je taj što rotirajućem zamašnjaku stalno moramo održavati kutnu brzinu što donosi negativnu energetsku računicu. Desaturaciju zamašnjaka vršimo pomoću drugih aktuatora (npr. magnetorkera).
+
+                Drugi problem zamašnjaka leži u činjenici da su zamašnjaci mehanički uređaji sa rotirajućim dijelovima te se očekuje da će s vremenom prestati raditi. Iz tog razloga umjesto 3 zamašnjaka za troosno upravljanje orijentacijom, uzimamo 4 zamašnjaka karakteristično položena (vidi sliku \ref{fig:cetiri_zamasnjaka}). Na taj način moguće je imati troosno upravljanje orijentacijom sa jednim zamašnjakom koji ne radi \cite{cetiriZamasnjaka}.
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.5\textwidth]{images/cetiri_zamasnjaka.jpg}
+                \caption{Skup od 4 zamašnjaka tvrtke NanoAvionics gdje je jedan zamašnjak redundantan \cite{cetiriZamasnjakaTvrtka}.}
+                \label{fig:cetiri_zamasnjaka}
+                \end{figure}
+            }
         }
     }
 
