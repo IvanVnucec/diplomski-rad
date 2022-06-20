@@ -114,19 +114,19 @@
 \chapter{Opis orijentacije satelita}{
     Kako bi matematički prikazali rotacijsko gibanje satelita, satelit je prvo potrebno modelirati kao kruto tijelo. Mi ćemo u nastavku navesti samo osnovne izraze potrebne za modeliranje satelita, a potpune matematičke izraze i izvode moguće je pronaći u popratnoj literaturi \cite{adcsKnjiga}.
 
-    Ako govorimo o orijentaciji, važno je objasniti pojam referentnog sustava \engl{reference plane}. Referentni sustav je skup 3 međusobno ortogonalnih vektora prema kojima određujemo sve ostale vektore, bilo njihovu orijentaciju, bilo pomak. Jedan možda najpoznatiji primjer takvog referentnog sustava je Kartezijev referentni sustav gdje smo kao referentne vektore izabrali 3 jedinična vektora $\textbf{i}$, $\textbf{j}$ i $\textbf{k}$ prema kojima onda određujemo sve ostale vektore koje definiramo u Kartezijevom prostoru. 
+    Ako govorimo o orijentaciji, važno je objasniti pojam referentnog sustava \engl{reference plane}. Referentni sustav je skup 3 međusobno ortogonalnih vektora prema kojima određujemo sve ostale vektore, bilo njihovu orijentaciju, bilo pomak. Jedan možda najpoznatiji primjer takvog referentnog sustava je Kartezijev referentni sustav gdje smo kao referentne vektore izabrali 3 jedinična vektora $\boldsymbol{i}$, $\boldsymbol{j}$ i $\boldsymbol{k}$ prema kojima onda određujemo sve ostale vektore koje definiramo u Kartezijevom prostoru. 
 
-    Moguće je imati više referentnih sustava. Prelazak iz jednog u drugi referentni sustav moguće je ostvariti transformacijama sa rotacijskim matricama o kojima ćemo govoriti kasnije. Referentne sustave najčešće označavamo kao npr. $\mathcal{F}_a$ ili $\mathcal{F}_b$. Rotacijska matrica koja bi određivala orijentaciju $\mathcal{F}_a$ referentnog sustava naspram $\mathcal{F}_b$ referentnog sustava označavamo kao $\textbf{C}_{ab}$.
+    Moguće je imati više referentnih sustava. Prelazak iz jednog u drugi referentni sustav moguće je ostvariti transformacijama sa rotacijskim matricama o kojima ćemo govoriti kasnije. Referentne sustave najčešće označavamo kao npr. $\mathcal{F}_a$ ili $\mathcal{F}_b$. Rotacijska matrica koja bi određivala orijentaciju $\mathcal{F}_a$ referentnog sustava naspram $\mathcal{F}_b$ referentnog sustava označavamo kao $\boldsymbol{C}_{ab}$.
 
     Da bi definirali orijentaciju satelita, prvo moramo definirati referentne sustave. Prvi referentni sustav kojeg definiramo je inercijski referentni sustav $\mathcal{F}_G$. U klasičnoj fizici, inercijski sustav označava referentni sustav koji ne posjeduje akceleraciju \cite{inertialFrame}. Drugi referentni sustav kojeg definiramo je tzv. \emph{body} referentni sustav $\mathcal{F}_b$ koji je nepomičan s obzirom na gibanje čvrstog tijela (satelita).
 
-    Orijentacija satelita u referentnom sustavu $\mathcal{F}_b$ naspram inercijskog referentnog sustava $\mathcal{F}_G$ označavamo rotacijskom matricom $\textbf{C}_{bG}$.
+    Orijentacija satelita u referentnom sustavu $\mathcal{F}_b$ naspram inercijskog referentnog sustava $\mathcal{F}_G$ označavamo rotacijskom matricom $\boldsymbol{C}_{bG}$.
 
     \section{Osnovni parametri satelita}{
         Inercijska matrica \engl{Moment of inertia tensor} u pojednostavljenom smislu označava moment tromosti krutog tijela oko pojedine osi rotacije. Naglašavamo da je u pitanju pojednostavljena definicija i da ona nije strogo točna, no za naše potrebe je ona dovoljna. Inercijsku matricu predstavljamo kao:
 
         \begin{equation}
-        \textbf{J} = 
+        \boldsymbol{J} = 
         \begin{bmatrix}
             J_{xx} & J_{xy} & J_{xz} \\
             J_{yx} & J_{yy} & J_{yz} \\
@@ -138,7 +138,7 @@
         Moguće je pokazati da za svako kruto tijelo možemo pojednostaviti Inercijsku matricu te tako dobiti dijagonalnu inercijsku matricu. Takva matrica nam omogućuje izvedbu jednostavnijih izraza za rotaciju krutog tijela. Zbog nepotrebnog ulaženja u detalje kako je moguće dobiti dijagonalnu matricu, navest ćemo samo izraz kao:
 
         \begin{equation}
-        \textbf{I} = 
+        \boldsymbol{I} = 
         \begin{bmatrix}
             I_{xx} & 0      & 0 \\
             0      & I_{yy} & 0 \\
@@ -170,29 +170,30 @@
     \section{Kvaternioni}{
         Kvaternion je četvero-dimenzionalni vektor s kojim je moguće opisati orijentaciju tijela. Kvaternion u usporedbi sa Eulerovim kutovima posjeduje dvije prednosti (o kojima nešto više u nastavku): prva je da ne posjeduje singularnost, i druga da matematičke relacije modeliranja orijentacije više nisu trigonometrijske već algebarske prirode, što ih dodatno čini pogodnima za računanje.
 
-        Kvaternion opisuje dvije stvari potrebne za opis rotacije: glavnu os rotacije \engl{principal axis} $\overrightarrow{\textbf{a}}$ i kuta rotacije $\phi$ kao što je vidljivo na slici \ref{fig:principal_axis_rotation}. Zbog toga, razlikujemo vektorski i skalarni dio koje definiramo kao:
+        Kvaternion opisuje dvije stvari potrebne za opis rotacije: glavnu os rotacije \engl{principal axis} $\overrightarrow{\boldsymbol{a}}$ i kuta rotacije $\phi$ kao što je vidljivo na slici \ref{fig:principal_axis_rotation}. Zbog toga, razlikujemo vektorski i skalarni dio koje definiramo kao:
 
         \begin{figure}[htb]
         \centering
         \includegraphics[width=0.2\textwidth]{images/principal_axis_rotation.png}
         % TODO: dodaj strelice iznad vektora (oprez: latex zeza nesto)
-        \caption{Prikaz rotacije vektora $\textbf{b}$ oko glavne osi rotacije $\textbf{a}$ za kut $\phi$.}
+        \caption{Prikaz rotacije vektora $\boldsymbol{b}$ oko glavne osi rotacije $\boldsymbol{a}$ za kut $\phi$.}
         \label{fig:principal_axis_rotation}
         \end{figure}
 
         \begin{equation}
         \label{eq:kvaternion}
         \begin{array}{rcl}
-            \boldsymbol\epsilon &  = & \overrightarrow{\textbf{a}}\sin\frac{\phi}{2} = \left[\epsilon_{x} \; \epsilon_{y} \; \epsilon_{z} \right], \\
+            \boldsymbol\epsilon &  = & \overrightarrow{\boldsymbol{a}}\sin\frac{\phi}{2} = \left[\epsilon_{x} \; \epsilon_{y} \; \epsilon_{z} \right], \\
             \eta & = & \cos\frac{\phi}{2}
         \end{array}
         \end{equation}
 
-        U praksi postoje dvije interpretacije kvaterniona u ovisnosti o tome ide li skalarni dio kao prvi element kvaterniona ili kao posljednji. U našem radu pretpostavit ćemo oblik kvaterniona gdje je skalarni dio prvi:
+        U praksi postoje dvije interpretacije kvaterniona u ovisnosti o tome ide li skalarni dio kao prvi element kvaterniona ili kao posljednji. U našem radu pretpostavit ćemo oblik kvaterniona gdje je skalarni dio prvi, a vektorski drugi:
 
         \begin{equation}
-            \textbf{q}=
-            \left[\eta \; \boldsymbol\epsilon \right] = \left[q_{0} \; q_{1} \; q_{2} \; q_{3}\right]
+        \label{eq:kvaternion_elem}
+            \boldsymbol{q}=
+            \left[\eta \; \boldsymbol\epsilon \right] = \left[q_{1} \; q_{2} \; q_{3} \; q_{4}\right]
         \end{equation}
     }
 
@@ -209,7 +210,7 @@
 
                 \begin{equation}
                 \label{eq:principal_rot_z}
-                \textbf{C}_{z}(\theta_{z}) = 
+                \boldsymbol{C}_{z}(\theta_{z}) = 
                 \begin{bmatrix}
                     \cos\theta_{z}   & \sin\theta_{z}    &  0 \\
                     -\sin\theta_{z}  & \cos\theta_{z}    &  0 \\
@@ -222,7 +223,7 @@
 
                 \begin{equation}
                 \label{eq:principal_rot_y}
-                \textbf{C}_{y}(\theta_{y}) = 
+                \boldsymbol{C}_{y}(\theta_{y}) = 
                 \begin{bmatrix}
                     \cos\theta_{y}   &    0    &  -\sin\theta_{y} \\
                     0                &    1    &  0               \\
@@ -235,7 +236,7 @@
 
                 \begin{equation}
                 \label{eq:principal_rot_x}
-                \textbf{C}_{x}(\theta_{x}) = 
+                \boldsymbol{C}_{x}(\theta_{x}) = 
                 \begin{bmatrix}
                     1    &      0           &  0 \\
                     0    & \cos\theta_{x}   &  \sin\theta_{x} \\
@@ -260,7 +261,7 @@
                 \begin{equation}
                 \label{eq:euler_rot_mat}
                 \begin{array}{rcl}
-                \textbf{C}_{21}(\phi, \theta, \psi) & = & \textbf{C}_{x}(\phi) \textbf{C}_{y}(\theta) \textbf{C}_{z}(\psi) \\
+                \boldsymbol{C}_{21}(\phi, \theta, \psi) & = & \boldsymbol{C}_{x}(\phi) \boldsymbol{C}_{y}(\theta) \boldsymbol{C}_{z}(\psi) \\
                 & = &
                 \begin{bmatrix}
                     c_{\theta}c_{\psi}                            & c_{\theta}s_{\psi}                            & -s_{\theta} \\
@@ -281,7 +282,7 @@
                 Jedna mana reprezentacije rotacije pomoću Eulerovih kutova je tzv. singularnost. Može se pokazati da za svaku parametrizaciju rotacije može doći do singulariteta. Za naš primjer 3-2-1 sekvence singularitet nastaje kada je $\theta=\pm90^{\circ}$. Za takav slučaj rotacijska matrica postaje:
 
                 \begin{equation}
-                \textbf{C}_{21}(\phi, 90^{\circ}, \psi) =
+                \boldsymbol{C}_{21}(\phi, 90^{\circ}, \psi) =
                 \begin{bmatrix}
                     0                 & 0                  & -1 \\
                     \sin(\phi - \psi) & \cos(\phi - \psi)  &  0 \\
@@ -298,7 +299,7 @@
 
                 \begin{equation}
                 \label{eq:rotation_matrix}
-                \textbf{C} =
+                \boldsymbol{C} =
                 \begin{bmatrix}
                     c_{11} & c_{12} & c_{13} \\
                     c_{21} & c_{22} & c_{23} \\
@@ -325,7 +326,8 @@
             Rotacijsku matricu pomoću kvaterniona definiranog ranije u radu označavamo kao:
 
             \begin{equation}
-                \textbf{C} = (2\eta^2-1)\textbf{1} + 2\boldsymbol\epsilon\boldsymbol\epsilon^{T}-2\eta\boldsymbol\epsilon^{\times},
+                \boldsymbol{C} = (2\eta^2-1)\boldsymbol{1} + 2\boldsymbol\epsilon\boldsymbol\epsilon^{T}-2\eta\boldsymbol\epsilon^{\times},
+            \label{eq:quat_rot_matrix}
             \end{equation}
 
             gdje je $\boldsymbol\epsilon^{\times}$ definiran kao:
@@ -340,17 +342,29 @@
                 .
             \end{equation}
 
-            Napominjemo da prilikom računanja rotacijske matrice kvaternion $\textbf{q}$ prvo normaliziramo na jediničnu duljinu jer tako garantiramo da množenje rotacijske matrice i vektora neće rezultirati promjenom duljine vektora, već samo promjenu smjera, a to je ono što želimo. Kvaternion normaliziramo na sljedeći način:
+            Napominjemo da prilikom računanja rotacijske matrice kvaternion $\boldsymbol{q}$ prvo normaliziramo na jediničnu duljinu jer tako garantiramo da množenje rotacijske matrice i vektora neće rezultirati promjenom duljine vektora, već samo promjenu smjera, a to je ono što želimo. Kvaternion normaliziramo na sljedeći način:
 
             \begin{equation}
-                \textbf{q}_{norm} = \frac{\textbf{q}}{||\textbf{q}||} = \frac{\textbf{q}}{\sqrt{q_0^2 + q_1^2 + q_2^2 + q_3^2}}
+                \boldsymbol{q}_{norm} = \frac{\boldsymbol{q}}{||\boldsymbol{q}||} = \frac{\boldsymbol{q}}{\sqrt{q_1^2 + q_2^2 + q_3^2 + q_4^2}}
+            \end{equation}
+
+            Ako li raspišemo rotacijsku matricu definiranu pomoću kvaterniona u jednadžbi \ref{eq:kvaternion_elem} dobivamo izraz \cite{uvod_u_svemirske} koji je pogodniji za računanje:
+
+            \begin{equation}
+                \boldsymbol{C} =
+                \begin{bmatrix}
+                    q_1^2 + q_2^2 - q_3^2 - q_4^2 & 2(q_2q_3 + q_1q_4) & 2(q_2q_4 - q_1q_3) \\
+                    2(q_2q_3 - q_1q_4) & q_1^2 - q_2^2 + q_3^2 - q_4^2 & 2(q_3q_4 + q_1q_2) \\
+                    2(q_2q_4 + q_1q_3) & 2(q_3q_4 - q_1q_2) & q_1^2 - q_2^2 - q_3^2 + q_4^2 
+                \end{bmatrix}
+            \label{eq:rot_mat_quat}
             \end{equation}
 
             \subsubsection{Određivanje kvaterniona iz rotacijske matrice}{
                 Pomoću rotacijske matrice definirane u jednadžbi \ref{eq:rotation_matrix} moguće je odrediti sva 4 člana kvaterniona na način da prvo odredimo skalarni član kao:
 
                 \begin{equation}
-                    \eta = \pm\frac{(\text{trace}[\textbf{C}] + 1)^{\frac{1}{2}}}{2}.
+                    \eta = \pm\frac{(\text{trace}[\boldsymbol{C}] + 1)^{\frac{1}{2}}}{2}.
                 \end{equation}
 
                 Predznak skalarnog člana nije bitan jer on fizikalno samo označava smjer rotacije. Pozitivan ili negativan predznak daju istu rotaciju.
@@ -385,10 +399,10 @@
             Naglašavamo kako će rotacija biti izvedena u istom referentnom sustavu i nećemo se baviti transformacijama iz jednom u drugi koordinatni sustav. Za potrebe transformacija koordinatnih sustava čitatelj se upućuje na izvor \cite{adcsKnjiga}.
 
             \subsubsection{Rotacija oko z-osi}{
-                Ako želimo vektor $\overrightarrow{\textbf{v}}=\left[ x \; y \; z \right]^T$ rotirati oko npr. z-osi za 30 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:principal_rot_z} kao:
+                Ako želimo vektor $\overrightarrow{\boldsymbol{v}}=\left[ x \; y \; z \right]^T$ rotirati oko npr. z-osi za 30 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:principal_rot_z} kao:
 
                 \begin{equation}
-                \textbf{C}_{z}(30^{\circ}) = 
+                \boldsymbol{C}_{z}(30^{\circ}) = 
                 \begin{bmatrix}
                     \cos30^{\circ}   & \sin30^{\circ}    &  0 \\
                     -\sin30^{\circ}  & \cos30^{\circ}    &  0 \\
@@ -397,11 +411,11 @@
                 ,
                 \end{equation}
 
-                zatim pomnožimo vektor $\overrightarrow{\textbf{v}}$ i matricu $\textbf{C}_{z}$ da dobijemo rotirani vektor $\overrightarrow{\textbf{v}}'$:
+                zatim pomnožimo vektor $\overrightarrow{\boldsymbol{v}}$ i matricu $\boldsymbol{C}_{z}$ da dobijemo rotirani vektor $\overrightarrow{\boldsymbol{v}}'$:
 
                 \begin{equation}
                 \begin{array}{rcl}
-                    \overrightarrow{\textbf{v}}' & = & \textbf{C}_{z}(30^{\circ}) \overrightarrow{\textbf{v}} \\
+                    \overrightarrow{\boldsymbol{v}}' & = & \boldsymbol{C}_{z}(30^{\circ}) \overrightarrow{\boldsymbol{v}} \\
                     & = &
                 \begin{bmatrix}
                     \cos30^{\circ}   & \sin30^{\circ}    &  0 \\
@@ -419,16 +433,16 @@
             }
 
             \subsubsection{3-2-1 rotacija}{
-                Ako želimo vektor $\overrightarrow{\textbf{v}}$ definiran u prošlom primjeru rotirati prvo oko z-osi za 30 stupnjeva, tranzicijske y-osi za 20 stupnjeva i na kraju oko transformirane x-osi za 10 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:euler_rot_mat} kao:
+                Ako želimo vektor $\overrightarrow{\boldsymbol{v}}$ definiran u prošlom primjeru rotirati prvo oko z-osi za 30 stupnjeva, tranzicijske y-osi za 20 stupnjeva i na kraju oko transformirane x-osi za 10 stupnjeva, prvo određujemo rotacijsku matricu pomoću jednadžbe \ref{eq:euler_rot_mat} kao:
 
                 \begin{equation}
-                \textbf{C}_{21}(10^\circ, 20^\circ, 30^\circ) = \textbf{C}_{x}(10^\circ) \textbf{C}_{y}(20^\circ) \textbf{C}_{z}(30^\circ),
+                \boldsymbol{C}_{21}(10^\circ, 20^\circ, 30^\circ) = \boldsymbol{C}_{x}(10^\circ) \boldsymbol{C}_{y}(20^\circ) \boldsymbol{C}_{z}(30^\circ),
                 \end{equation}
 
-                zatim pomnožimo vektor $\overrightarrow{\textbf{v}}$ i matricu $\textbf{C}_{21}$ da dobijemo rotirani vektor $\overrightarrow{\textbf{v}}'$:
+                zatim pomnožimo vektor $\overrightarrow{\boldsymbol{v}}$ i matricu $\boldsymbol{C}_{21}$ da dobijemo rotirani vektor $\overrightarrow{\boldsymbol{v}}'$:
 
                 \begin{equation}
-                    \overrightarrow{\textbf{v}}' = \textbf{C}_{21}(10^\circ, 20^\circ, 30^\circ) \overrightarrow{\textbf{v}}.
+                    \overrightarrow{\boldsymbol{v}}' = \boldsymbol{C}_{21}(10^\circ, 20^\circ, 30^\circ) \overrightarrow{\boldsymbol{v}}.
                 \end{equation}
             }
         }
@@ -436,9 +450,13 @@
 
     \section{Jednadžba rotacijskog gibanja}{
         Ako govorimo o jednadžbi rotacije satelita, važno se prisjetiti definicija tzv. \emph{body} $\mathcal{F}_b
-        $ i inercijskog referentnog sustava $\mathcal{F}_G$. Orijentaciju između ta dva referentna sustava moguće je opisati orijentacijskom matricom $\textbf{C}_{bG}$ i to na barem dva načina: pomoću Eulerovih kutova ili pomoću kvaterniona kao što je opisano u prethodnim poglavljima.
+        $ i inercijskog referentnog sustava $\mathcal{F}_G$. Orijentaciju između ta dva referentna sustava moguće je opisati orijentacijskom matricom $\boldsymbol{C}_{bG}$ i to na barem dva načina: pomoću Eulerovih kutova ili pomoću kvaterniona kao što je opisano u prethodnim poglavljima.
 
-        Kako je $\mathcal{F}_b$ referentni sustav nepomičan s obzirom na tijelo satelita, kutnu brzinu \emph{body} referentnog sustava $\mathcal{F}_b$ s obzirom na $\mathcal{F}_G$ inercijskog sustava označavamo kao $\boldsymbol{\omega}_{bG}=\left[ \omega_1 \; \omega_2 \; \omega_2\right]^T$.
+        Kako je $\mathcal{F}_b$ referentni sustav nepomičan s obzirom na tijelo satelita, kutnu brzinu \emph{body} referentnog sustava $\mathcal{F}_b$ s obzirom na $\mathcal{F}_G$ inercijskog sustava označavamo kao:
+
+        \begin{equation}
+            \boldsymbol{\omega}_{bG} = \left[ \omega_1 \; \omega_2 \; \omega_2\right]^T.
+        \end{equation}
 
         \subsection{Prikaz pomoću Eulerovih kutova}{
             Jednadžbu rotacijskog gibanja pomoću Eulerovih kutova definiramo kao umnožak 3-2-1 rotacijske sekvence i kutne brzine kao:
@@ -463,10 +481,32 @@
             Jednadžbu rotacijskog gibanja pomoću kvaterniona i kutne brzine definiramo kao:
 
             \begin{equation}
+            \label{eq:rot_gib}
             \begin{array}{rcl}
-                \dot{\boldsymbol\epsilon} &  = & \frac{1}{2}(\eta\textbf{1} + \boldsymbol{\epsilon}^\times)\boldsymbol{\omega}_{bG}, \\
+                \dot{\boldsymbol\epsilon} &  = & \frac{1}{2}(\eta\boldsymbol{1} + \boldsymbol{\epsilon}^\times)\boldsymbol{\omega}_{bG}, \\
+                & & \\
                 \dot{\eta} & = & -\frac{1}{2}\boldsymbol{\epsilon}^T\boldsymbol{\omega}_{bG}.
             \end{array}
+            \end{equation}
+
+            Radi lakšeg računanja, raspišemo li jednadžbu \ref{eq:rot_gib} pomoću definicije kvaterniona u jednadžbi \ref{eq:kvaternion_elem} dobiti ćemo relaciju za rotacijsko gibanje \cite{uvod_u_svemirske} kao:
+
+            \begin{equation}
+            \label{eq:rot_qib_elem}
+                \dot{\boldsymbol{q}} = \frac{1}{2} \boldsymbol{S}(\boldsymbol{\omega}_{bG}) \boldsymbol{q}
+            \end{equation}
+
+            gdje je matrica $\boldsymbol{S}(\boldsymbol{\omega}_{bG})$ definirana kao:
+
+            \begin{equation}
+                \boldsymbol{S}(\boldsymbol{\omega}_{bG}) =
+                \begin{bmatrix}
+                    0 & -\omega_1 & -\omega_2 & -\omega_3 \\
+                    \omega_1 & 0 & \omega_3 & -\omega_2 \\
+                    \omega_2 & -\omega_3 & 0 & \omega_1 \\
+                    \omega_3 & \omega_2 & -\omega_1 & 0 
+                \end{bmatrix}
+                .
             \end{equation}
         }
     }
@@ -510,6 +550,7 @@
         }
 
         \subsection{Senzori orijentacije}{
+        \label{subsection:senzori_orijentacije}
             Senzori orijentacije su elektroničke naprave iz kojih je moguće dobiti podatak o orijentaciji. Podatak o orijentaciji najčešće ne dolazi direktno iz senzora već se orijentacija estimira matematičkim algoritmima koji kao svoj rezultat daju estimiranu orijentaciju \cite{adcsKnjiga}. Za precizno određivanje orijentacije nekada je potrebno uzeti u obzir podatke iz više senzora odjednom. Takav način prikupljanja podataka zovemo engl. \emph{sensor fusion}. 
 
             U nastavku ćemo navesti najkorištenije senzore, njihove karakteristike i način rada.
@@ -524,13 +565,13 @@
                 \label{fig:sensor_sunca_industrija}
                 \end{figure}
 
-                Struja iz solarnih ćelija ovisna je o kutu $\theta$ što označava kut između normale senzora $\hat{\overrightarrow{\textbf{n}}}$ i vektora nadolazeće zrake Sunca $\hat{\overrightarrow{\textbf{v}}}$ (vidi sliku \ref{fig:sensor_sunca}) kao:
+                Struja iz solarnih ćelija ovisna je o kutu $\theta$ što označava kut između normale senzora $\hat{\overrightarrow{\boldsymbol{n}}}$ i vektora nadolazeće zrake Sunca $\hat{\overrightarrow{\boldsymbol{v}}}$ (vidi sliku \ref{fig:sensor_sunca}) kao:
 
                 \begin{equation}
                     i(\theta) = i(0)\cos\theta,
                 \end{equation}
 
-                Senzor Sunca ima konačni kut gledanja u obliku stošca. Sa samo jednim senzorom Sunca nije moguće odrediti vektor $\hat{\overrightarrow{\textbf{v}}}$ već se primjenjuje paradigma \emph{sensor fusion}-a gdje koristimo dodatni senzor Sunca (vidi sliku \ref{fig:sensor_sunca_sensor_fusion}) \cite{adcsKnjiga}.
+                Senzor Sunca ima konačni kut gledanja u obliku stošca. Sa samo jednim senzorom Sunca nije moguće odrediti vektor $\hat{\overrightarrow{\boldsymbol{v}}}$ već se primjenjuje paradigma \emph{sensor fusion}-a gdje koristimo dodatni senzor Sunca (vidi sliku \ref{fig:sensor_sunca_sensor_fusion}) \cite{adcsKnjiga}.
 
                 \begin{figure}[htb]
                 \centering
@@ -582,6 +623,7 @@
 
                 Modeliranje spomenutih efekata opisujemo u sljedećoj jednadžbi:
 
+                % TODO: dodaj boldanje
                 \begin{equation}
                     (x - b)R(x - b)^T = \beta^2,
                 \end{equation}
@@ -629,6 +671,7 @@
         }
 
         \subsection{Senzori kutne brzine}{
+        \label{subsection:senzori_kutne_brzine}
             Senzori kutne brzine mjere kutnu brzinu satelita. Kao što ćemo vidjeti u nastavku rada, većina algoritama za procjenu orijentacije koriste kutnu brzinu kao dodatnu informaciju. Kutna brzina može se izračunati kao vremenska derivacija orijentacije, ali takav izračun unosi neodređenost u obliku šuma. Senzori kutne brzine nemaju izražen šum, ali zato imaju problem sa tzv. \emph{bias}-om - konstantnoj srednjoj vrijednosti koja unosi grešku u račun. 
 
             Osim niskog šuma, druga prednost senzora kutne brzine je što ne zahtijevaju eksterni izvor informacije. Primjerice, senzor Sunca uvijek mora imati prisutno Sunce ne bi li izračunali orijentaciju satelita. U tim situacijama kada ne možemo dobiti direktno podatak o orijentaciji satelita, integracijom kutne brzine moguće je odrediti orijentaciju. Problem takvog načina određivanja orijentacije je konstantni \emph{bias} koji unosi grešku u integraciju. Zbog toga se takav način određivanja orijentacije ograničava na kratka vremenska razdoblja u kojima je greška zbog integracije konstantnog člana zanemariva.
@@ -654,15 +697,15 @@
                 Zbog toga što potisnik nije u stanju generiranja sile $F$ u oba smjera (naravni i suprotni smjer), za stvaranje pozitivnog i negativnog momenta potrebno je imati dva potisnika koja su međusobno suprotno orijentirana. Sukladno tomu, za troosno upravljanje orijentacijom potrebno je imati 6 potisnika \cite{adcsKnjiga}.
             }
 
-            \subsubsection{Magnetorkeri \engl{magnetic torquers}}{
-                Magnetorkeri su aktuatori koji generiraju moment pomoću magnetske sprege lokalno generiranog magnetskog polja i magnetskog polja Zemlje. Magnetorker je u suštini zavojnica. Kao što nalaže Amperov zakon, prolaskom struje kroz namotaje zavojnice dolazi do stvaranja lokalnog magnetskog polja (magnetski dipol). Međusobnom interakcijom generiranog magnetskog dipola magnetorkera $\overrightarrow{\textbf{m}}$ i magnetskog dipola Zemlje $\overrightarrow{\textbf{b}}$ stvara se moment $\overrightarrow{\textbf{T}}$ koji je jednak:
+            \subsubsection{Magnetorkeri \engl{magnetorquers, magnetic torquers}}{
+                Magnetorkeri su aktuatori koji generiraju moment pomoću magnetske sprege lokalno generiranog magnetskog polja i magnetskog polja Zemlje. Magnetorker je u suštini zavojnica. Kao što nalaže Amperov zakon, prolaskom struje kroz namotaje zavojnice dolazi do stvaranja lokalnog magnetskog polja (magnetski dipol). Međusobnom interakcijom generiranog magnetskog dipola magnetorkera $\overrightarrow{\boldsymbol{m}}$ i magnetskog dipola Zemlje $\overrightarrow{\boldsymbol{b}}$ stvara se moment $\overrightarrow{\boldsymbol{T}}$ koji je jednak:
 
                 \begin{equation}
                     \label{eq:magnetorker_eq}
-                    \overrightarrow{\textbf{T}} = \overrightarrow{\textbf{m}} \times \overrightarrow{\textbf{b}}
+                    \overrightarrow{\boldsymbol{T}} = \overrightarrow{\boldsymbol{m}} \times \overrightarrow{\boldsymbol{b}}
                 \end{equation}
 
-                Moguće je pokazati kako je vektorski produkt u jednadžbi \ref{eq:magnetorker_eq} (isto vektor) uvijek okomit na magnetski dipol Zemlje $\overrightarrow{\textbf{b}}$. Zbog toga je nemoguće generirati moment kada je položaj dipola magnetorkera usmjeren kao i dipol magnetskog polja Zemlje.
+                Moguće je pokazati kako je vektorski produkt u jednadžbi \ref{eq:magnetorker_eq} (isto vektor) uvijek okomit na magnetski dipol Zemlje $\overrightarrow{\boldsymbol{b}}$. Zbog toga je nemoguće generirati moment kada je položaj dipola magnetorkera usmjeren kao i dipol magnetskog polja Zemlje.
 
                 Magnetorker omogućuje upravljanje orijentacijom samo u jedno osi, što znači da za troosno upravljanje orijentacijom tipično imamo 3 međusobno ortogonalna magnetorkera za svaku os zasebno (vidi sliku \ref{fig:magnetorquer_img}).
 
@@ -675,7 +718,9 @@
 
                 Zbog relativno slabe jakosti Zemljinog magnetskog polja, teško je generirati momente sa dovoljnom jačinom jakosti specificirane zahtjevima, pogotovo za satelite koji posjeduju velike momente tromosti. Zbog toga najčešće se kontrola orijentacije vrši pomoću zamašnjaka (vidi kasnije poglavlje) u sprezi sa magnetorkerima iz dva razloga. Prvi razlog je već spomenuta nedovoljna jakost generiranog momenta od strane magnetorkera, i drugi razlog, problem zasićenja zamašnjaka.
 
-                Valja skrenuti pažnju i na problem utjecaja magnetorkera na mjerenja senzora magnetskog polja. Ako prilikom korekcije orijentacije pomoću magnetorkera mjerimo magnetsko polje, doći će do magnetske interferencije magnetorkera i senzora magnetskog polja (vidi poglavlje \ref{subsubsection:troosni_magnetometar}). Samim time direktno unosimo grešku u estimaciji orijentacije. Rješenje problemu leži u tome da za vrijeme mjerenja magnetskog polja magnetorker ne vrši korekciju orijentacije \cite{adcsKnjiga}. 
+                Valja skrenuti pažnju i na problem utjecaja magnetorkera na mjerenja senzora magnetskog polja. Ako prilikom korekcije orijentacije pomoću magnetorkera mjerimo magnetsko polje, doći će do magnetske interferencije magnetorkera i senzora magnetskog polja (vidi poglavlje \ref{subsubsection:troosni_magnetometar}). Samim time direktno unosimo grešku u estimaciji orijentacije. Rješenje problemu leži u tome da za vrijeme mjerenja magnetskog polja magnetorker ne vrši korekciju orijentacije \cite{adcsKnjiga}.
+
+                U sklopu projekta razvili smo metodu optimalne parametrizacije magnetorkera koja za dani magnetski moment vrši parametrizaciju magnetorkera tako da posjeduje minimalnu masu uz minimalni potrošak snage \cite{magnetorker_ieee}.
             }
 
             \subsubsection{Zamašnjaci \engl{Momentum wheels}}{
@@ -702,11 +747,180 @@
         }
     }
 
-    \section{Određivanje orijentacije}{
-        U ovom dijelu navest ćemo senzore i algoritme za estimaciju orijentacije korištene u našem sustavu. 
+    \section{Algoritmi za određivanje i upravljanje orijentacijom}{
+        U ovom dijelu navest ćemo neke algoritme i metode za određivanje i upravljanje orijentacijom satelita. 
  
-        \subsection{Korišteni senzori}{
-            Zbog prirode algoritama za procjenu orijentacije (vidi poglavlje \ref{subsection:algoritmi_za_estimaciju}), potrebno je imati 2 neovisna troosna senzora. U praksi bi to npr. mogli biti senzor Sunca i magnetometar. U našem slučaju, radi jednostavnije izvedbe testnog sustava i samog testiranja algoritama za estimaciju, izabrali smo akcelerometar kao prvi, odnosno magnetometar kao drugi senzor. 
+        \subsection{Određivanje orijentacije}{
+        \label{subsection:odredjivanje_orijentacije}
+            Određivanje orijentacije je postupak u kojem iz odabranih orijentacijskih senzora (vidi poglavlje \ref{subsection:senzori_orijentacije}) prikupljamo podatke koje potom obrađujemo unutar posebno razvijenih algoritama koji kao rezultat računanja na izlazu daju podatak o orijentaciji. Orijentacija satelita nije jednoznačno određena već u njoj postoje neodređenosti (greške). Takve neodređenosti najviše proizlaze iz neodređenosti senzora iz kojih prikupljamo podatke. Druge, manje utjecajnije neodređenosti orijentacije proizlaze iz konačne preciznosti aritmetičkih operacija procesora na kojima se izvršavaju takvi algoritmi. Zbog svega toga, vrlo često u radu pišemo da orijentaciju estimiramo jer je podatak o orijentaciji (više ili manje) gruba procjena. Kako bi smanjili neodređenosti procjene orijentacije, najčešće uzimamo podatke iz više neovisnih senzora i vršimo postupak \emph{Sensor fusion}-a. \emph{Sensor fusion} će smanjiti neodređenosti pojedinih senzora te u konačnici dati bolji rezultat o procjeni orijentacije nego što bismo dobili kad bismo koristili podatak iz samo jednog senzora.
+
+            Algoritmi za estimaciju orijentacije vrlo često budu razvijeni na način da optimalno procjenjuju orijentaciju s obzirom na neki uvjet koji je unaprijed zadan. Možda najpoznatiji problem optimalne estimacije orijentacije satelita naziva se tzv. \emph{Wahba's Problem} iz 1965. godine \cite{wahbas_problem}. Nekoliko algoritama je razvijeno za potrebe rješavanja \emph{Wahba's} problema. Neke od njih navest ćemo u nastavku poglavlja.
+
+            Pri estimaciji orijentacije važno je shvatiti nekoliko stvari. Algoritmi koje ćemo spomenuti, za svoj rad koriste podatke iz 2 različita troosna senzora položena u referentni sustav tijela (satelita). Za svaki od ta dva senzora unaprijed moraju biti poznate njihove tzv. referentne vrijednosti. Referentne vrijednosti senzora označavaju vektore koje smo unaprijed dobili ili izračunali. Razlika trenutno dobivene vrijednosti iz senzora i njegove referentne vrijednosti kolokvijalno nam govori za koliko smo zaokrenuli tijelo. Za lakše shvaćanje pojma referentnog vektora navest ćemo primjer referentnog vektora akcelerometra. Kao dogovor uzet ćemo primjer gdje je referentni vektor akcelerometra položen u referentni sustav kojemu Z komponenta gleda prema središtu Zemlje (X i Y komponenta za ovaj primjer nisu važne). U tom slučaju vrijedi kako će očitana vrijednost sa akcelerometra biti jednaka $\left[0 \; 0 \; -9.81\right] m/s^2$. Recimo da u jednom trenu promijenimo orijentaciju senzora tako da mu Z komponenta gleda u suprotnom smjeru. U tom ćemo slučaju sa akcelerometra pročitati vrijednost mjerenja iznosa $\left[0 \; 0 \; +9.81\right] m/s^2$ iz čega možemo zaključiti kako se je orijentacija akcelerometra promijenila.
+
+            Algoritme za estimaciju orijentacije dijelimo u dvije skupine: bezmemorijske i memorijske algoritme \cite{uvod_u_svemirske}. Bezmemorijski algoritmi ne uzimaju u obzir prošlo stanje orijentacije već podatak o orijentaciji estimiraju samo iz trenutnih vrijednosti senzora (naravno i njihovih referentnih vrijednosti). Memorijski algoritmi će na temelju prošlog stanja orijentacije i trenutnih vrijednosti senzora estimirati orijentaciju. Memorijski algoritmi su superiorniji jer rade na ideji rekurzije. Svaka iznova estimirana orijentacija biva sve točnija baš zato što senzor uzima u obzir i prošlu orijentaciju, a po logici očuvanja stanja sustava, prošlo stanje je ili isto ili vrlo slično trenutnom stanju. 
+
+            Popularni bezmemorijski algoritam ima naziv QUEST, a memorijski REQUEST, Optimal-REQUEST, Komplementarni filtar i dr. O njima nešto više u nastavku. 
+
+            \subsubsection{Wahba problem}{
+                Da bismo objasnili estimacijske algoritme, prvo je potrebno da definiramo Wahba problem. Ako su nam dani dva skupa vektora sa $n\ge2$ elemenata $\left\{ \boldsymbol{r}_1, \boldsymbol{r}_2, \cdots , \boldsymbol{r}_n \right\}$ i $\left\{ \boldsymbol{b}_1, \boldsymbol{b}_2, \cdots , \boldsymbol{b}_n \right\}$, Wahba problem je problem pronalaženja matrice $A$ koja će transformirati prvi set vektora u drugi na način koji najbolje minimizira srednju kvadratnu pogrešku relacije:
+
+                \begin{equation}
+                    \sum_{i=1}^{n}||\boldsymbol{b}_i - A\boldsymbol{r}_i||^2,
+                \end{equation}
+
+                gdje za matricu $A$ vrijedi $A^T A = \boldsymbol{I}_3$ i $\det(A)=1.$
+            }
+
+            \subsubsection{REQUEST algoritam}{
+                REQUEST algoritam je algoritam koji rješava Wahba problem pronalaska orijentacijske matrice $A$. REQUEST algoritam je preteča QUEST algoritma koji je uzimao u obzir samo $n$ trenutno izmjerenih vektora i na temelju njih izračunao orijentacijsku matricu \cite{quest_algo}. 
+
+                REQUEST algoritam ide korak dalje i uvodi rekurziju. Na temelju već dobivene orijentacijske matrice u prijašnjem $k$-tom koraku i novo izmjerenih $\boldsymbol{b}_i$ i $\boldsymbol{r}_i$ vektora senzora orijentacije, REQUEST algoritam računa orijentacijsku matricu u $k+1$ koraku \cite{request_algo}.
+
+                Osim izmjerenih $\boldsymbol{b}_i$ i $\boldsymbol{r}_i$ vektora, REQUEST algoritam uzima u obzir i trenutnu kutnu brzinu tijela pomoću koje točnije estimira orijentacijsku matricu. 
+
+                Jedan problem REQUEST algoritma je taj što zahtijeva par dodatnih (fiksnih) koeficijenata koji moraju biti empirički izabrani. Ti koeficijenti su zapravo težinski faktori koji govore kojim mjerenjima pridodajemo više važnosti: senzorima orijentacije ili mjerenjima žiroskopa. Zbog tih parametara REQUEST algoritam je suboptimalan \cite{opt_req_algo}. Problem suboptimalnosti rješava Optimal-REQUEST algoritam kojeg ćemo navesti u nastavku.
+
+                Valja još spomenuti kako REQUEST algoritam nije općeniti algoritam koji će na izlazu dati estimaciju spomenute matrice $A$, već je to algoritam koji je specifično razvijen da na svom izlazu daje podatak o orijentaciji u obliku kvaterniona.
+            }
+
+            \subsubsection{Optimal-REQUEST algoritam}{
+                Optimal-REQUEST algoritam je preteča REQUEST algoritma. Kao što smo već napomenuli ranije, REQUEST algoritam sadrži empirički izabrane koeficijente zbog kojih je takav algoritam suboptimalan. Optimal-REQUEST algoritam će na optimalan način s vremenom, s obzirom na propagaciju greške na senzorima orijentacije i žiroskopu, sam estimirati spomenute koeficijente. Metoda estimacije koeficijenata zasniva se na Kalmanovom filtru \cite{opt_req_algo}.
+
+                Nećemo ulaziti u detalje implementacije već ćemo samo navesti kako smo u sklopu ovog projekta razvili Optimal-REQUEST algoritam u MATLAB kodu, te smo ga naposlijetku pretvorili u C kod. Cijeli programski kod dostupan je ovdje \cite{opt_req_kod} uz popratnu dokumentaciju ovdje \cite{opt_req_dokumen}. 
+            }
+
+            \subsubsection{Gradijentni spust \engl{Gradient descent}}{
+                Ako posjedujemo dva para vektora mjerenja $(\boldsymbol{v}_1^i, \; \boldsymbol{v}_1^b)$ i $(\boldsymbol{v}_2^i, \; \boldsymbol{v}_2^b)$ gdje $\boldsymbol{v}_i^b$ označava vektor definiran u referentnom sustavu tijela $\mathcal{F}_b$, a $\boldsymbol{v}_i^i$ označava vektor definiran u inercijskom referentnom sustavu $\mathcal{F}_i$, moguće je definirati tzv. rotacijsku matricu $\mathcal{R}_i^b$ (vidi jednadžbu \ref{eq:rot_mat_quat}) koja transformira vektor $\boldsymbol{v}^i $ u vektor $\boldsymbol{v}^b$. 
+
+                Cilj estimacijskog algoritma je izračunati orijentacijsku matricu na način da što više smanjimo pogrešku estimacije. Pogrešku estimacije $\boldsymbol{e_i} = \left[e_{x,i} \; e_{y,i} \; e_{z,i}\right]^T$ za svaki par mjerenih vektora definiramo kao:
+
+                \begin{equation}
+                \begin{array}{rcl}
+                    \boldsymbol{e}_1 & = & \mathcal{R}_i^b \boldsymbol{v}_1^i - \boldsymbol{v}_1^b, \\
+                    \boldsymbol{e}_2 & = & \mathcal{R}_i^b \boldsymbol{v}_2^i - \boldsymbol{v}_2^b. 
+                \end{array}
+                \end{equation} 
+
+                Nadalje, definirati ćemo funkciju cilja. Funkcija cilja u gradijentnom spustu je parametar kojeg želimo maksimalno smanjiti. Funkciju cilja definiramo kao:
+
+                \begin{equation}
+                    J(\boldsymbol{q}_i^b) = \boldsymbol{e}_1^T \boldsymbol{e}_1 + \boldsymbol{e}_2^T \boldsymbol{e}_2
+                \end{equation}
+
+                Konačno, algoritam gradijentnog spusta definiramo kao:
+
+                \begin{equation}
+                \label{eq:grad_des}
+                    \boldsymbol{q}_{n+1} = \boldsymbol{q}_n - \alpha\nabla J(\boldsymbol{q}_n),
+                \end{equation}
+
+                gdje je gradijent funkcije cilja $\nabla J(\boldsymbol{q}_n)$ definiran kao:
+
+                \begin{equation}
+                    \nabla J(\boldsymbol{q}_n) = 
+                    \begin{bmatrix}
+                        2 \boldsymbol{e}_1^T \boldsymbol{M}_1 \boldsymbol{v}_1^i(\boldsymbol{q}_n) + 2 \boldsymbol{e}_2^T \boldsymbol{M}_1 \boldsymbol{v}_2^i(\boldsymbol{q}_n) \\
+                        2 \boldsymbol{e}_1^T \boldsymbol{M}_2 \boldsymbol{v}_1^i(\boldsymbol{q}_n) + 2 \boldsymbol{e}_2^T \boldsymbol{M}_2 \boldsymbol{v}_2^i(\boldsymbol{q}_n) \\
+                        2 \boldsymbol{e}_1^T \boldsymbol{M}_3 \boldsymbol{v}_1^i(\boldsymbol{q}_n) + 2 \boldsymbol{e}_2^T \boldsymbol{M}_3 \boldsymbol{v}_2^i(\boldsymbol{q}_n) \\
+                        2 \boldsymbol{e}_1^T \boldsymbol{M}_4 \boldsymbol{v}_1^i(\boldsymbol{q}_n) + 2 \boldsymbol{e}_2^T \boldsymbol{M}_4 \boldsymbol{v}_2^i(\boldsymbol{q}_n)
+                    \end{bmatrix}
+                    ,
+                \end{equation}
+
+                i gdje su sve parcijalne derivacije rotacijske matrice $\mathcal{R}_i^b$ definirane kao:
+
+                \begin{equation}
+                \begin{array}{rcl}
+                    \boldsymbol{M}_1 = \frac{\partial \mathcal{R}_i^b}{\partial q_1} = 2
+                    \begin{bmatrix}
+                        q_1 & q_4 & -q_3 \\
+                        -q_4 & q_1 & q_2 \\
+                        q_3 & -q_2 & q_1 
+                    \end{bmatrix},
+                    & 
+                    \boldsymbol{M}_2 = \frac{\partial \mathcal{R}_i^b}{\partial q_2} = 2
+                    \begin{bmatrix}
+                        q_2 & q_3 & q_4 \\
+                        q_3 & -q_2 & q_1 \\
+                        q_4 & -q_1 & -q_2 
+                    \end{bmatrix},
+                    \\
+                    & & \\
+                    \boldsymbol{M}_3 = \frac{\partial \mathcal{R}_i^b}{\partial q_3} = 2
+                    \begin{bmatrix}
+                        -q_3 & q_2 & -q_1 \\
+                        q_2 & q_3 & q_4\\
+                        q_1 & q_4 & -q_3 
+                    \end{bmatrix},
+                    & 
+                    \boldsymbol{M}_4 = \frac{\partial \mathcal{R}_i^b}{\partial q_4} = 2
+                    \begin{bmatrix}
+                        -q_4 & q_1 & q_2 \\
+                        -q_1 & -q_4 & q_3 \\
+                        q_2 & q_3 & q_4 
+                    \end{bmatrix}.
+                \end{array}
+                \end{equation}
+
+                Procjena orijentacijskog kvaterniona započinje odabirom inicijalnog kvaterniona $\boldsymbol{q}_0$. Za inicijalni kvaternion najčešće se uzima proizvoljna vrijednost (ako drugačije nije moguće) npr. $\boldsymbol{q}_0 = \left[1, \; 0, \; 0, \; 0\right]^T$. Svaki sljedeći korak uključuje potraživanje mjerenih vektora iz orijentacijskih senzora i računanje procjene orijentacije jednadžbom \ref{eq:grad_des}.
+
+                Problem opisane procijene orijentacijskog kvaterniona metodom gradijentnog spusta je što takva procjena sadrži visokofrekventne komponente šuma. Takav šum moguće je filtrirati niskopropusnim filtrom. Međutim, postoji bolji način filtriranja. Naime, kao što što je bilo rečeno u poglavlju \ref{subsection:senzori_kutne_brzine}, orijentaciju je moguće izračunati iz mjerenog vektora kutne brzine (vidi jednadžbu \ref{eq:rot_qib_elem}) relacijom \cite{uvod_u_svemirske}:
+
+                \begin{equation}
+                    \boldsymbol{q}_k = \boldsymbol{q}_{k-1} + \Delta T \dot{\boldsymbol{q}}_k = \boldsymbol{q}_{k-1} + \frac{\Delta T}{2} \boldsymbol{S}(\boldsymbol{\omega}_{bG}) \boldsymbol{q}_{k-1},
+                \end{equation}
+
+                gdje je $\Delta T$ proteklo vrijeme od prošlog računanja.
+
+                No međutim, problem takvog načina određivanja orijentacije je akumulirana greška. Takvu akumuliranu grešku moguće je filtrirati visokopropusnim filtrom. 
+
+                Nadalje, pokušati ćemo spojiti obje metode procijene orijentacije u jednu metodu ne bi li tako u konačnici dobili procjenu sa manjom greškom. U tu svrhu uvest ćemo tzv. komplementarni filtar.
+            }
+
+            \subsubsection{Komplementarni filtar}{
+                Komplementarni filtar zasniva se na jednostavnoj ideji gdje izlaz filtra ovisi o dvoma ulaznim vrijednostima i to na način da filtru težinskim faktorom $K \in \left[ 0, \; 1\right]$ odredimo hoće li izlaz filtra više ovisiti o prvom, odnosno drugom ulaznom parametru. 
+
+                Cijela logika računanja orijentacijskog kvaterniona može se opisati slikom \ref{fig:komp_filt_fig}. Obratimo pažnju na to kako, s obzirom na težinski faktor $K$, izlaz filtra ovisi o jednom ili o drugom ulaznom parametru. Ako vrijedi da je $K = 1$, izlaz komplementarnog filtra, odnosno procijenjena orijentacija, ovisi isključivo o algoritmu određivanja orijentacije pomoću vektora kutne brzine. Vrijedi i obrnuto, ako je $K = 0$, izlaz isključivo ovisi o algoritmu procijene orijentacije pomoću gradijentnog spusta \cite{grad_desc}. Parametar $K$ moguće je odrediti eksperimentalnim putem ili simulacijom. 
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=1.0\textwidth]{images/komp_filt_fig.png}
+                \caption{Prikaz komplementarnog filtra za određivanje orijentacije satelita pomoću gradijentnog spusta i vektora kutne brzine \cite{uvod_u_svemirske}.}
+                \label{fig:komp_filt_fig}
+                \end{figure}
+            }
+        }
+
+        \subsection{Upravljanje orijentacijom}{
+            \subsubsection{Korišteni aktuatori}{
+                Kao što smo vidjeli u poglavlju
+                %- navesti aktuatore
+                %- zamasnjake, magnetorqere
+                %- navesti problem zasicenja zamasnjaka
+            }
+
+            \subsubsection{Korišteni algoritmi}{
+                %- ukratko o upravljanju orijentacijom
+                %- ukratko o upravljanju kutnom brzinom
+                %- regulacija
+                %    - navesti PID regulator kao regulator
+                %    - opisati sto je PID regulator
+                %    - navesti quaternion regulator kao regulator
+                %        - jednadzbe
+                %        - dodaj referencu na paper
+            }
+        }
+    }
+
+    \section{Razvijeni sustav}{
+        \subsection{Tiskana pločica i sklopovlje}{
+            %- ukratko o razvijenoj plocici
+            %- staviti kakvu shemu
+        }
+
+        \subsection{Izabrani senzori}{
+            Zbog prirode algoritama za procjenu orijentacije (vidi poglavlje \ref{subsection:odredjivanje_orijentacije}), potrebno je imati 2 neovisna troosna senzora. U praksi bi to npr. mogli biti senzor Sunca i magnetometar. U našem slučaju, radi jednostavnije izvedbe testnog sustava i samog testiranja algoritama za estimaciju, izabrali smo akcelerometar kao prvi, odnosno magnetometar kao drugi senzor. 
 
             Oba troosna senzora (plus troosni žiroskop) nalaze se u jedinstvenom kućištu tzv. IMU \engl{Inertial Measurement Unit} senzora oznake \emph{MPU9250} \cite{mpu9250_datasheet}. U našem sustavu koristimo Arduino modul sa MPU9250 senzorom (slika \ref{fig:mpu9250}).
 
@@ -724,52 +938,13 @@
             }
 
             \subsubsection{Magnetometar}{
-                Magnetometar nam za podatak daje vektor Zemljinog magnetskog polja. Pomoću dostupnih alata na internetu (vidi \cite{}), moguće je odrediti referentni vektor Zemljinog magnetskog polja za dato mjesto na Zemlji. Magnetometar nam je povoljan senzor utoliko što ga je moguće koristiti u Zemljinoj orbiti. Ako bi znali podatak o referentnom vektoru magnetskog polja Zemlje za svaku točku orbite i trenutnu vrijednost magnetskog polja koji bi dobili sa senzora, mogli bismo podatak dati algoritmu za estimaciju orijentacije i tako dobiti podatak o orijentaciji.
+                Magnetometar nam za podatak daje vektor Zemljinog magnetskog polja. Pomoću dostupnih alata na internetu (vidi \cite{magnetic_model}), moguće je odrediti referentni vektor Zemljinog magnetskog polja za dato mjesto na Zemlji. Magnetometar nam je povoljan senzor utoliko što ga je moguće koristiti u Zemljinoj orbiti. Ako bi znali podatak o referentnom vektoru magnetskog polja Zemlje za svaku točku orbite i trenutnu vrijednost magnetskog polja koji bi dobili sa senzora, mogli bismo podatak dati algoritmu za estimaciju orijentacije i tako dobiti podatak o orijentaciji.
             }
 
             \subsubsection{Žiroskop}{
                 Unutar IMU senzora nalazi se i troosni žiroskop. Kao što smo ranije spomenuli u poglavlju \ref{}, za uspješniju estimaciju orijentacije koristimo i žiroskop. Žiroskop kojeg koristimo se također nalazi unutar IMU senzora.
             }
-        }
 
-        \subsection{Algoritmi}{
-        \label{subsection:algoritmi_za_estimaciju}
-            %- kako mozemo estimirati orijentaciju satelita
-            %    - senzor fusion
-            %    - navesti neke od algoritama
-            %    - rekurzivni
-            %    - ne rekurzivni
-            %    - vidi s josipom jos neke koje je on razvijao
-            %    - karla je jedan razvijala (stavi referencu)
-        }
-    }
-
-    \section{Upravljanje orijentacijom}{
-        \subsection{Korišteni aktuatori}{
-            %- navesti aktuatore
-            %- zamasnjake, magnetorqere
-            %- navesti problem zasicenja zamasnjaka
-        }
-
-        \subsection{Algoritmi}{
-            %- ukratko o upravljanju orijentacijom
-            %- ukratko o upravljanju kutnom brzinom
-            %- regulacija
-            %    - navesti PID regulator kao regulator
-            %    - opisati sto je PID regulator
-            %    - navesti quaternion regulator kao regulator
-            %        - jednadzbe
-            %        - dodaj referencu na paper
-        }
-    }
-
-    \section{Razvijeni sustav}{
-        \subsection{Tiskana pločica i sklopovlje}{
-            %- ukratko o razvijenoj plocici
-            %- staviti kakvu shemu
-        }
-
-        \subsection{Izabrani senzori}{
             %- zasto koristimo IMU
             %- napisati da akcelerometar ne moze raditi u svemiru
             %- mane ziroskopa
