@@ -1,5 +1,41 @@
 \documentclass[times, utf8, diplomski, numeric]{templates/template}
 \usepackage{booktabs}
+\usepackage{listingsutf8}
+\usepackage{xcolor}
+
+% konfiguracija za pseudokod
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    inputencoding = utf8,  % Input encoding
+    extendedchars = true,  % Extended ASCII
+    literate      =        % Support additional characters
+      {ž}{{\v z}}1 {č}{{\v c}}1 {š}{{\v s}}1  
+      % ¿ and ¡ are not correctly displayed if inconsolata font is used
+      % together with the lstlisting environment. Consider typing code in
+      % external files and using \lstinputlisting to display them instead.  
+}
+
+\lstset{style=mystyle}
 
 \begin{document}
 
@@ -894,7 +930,7 @@
 
         \subsection{Upravljanje orijentacijom/kutnom brzinom}{
             \subsubsection{Pojednostavljeni model satelita}{
-                Zbog lakšeg razvijanja regulalacijskih petlji odlučili smo se za upravljanje orijentacijom, odnosno kutnom brzinom samo oko jedne osi. 
+                Zbog lakšeg razvijanja regulacijskih petlji odlučili smo se za upravljanje orijentacijom, odnosno kutnom brzinom samo oko jedne osi. 
 
                 Ako vrijedi da su kutne brzine $TODO$ i $TODO$, iz jednadžbe \ref{eq:} vidimo kako vrijedi:
 
@@ -919,9 +955,9 @@
             }
 
             \subsubsection{Korišteni aktuatori}{
-                U našem radu za kontrolu orijentacije upotrijebili smo zamašnjak. Zamašnjak je pogonjen elektromotorom. Elektromotor se upravlja pomoću upravljivog H-mosta koji omogučava promijenu smijera. Brzinom elektromotora upravlja se pomoću pulsno širinske modulacije \engl{Pulse Width Modulation - PWM}. Rotirajuća masa izrađena je na 3D printeru.
+                U našem radu za kontrolu orijentacije upotrijebili smo zamašnjak. Zamašnjak je pogonjen elektromotorom. Elektromotor se upravlja pomoću upravljivog H-mosta koji omogućuje promjenu smjera. Brzinom elektromotora upravlja se pomoću pulsno širinske modulacije \engl{Pulse Width Modulation - PWM}. Rotirajuća masa izrađena je na 3D printeru.
 
-                Razlog zašto smo odabrali zamašnjak za upravljanje orijentacijom je u tome što je to najlakši aktuator za izvest. Magnetorker bi zahtijevao izradu posebnog kaveza koji zamijenjuje Zemljino magnetsko polje što dodatno komplicira testni sustav.
+                Razlog zašto smo odabrali zamašnjak za upravljanje orijentacijom je u tome što je to najlakši aktuator za izvest. Magnetorker bi zahtijevao izradu posebnog kaveza koji zamjenjuje Zemljino magnetsko polje što dodatno komplicira testni sustav.
 
                 PWM modulacija generira se u sklopovlju mikroupravljača.
             }
@@ -1028,7 +1064,7 @@
 \chapter{Programska podrška ADCS sustava}{
     U ovom poglavlju biti će opisana programska podrška ADCS sustava. Opisati ćemo ugradbeno računalo koje koristimo. Objasniti ćemo organizaciju projekta (programske podrške). Navest ćemo korištene biblioteke, operacijski sustav, opisati funkcionalnost programa i u konačnici ukratko opisati postupak razvijanja programske podrške.
 
-    Napominjemo kako sljedeći opis sustava vrijedi iskljućivo za stanje sustava kojeg smo zatekli u trenutku pisanja ovog rada. Cijela programska podrška nalazi se na GitHub repozitoriju autora ovdje \cite{github_repo}. Programska podrška verzionirana je pomoću Git \cite{git} programa za verzioniranje. Objašnjenja i opisi programske podrške vrijede do \emph{TODO} \emph{commit}-a \cite{git_commit}. Postoji velika vjerojatnost kako će se sustav u budučnosti mijenjati i da opis u nastavku nužno neće odgovarati stanju u budučnosti. 
+    Napominjemo kako sljedeći opis sustava vrijedi isključivo za stanje sustava kojeg smo zatekli u trenutku pisanja ovog rada. Cijela programska podrška nalazi se na GitHub repozitoriju autora ovdje \cite{github_repo}. Programska podrška verzionirana je pomoću Git \cite{git} programa za verzioniranje. Objašnjenja i opisi programske podrške vrijede do \emph{TODO} \emph{commit}-a \cite{git_commit}. Postoji velika vjerojatnost kako će se sustav u budućnosti mijenjati i da opis u nastavku nužno neće odgovarati stanju u budućnosti. 
 
     \section{Ugradbeno računalo}{
         Ugradbeno računalo koje koristimo je već gotov sustav na \emph{TODO} razvojnoj pločici \cite{}. Takav gotov sustav omogućuje nam jednostavno i brzo razvijanje programske podrške. 
@@ -1079,7 +1115,7 @@
         Naziv & Tip & Opis \\ 
         \midrule
         bsp         & Direktorij & engl. \emph{Board support package} \\
-        core        & Direktorij & Postavljanje osnovnih periferija mikrokontrolera (clock, memorija itd.) \\
+        core        & Direktorij & Postavljanje osnovnih periferija mikroupravljača (clock, memorija itd.) \\
         drivers     & Direktorij & Drajveri za periferiju (I2C, UART, PWM, tajmeri itd.) \\
         libs        & Direktorij & Eksterne biblioteke (Bluetooth, MPU9250, komplementarni filtar itd.) \\
         linker      & Direktorij & Linker datoteke \\
@@ -1095,7 +1131,7 @@
     }
     
     \section{Korištene biblioteke}{
-        U sklopu programske podrše koristimo i nekoliko biblioteka:
+        U sklopu programske podrške koristimo i nekoliko biblioteka:
 
         \begin{itemize}
         \item comp\_filt,
@@ -1107,13 +1143,13 @@
 
         Neke biblioteke su samostalni GitHub repozitoriji i u projekt su dodani kao tzv. Git submoduli. Primjer su \texttt{mpu9250} biblioteka koja upravlja MPU9250 IMU senzorom, \texttt{optimal\_request} biblioteka koja sadrži kod za Optimal-REQUEST algoritam, \texttt{printf} biblioteka koja sadrži jednostavniju verziju klasične \texttt{printf} funkcije i \texttt{zs040} biblioteka koja upravlja Bluetooth modulom.
 
-        \texttt{comp\_filt} biblioteka sadrži programski kod za Komplementarni filtar i jedina je biblioteka koja nema svoj zasebni GitHub repozitorij ali ta se činjenica može promijeniti u budučnosti. 
+        \texttt{comp\_filt} biblioteka sadrži programski kod za Komplementarni filtar i jedina je biblioteka koja nema svoj zasebni GitHub repozitorij ali ta se činjenica može promijeniti u budućnosti. 
 
         Pogodnost eksternih GitHub repozitorija je u tome što to mogu biti samostalni repozitoriji koje netko drugi može uzeti i ukomponirati u svoj projekt neovisno o tome na kojemu se sustavu pokreće. Netko tko želi koristiti npr. Optimal-REQUEST biblioteku može jednostavno dodati GitHub repozitorij kao submodul i pokrenuti to na svom sustavu. 
     }
 
     \section{Operacijski sustav i funkcionalnost}{
-        Zahtijev sustava je da u realnom vremenu obavlja nekoliko stvari istovremeno:
+        Zahtjev sustava je da u realnom vremenu obavlja nekoliko stvari istovremeno:
 
         \begin{enumerate}
         \item Estimacija orijentacije,
@@ -1134,25 +1170,92 @@
             \subsubsection{Dretva budnosti}{
                 Dretva budnosti je jednostavna dretva u kojoj se periodički pali i gasi LED statusna dioda koja se nalazi na samoj Nucleo pločici. Dretva budnosti nam omogućuje vizualnu provjeru rada sustava. Ako iz nekog razloga izvršavanje sustava prestane, jasno se na oko može vidjeti kako statusna LED-ica ne treperi. To je znak kako je sustav otišao u neodređeno stanje. Pseudokod dretve nalazi se u nastavku:
 
-                \begin{verbatim}
-                    TODO
-                    dodaj pseudokod dretve budnosti.
-                \end{verbatim}
+                \begin{lstlisting}[language=C]
+while(True) {
+    promijeni_stanje_statusne_ledice();
+    čekaj_100_milisekundi();
+}               \end{lstlisting}
             }
     
             \subsubsection{Dretva za estimaciju i kontrolu orijentacije}{
                 Dretva za estimaciju i kontrolu orijentacije (ADCS dretva) sadrži programski kod koji periodički estimira trenutnu orijentaciju i na temelju toga upravlja regulacijskim petljama. Pseudokod dretve nalazi se u nastavku:
         
-                \begin{verbatim}
-                    TODO
-                    dodaj pseudokod ADCS dretve.
-                \end{verbatim}
-        
-                Obratimo pažnju kako regulacijske petlje ovise o periodu izvođenja ADCS dretve.
+                \begin{lstlisting}[language=C]
+pričekaj_3_sekunde_za_stabilizaciju_satelita();
+
+inicijaliziraj_imu();
+inicijaliziraj_komplementarni_filtar();
+inicijaliziraj_zamašnjak();
+inicijaliziraj_regulacijske_petlje();
+
+while(True) {
+  imu_mjerenje = izmjeri_imu_vrijednosti();
+
+  vrsta_regulacije = potraži_vrstu_regulacije();
+  if (vrsta_regulacije == REGULACIJA_ORIJENTACIJE) {
+    kvaternion = estimiraj_orijentaciju(imu_mjerenje);
+
+    izmjereni_kut = izračunaj_eulerov_kut_z(kvaternion);
+    željeni_kut = potraži_željeni_eulerov_kut();
+    reguliraj_orijentaciju_oko_z_osi(željeni_kut, izmjereni_kut);
+
+    izlaz_regulatora = potraži_izlaz_pid_regulatora_orijentacije();
+
+    pošalji_preko_bluetootha(željeni_eulerov_kut, 
+      izmjereni_eulerov_kut, 
+      izlaz_regulatora);
+
+  } else if (vrsta_regulacije == REGULACIJA_KUTNE_BRZINE) {
+    željena_kutna_brzina = potraži_željenu_kutnu_brzinu();
+    reguliraj_kutnu_brzinu_oko_z_osi(željena_kutna_brzina, 
+      imu_mjerenje.žiroskop.z);
+
+    izlaz_regulatora = potraži_izlaz_pid_regulatora_kutne_brzine();
+    pošalji_preko_bluetootha(željena_kutna_brzina, 
+      imu_mjerenje.žiroskop.z, 
+      izlaz_regulatora);
+
+  } else if (vrsta_regulacije == BEZ_REGULACIJE) {
+      kvaternion = estimiraj_orijentaciju(imu_mjerenje);
+      kutovi = izračunaj_eulerove_kutove(kvaternion);
+      željeni_kut = potraži_željeni_eulerov_kut();
+      zamašnjak = potraži_duty_cycle_zamašnjaka();
+
+      pošalji_preko_bluetootha(kutovi, 
+        imu_mjerenje.žiroskop, 
+        zamašnjak);
+  }
+
+  čekaj_100_milisekundi();
+}               \end{lstlisting}
+
+                Vidimo da na samom početku ADCS dretve imamo čekanje od 3 sekunde ne bi li se satelit smirio. Razlog tomu je što na samom početku inicijalizacije sustava imamo kalibraciju žiroskopa. Kalibracija žiroskopa nastoji pronaći konstantni bias ali pod uvjetom da je satelit u stacionarnom stanju, odnosno da je kutna brzina jednaka 0 za svaku os. Tih 3 sekunde čekanja nam omogućuje da nakon ponovnog pokretanja sustava, imamo vremena satelit položiti negdje i pričekati da prođe vrijeme kalibracije.
+
+                Nakon 3 sekunde čekanja slijedi inicijalizacija IMU jedinice, komplementarnog filtra, zamašnjaka i obje regulacijske petlje.
+
+                Nakon inicijalizacije slijedi beskonačna petlja gdje se prvo potražuje mjerenje sa IMU jedinice. IMU jedinica dat će podatke o vektorima akceleracije, magnetskog polja i kutne brzine za svaku os. 
+
+                Jednom kada smo dobili vrijednosti mjerenja, slijedi potraživanje stanja regulacije. Postoje 3 stanja regulacije: 
+
+                \begin{enumerate}
+                    \item Regulacija orijentacije oko z-osi,
+                    \item Regulacija kutne brzine oko z-osi,
+                    \item Bez regulacije.
+                \end{enumerate}
+
+                Sva 3 stanja zapravo dolaze iz komunikacijske dretve koja omogućuje da korisnik u bilo koje vrijeme odabere jedan od tih stanja (vidi komande koje pruža komunikacijska dretva). Prvotno stanje regulacije (nakon svakog ponovnog pokretanja) je stanje bez regulacije.
+
+                Stanje regulacije orijentacije započinje estimacijom orijentacije. Funkcija koja estimira orijentaciju kao podatak prima mjerenja iz IMU jedinice (koristi sva 3 podatka), a na izlaz daje procijenjeni kvaternion. Funkcija za estimaciju orijentacije u pozadini poziva komplementarni filtar koji računa kvaternion. Nakon što smo dobili kvaternion, računamo Eulerov kut oko z-osi. Nadalje, potražujemo željeni Eulerov kut koji zapravo dolazi također iz komunikacijske dretve jer korisnik u svakom trenutku može promijeniti željeni kut. Pomoću izračunatog (estimiranog) kuta i željenog kuta pozivamo funkciju za regulaciju orijentacije. U pozadini ta funkcija poziva PID regulacijsku petlju za kontrolu orijentacije (kuta). Na samom kraju dretve šalju se podaci preko Bluetooth-a korisniku o vrijednosti željenog (referentnog) Eulerovog kuta, trenutnog (estimiranog) Eulerovog kuta i izlaz PID regulatora. Te tri vrijednosti važne su nam u proučavanju odziva satelita prilikom regulacije orijentacije. 
+
+                Stanje regulacije kutne brzine započinje pozivanjem funkcije regulacijske petlje za regulaciju kutne brzine. Funkcija koja regulira kutnu brzinu kao podatak prima mjerenja iz žiroskopa (samo z-os) i željenu kutnu brzinu. Željenu kutnu brzinu potražujemo iz komunikacijske dretve koja omogućava da korisnik u svakom trenutku promijeni željenu kutnu brzinu. Funkcija za regulaciju kutne brzine u pozadini poziva funkciju za PID regulator kutne brzine. Pri samom kraju dretve šaljemo podatke korisniku o vrijednosti željene (referentne) kutne brzine, trenutne (izmjerene) kutne brzine i izlaz PID regulatora. 
+
+                Stanje bez regulacije započinje estimiranjem orijentacije, računanjem Eulerovih kutova i čitanjem vrijednosti Duty Cycle-a PWM-a zamašnjaka (trenutne i referente). Sve to na kraju zajedno pošaljemo korisniku. Ti podaci su nam važni za snimanje odziva satelita na tzv. Step pobudu (vidi poglavlje \ref{TODO}) i računanje koeficijenata pojednostavljenog modela (vidi poglavlje \ref{TODO}).
+
+                Na samom kraju dretve slijedi čekanje od 100 milisekundi. Obratimo pažnju i na to da regulacijske petlje ovise o periodu izvođenja ADCS dretve.
             }
 
             \subsubsection{Dretva za komunikaciju}{
-                Dretva za komunikaciju sadrži programski kod koji je zaslužan za komunikaciju sa satelitom. Komunikacija sa satelitom odvija se u oba smijera: od korisnika prema sustavu i od sustava prema korisniku. Kao što je rečeno u poglavlju \ref{}, komunikacija se vrši preko Bluetooth-a i to nam omogućuje da jednostavno možemo pristupiti satelitu pomoću računala koji sadrži Bluetooth sučelje ili preko pametnog telefona. Za komunikaciju preko računala koristimo program TODO koji preko COM porta računala, jednostavno komunicira sa satelitom. Za komandno sučelje na pametnom telefonu preporučujemo aplikaciju TODO. 
+                Dretva za komunikaciju sadrži programski kod koji je zaslužan za komunikaciju sa satelitom. Komunikacija sa satelitom odvija se u oba smjera: od korisnika prema sustavu i od sustava prema korisniku. Kao što je rečeno u poglavlju \ref{}, komunikacija se vrši preko Bluetooth-a i to nam omogućuje da jednostavno možemo pristupiti satelitu pomoću računala koji sadrži Bluetooth sučelje ili preko pametnog telefona. Za komunikaciju preko računala koristimo program TODO koji preko COM porta računala, jednostavno komunicira sa satelitom. Za komandno sučelje na pametnom telefonu preporučujemo aplikaciju TODO. 
 
                 Takva dretva nam omogućava slanje podataka o trenutnom stanju satelita npr. trenutne orijentacije, kutne brzine, izlaza upravljačkih regulatora i sl. Druga bitna funkcionalnost dretve je mogućnost upravljanja satelitom sa strane korisnika. Mogućnosti upravljanja satelitom su sljedeće:
 
@@ -1167,14 +1270,36 @@
                 
                 Komunikacijska dretva u normalnom stanju čeka poruke za slanje i tako ne "krade" procesorsko vrijeme ostalim dretvama. Jednom kada je dretva primila poruku za slanje, dretva preuzima procesorsko vrijeme i šalje preko UART sučelja dane joj podatke. Jednom kad su svi podaci poslani, komunikacijska dretva ponovno ulazi u stanje čekanja.
                 
-                Na isti način se odvija komunikacija u suprotnom smijeru od korisnika prema satelitu. Jednom kad Bluetooth sučelje na satelitu primi podatak iz vana, komunikacijska dretva se budi iz stanja pripravnosti i pohranjuje sve podatke. Jednom kada je prikupila sve podatke, komunikacijska dretva će pročitati primljenu komandu i na temelju toga izvršiti funkcije (vidi komande).
+                Na isti način se odvija komunikacija u suprotnom smjeru od korisnika prema satelitu. Jednom kad Bluetooth sučelje na satelitu primi podatak od korisnika, komunikacijska dretva se budi iz stanja pripravnosti i pohranjuje sve podatke. Jednom kada je prikupila sve podatke, komunikacijska dretva će pročitati primljenu komandu i na temelju toga izvršiti funkcije (vidi komande).
 
                 Pseudokod dretve nalazi se u nastavku:
 
-                \begin{verbatim}
-                    TODO
-                    dodaj pseudokod komunikacijske dretve.
-                \end{verbatim}
+                \begin{lstlisting}[language=C]
+inicijaliziraj_bluetooth();
+
+while (True) {
+    if (provjeri_ima_li_poruka_za_slanje()) {
+        poruka = potraži_poruke_od_drugih_dretvi();
+        pošalji_poruku_preko_bluetootha(poruka);
+    }
+
+    if (provjeri_ima_li_poruka_od_korisnika()) {
+        poruka = potraži_primljenu_poruku();
+
+        komanda, arg = potraži_komandu_i_argument_iz_poruke(poruka);
+
+        for (podržana_komanda : podržane_komande) {
+            if (podržana_komanda == komanda) {
+                funkcija = potraži_funkciju(komanda);
+                funkcija(arg);
+            }
+        }
+    }
+
+    raspusti_dretvu();
+}           \end{lstlisting}
+
+            Funkcije koje provjeravaju ima li poruka za slanje ili poruke koje smo primili od korisnika nisu blokirajuće. Na kraju beskonačne petlje nalazi se funkcija koja raspušta izvršavanje dretve i daje procesorsko vrijeme drugim dretvama. Izvršavanje komunikacijske dretve odvija se onda kada sve dretve budu u stanju čekanja.
 
                 % todo: dodaj sliku svih dretvi i mogucnost medjusobne komunikacije
             }
