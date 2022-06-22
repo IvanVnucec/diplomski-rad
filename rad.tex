@@ -892,28 +892,87 @@
             }
         }
 
-        \subsection{Upravljanje orijentacijom}{
+        \subsection{Upravljanje orijentacijom/kutnom brzinom}{
+            \subsubsection{Pojednostavljeni model satelita}{
+                Zbog lakšeg razvijanja regulalacijskih petlji odlučili smo se za upravljanje orijentacijom, odnosno kutnom brzinom samo oko jedne osi. 
+
+                Ako vrijedi da su kutne brzine $TODO$ i $TODO$, iz jednadžbe \ref{eq:} vidimo kako vrijedi:
+
+                \begin{equation}
+                \end{equation}
+
+                Ta jednadžba kutne brzine satelita podrazumijeva kako upravljački moment zamašnjaka $TODO$ može biti beskonačne vrijednosti što nije slučaj zbog toga što zamašnjak može generirati konačnu kutnu količinu gibanja. Zbog toga uvodimo drugi pojednostavljeni model satelita koji se zasniva na modelu prvog reda:
+
+                \begin{equation}
+                    TODO,
+                \end{equation}
+
+                gdje parametar $TODO$ označava maksimalnu kutnu brzinu s obzirom na upravljački signal PWM-a, a parametar $TODO$ možemo usporediti sa tromosti sustava.
+                
+                Drugi pojednostavljeni model sustava opisuje nam orijentaciju satelita oko jedne osi, odnosno kut i definiramo je kao:
+
+                \begin{equation}
+                    TODO.
+                \end{equation}
+
+                TODO: dodat graf eksponencijalne funkcije
+            }
+
             \subsubsection{Korišteni aktuatori}{
-                Kao što smo vidjeli u poglavlju
-                %- navesti aktuatore
-                %- zamasnjake, magnetorqere
-                %- navesti problem zasicenja zamasnjaka
+                U našem radu za kontrolu orijentacije upotrijebili smo zamašnjak. Zamašnjak je pogonjen elektromotorom. Elektromotor se upravlja pomoću upravljivog H-mosta koji omogučava promijenu smijera. Brzinom elektromotora upravlja se pomoću pulsno širinske modulacije \engl{Pulse Width Modulation - PWM}. Rotirajuća masa izrađena je na 3D printeru.
+
+                Razlog zašto smo odabrali zamašnjak za upravljanje orijentacijom je u tome što je to najlakši aktuator za izvest. Magnetorker bi zahtijevao izradu posebnog kaveza koji zamijenjuje Zemljino magnetsko polje što dodatno komplicira testni sustav.
+
+                PWM modulacija generira se u sklopovlju mikroupravljača.
             }
 
             \subsubsection{Korišteni algoritmi}{
-                %- ukratko o upravljanju orijentacijom
-                %- ukratko o upravljanju kutnom brzinom
-                %- regulacija
-                %    - navesti PID regulator kao regulator
-                %    - opisati sto je PID regulator
-                %    - navesti quaternion regulator kao regulator
-                %        - jednadzbe
-                %        - dodaj referencu na paper
+                Upravljanje orijentacijom satelita prvo započinje određivanjem orijentacije. Jednom kada je orijentacija određena, upravljački PWM signal upravlja elektromotorom.
+
+                Upravljački signal $u(t)$ ovisi o razlici trenutne i željene orijentacije $e(t)$. Razliku trenutne i željene orijentacije dovodimo na ulaz PID regulatora koji zatim na izlazu daje upravljački signal $u(t)$. Upravljački signal PID regulatora je u intervalu $u(t) \in \left[ 0, 100 \right]$ što nam direktno daje tzv. \emph{Duty cycle} (DT) PWM-a. DT računamo kao \cite{dt_pwm}:
+
+                \begin{equation}
+                    DT = \frac{T_{on}}{T_{on} + T_{off}} \times 100 \left[ \% \right],
+                \end{equation}
+
+                gdje je parametar $T_{on}$ jednak vremenu visokog stanja PWM signala, a parametar $T_{off}$ jednak vremenu niskog stanja PWM signala. Zbroj vremena visokog i niskog stanja PWM daje nam period PWM signala $T_{\text{PWM}} = T_{on} + T_{off}$. Ako vrijedi da je $T_{on}=T_{\text{PWM}}$ onda znači da je srednja vrijednost PWM signala jednaka naponu napajanja PWM-a. Vrijedi i obrnuto, ako vrijedi da je $T_{off}=T_{\text{PWM}}$ onda srednja vrijednost PWM signala iznosi 0.
+
+                U našem sustavu implementirane su dvije regulacijske petlje: prva koja upravlja kutnom brzinom satelita i druga koja upravlja orijentacijom. Radi jednostavnosti obje regulacijske petlje reguliraju orijentaciju/kutnu brzinu samo oko jedne osi.
+
+                PID regulator kojeg koristimo oblika je:
+
+                \begin{equation}
+                    u(t) = K_p e(t) + K_i \int_{}^{}{e(t)dt} + K_d \frac{de(t)}{dt},
+                \end{equation}
+
+                gdje su $K_p$, $K_i$ i $K_d$ koeficijenti PID regulatora.
+
+                Za implementaciju PID regulatora u računalu pogodan je diskretizirani oblik. Diskretizirani oblik PID regulatora \cite{diskr_pid} definiramo kao:
+
+                \begin{equation}
+                    u(k) = K_P e(k) + K_I \sum_{}^{}{e(k)} + K_D (e(k) - e(k-1)),
+                \end{equation}
+
+                gdje su koeficijenti diskretiziranog regulatora jednaki:
+
+                \begin{equation}
+                    \begin{array}{rcl}
+                        K_P & = & K_p,\\
+                        K_I & = & \frac{K_p T}{T_i}, \\
+                        K_D & = & \frac{K_p T_d}{T},
+                    \end{array}
+                \end{equation}
+
+                i gdje je parametar $T$ jednak vremenskom periodu pozivanja regulacijske petlje.
+
+                Odabir PID koeficijenata za obje regulacijske petlje opisan je u poglavlju \ref{}.
             }
         }
     }
 
     \section{Razvijeni sustav}{
+        U ovom poglavlju biti će opisana razvijena tiskana pločica i sklopovlje. Također, navest ćemo izabrane orijentacijske senzore i aktuatore.
+
         \subsection{Tiskana pločica i sklopovlje}{
             %- ukratko o razvijenoj plocici
             %- staviti kakvu shemu
@@ -962,38 +1021,164 @@
             %    - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
             %    - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj
         }
-
-        \subsection{Komunikacija}{
-            %- zasto koristimo bluetooth komunikaciju
-            %- navest ime modula
-            %- kako radi modul
-            %- kako komuniciramo s njime
-        }
     }
 }
 
 
 \chapter{Programska podrška ADCS sustava}{
+    U ovom poglavlju biti će opisana programska podrška ADCS sustava. Opisati ćemo ugradbeno računalo koje koristimo. Objasniti ćemo organizaciju projekta (programske podrške). Navest ćemo korištene biblioteke, operacijski sustav, opisati funkcionalnost programa i u konačnici ukratko opisati postupak razvijanja programske podrške.
+
+    Napominjemo kako sljedeći opis sustava vrijedi iskljućivo za stanje sustava kojeg smo zatekli u trenutku pisanja ovog rada. Cijela programska podrška nalazi se na GitHub repozitoriju autora ovdje \cite{github_repo}. Programska podrška verzionirana je pomoću Git \cite{git} programa za verzioniranje. Objašnjenja i opisi programske podrške vrijede do \emph{TODO} \emph{commit}-a \cite{git_commit}. Postoji velika vjerojatnost kako će se sustav u budučnosti mijenjati i da opis u nastavku nužno neće odgovarati stanju u budučnosti. 
+
     \section{Ugradbeno računalo}{
-        %- koje ugradbeno racunalo koristimo
-        %- zasto smo bas to odabrali
+        Ugradbeno računalo koje koristimo je već gotov sustav na \emph{TODO} razvojnoj pločici \cite{}. Takav gotov sustav omogućuje nam jednostavno i brzo razvijanje programske podrške. 
+
+        Pločica se sastoji od \emph{TODO} mikroupravljača niske potrošnje koji sadrži tzv. jedinicu za računanje aritmetike pomičnog zareza \engl{Floating point unit - FPU}. FPU nam omogućava hardversko ubrzanje aritmetike pomičnog zareza. Osim mikroupravljača, pločica sadrži ST-LINK sučelje za jednostavno \emph{debugiranje} i pohranu programa. Na samoj pločici nalazi se i korisna upravljiva LED dioda.
+
+        Kako bi imali TODO, morali smo napraviti nekoliko preinaka na pločici. TODO objasni što smo promijenili. 
     }
 
     \section{Organizacija projekta}{
-        %- objasniti organizaciju koda
+        Programski kod podijeljen je u nekoliko direktorija i poddirektorija. Pogled iz glavnog direktorija prikazan je u tablici \ref{tbl:pogled_iz_glavnog_direktorija}.
+
+        Nepotrebno je ulaziti u detalje svakog direktorija već ćemo u nastavku opisati samo što se nalazi unutar \texttt{src} direktorija. Pogled iz \texttt{src} direktorija prikazan je u tablici \ref{tbl:pogled_iz_src_direktorija}.
+
+        \begin{table}[htb]
+        \caption{Pogled iz glavnog direktorija projekta.}
+        \label{tbl:pogled_iz_glavnog_direktorija}
+        \centering
+        \begin{tabular}{lll} 
+        \toprule
+        Naziv & Tip & Opis \\ 
+        \midrule
+        cmake           & Direktorij & Pomoćne CMake datoteke \\
+        docs            & Direktorij & Popratnu dokumentaciju \\
+        .git            & Direktorij & Git verzioniranje \\
+        .github         & Direktorij & GitHub CI server \\
+        scripts         & Direktorij & Pomoćne Shell skripte \\
+        src             & Direktorij & Programska podrška \\
+        tests           & Direktorij & Testovi programske podrške \\
+        .vscode         & Direktorij & Pomoćne datoteke za VSCode editor \\
+        .clang-format   & Datoteka   & Konfiguracija za clang-format \\
+        CMakeLists.txt  & Datoteka   & CMake konfiguracija projekta \\
+        .gitignore      & Datoteka   & Imena direktorija/datoteka koje Git ne verzionira \\
+        .gitmodules     & Datoteka   & Imena i poveznice (linkovi) na eksterne Git repozitorije \\
+        LICENSE         & Datoteka   & Licenca projekta \\
+        Makefile        & Datoteka   & GNU Make komande za olakšano prevođenje (kompajliranje) \\
+        README.md       & Datoteka   & Opis projekta \\
+        \bottomrule
+        \end{tabular}
+        \end{table}
+
+        \begin{table}[htb]
+        \caption{Pogled iz \texttt{src} direktorija.}
+        \label{tbl:pogled_iz_src_direktorija}
+        \centering
+        \begin{tabular}{lll} 
+        \toprule
+        Naziv & Tip & Opis \\ 
+        \midrule
+        bsp         & Direktorij & engl. \emph{Board support package} \\
+        core        & Direktorij & Postavljanje osnovnih periferija mikrokontrolera (clock, memorija itd.) \\
+        drivers     & Direktorij & Drajveri za periferiju (I2C, UART, PWM, tajmeri itd.) \\
+        libs        & Direktorij & Eksterne biblioteke (Bluetooth, MPU9250, komplementarni filtar itd.) \\
+        linker      & Direktorij & Linker datoteke \\
+        mcu         & Direktorij & Drajveri za periferiju (ali za naš mikroupravljač) \\
+        middlewares & Direktorij & Programski kod dretvi/aplikacije \\
+        rtos        & Direktorij & Datoteke RTOS-a \\
+        utils       & Direktorij & tzv. \emph{Error handling}, matematičke funkcije \\
+        main.c      & Direktorij & Main (glavna) funkcija \\
+        main.h      & Direktorij & Main (glavna) funkcija \\
+        \bottomrule
+        \end{tabular}
+        \end{table}
     }
     
     \section{Korištene biblioteke}{
-        %- koje biblioteke koristimo i zasto
+        U sklopu programske podrše koristimo i nekoliko biblioteka:
+
+        \begin{itemize}
+        \item comp\_filt,
+        \item mpu9250,
+        \item optimal\_request,
+        \item printf,
+        \item zs040.
+        \end{itemize}
+
+        Neke biblioteke su samostalni GitHub repozitoriji i u projekt su dodani kao tzv. Git submoduli. Primjer su \texttt{mpu9250} biblioteka koja upravlja MPU9250 IMU senzorom, \texttt{optimal\_request} biblioteka koja sadrži kod za Optimal-REQUEST algoritam, \texttt{printf} biblioteka koja sadrži jednostavniju verziju klasične \texttt{printf} funkcije i \texttt{zs040} biblioteka koja upravlja Bluetooth modulom.
+
+        \texttt{comp\_filt} biblioteka sadrži programski kod za Komplementarni filtar i jedina je biblioteka koja nema svoj zasebni GitHub repozitorij ali ta se činjenica može promijeniti u budučnosti. 
+
+        Pogodnost eksternih GitHub repozitorija je u tome što to mogu biti samostalni repozitoriji koje netko drugi može uzeti i ukomponirati u svoj projekt neovisno o tome na kojemu se sustavu pokreće. Netko tko želi koristiti npr. Optimal-REQUEST biblioteku može jednostavno dodati GitHub repozitorij kao submodul i pokrenuti to na svom sustavu. 
     }
 
-    \section{Operacijski sustav}{
-        %- opisati da koristimo FreeRTOS
-        %- opisati koje sve dretve imamo
-        %    - za svaku dretvu napisati dijagram toka
-        %    - opisati funkciju dretve
-        %    - opisati vrijeme izvođenja dretvi
-        %    - opisati na koji nacin dretve međusobno komuniciraju
+    \section{Operacijski sustav i funkcionalnost}{
+        Zahtijev sustava je da u realnom vremenu obavlja nekoliko stvari istovremeno:
+
+        \begin{enumerate}
+        \item Estimacija orijentacije,
+        \item Kontrola orijentacije,
+        \item Komunikacija.
+        \end{enumerate}
+
+        \subsection{Operacijski sustav i dretve}{
+            Radi jednostavnijeg razvijanja programske podrške odlučili smo se za operacijski sustav u stvarnom vremenu \engl{Real Time Operating System - RTOS}. Zbog popularnosti i široke zajednice, izabrali smo FreeRTOS operacijski sustav. FreeRTOS je besplatni operacijski sustav otvorenog koda koji ima podršku za mikroupravljač kojeg koristimo \cite{freertos}. 
+    
+            Sustav smo podijelili u nekoliko dretvi koje se izvršavaju paralelno:
+            \begin{enumerate}
+            \item Dretva budnosti \engl{Alive thread},
+            \item Dretva za estimaciju i kontrolu orijentacije,
+            \item Dretva za komunikaciju.
+            \end{enumerate}
+
+            \subsubsection{Dretva budnosti}{
+                Dretva budnosti je jednostavna dretva u kojoj se periodički pali i gasi LED statusna dioda koja se nalazi na samoj Nucleo pločici. Dretva budnosti nam omogućuje vizualnu provjeru rada sustava. Ako iz nekog razloga izvršavanje sustava prestane, jasno se na oko može vidjeti kako statusna LED-ica ne treperi. To je znak kako je sustav otišao u neodređeno stanje. Pseudokod dretve nalazi se u nastavku:
+
+                \begin{verbatim}
+                    TODO
+                    dodaj pseudokod dretve budnosti.
+                \end{verbatim}
+            }
+    
+            \subsubsection{Dretva za estimaciju i kontrolu orijentacije}{
+                Dretva za estimaciju i kontrolu orijentacije (ADCS dretva) sadrži programski kod koji periodički estimira trenutnu orijentaciju i na temelju toga upravlja regulacijskim petljama. Pseudokod dretve nalazi se u nastavku:
+        
+                \begin{verbatim}
+                    TODO
+                    dodaj pseudokod ADCS dretve.
+                \end{verbatim}
+        
+                Obratimo pažnju kako regulacijske petlje ovise o periodu izvođenja ADCS dretve.
+            }
+
+            \subsubsection{Dretva za komunikaciju}{
+                Dretva za komunikaciju sadrži programski kod koji je zaslužan za komunikaciju sa satelitom. Komunikacija sa satelitom odvija se u oba smijera: od korisnika prema sustavu i od sustava prema korisniku. Kao što je rečeno u poglavlju \ref{}, komunikacija se vrši preko Bluetooth-a i to nam omogućuje da jednostavno možemo pristupiti satelitu pomoću računala koji sadrži Bluetooth sučelje ili preko pametnog telefona. Za komunikaciju preko računala koristimo program TODO koji preko COM porta računala, jednostavno komunicira sa satelitom. Za komandno sučelje na pametnom telefonu preporučujemo aplikaciju TODO. 
+
+                Takva dretva nam omogućava slanje podataka o trenutnom stanju satelita npr. trenutne orijentacije, kutne brzine, izlaza upravljačkih regulatora i sl. Druga bitna funkcionalnost dretve je mogućnost upravljanja satelitom sa strane korisnika. Mogućnosti upravljanja satelitom su sljedeće:
+
+                \begin{itemize}
+                \item TODO navedi sve komande i,
+                \item opiši što svaka radi.
+                \end{itemize}
+
+                Komunikacijska dretva će ignorirati bilo koju ostalu vrstu komandi.
+
+                Svi parametri (npr. kutna brzina, Eulerovi kutovi i sl.) koje želimo slati preko Bluetooth sučelja prolaze kroz komunikacijsku dretvu. Kako ADCS dretva jedina ima informaciju o npr. trenutnoj orijentaciji, morali smo implementirati način komunikacije između dretvi. Način komunikacije između dretvi odvija se pomoću TODO. Prikaz svih dretvi sa međusobnim komunikacijskim kanalima nalazi se na slici TODO. 
+                
+                Komunikacijska dretva u normalnom stanju čeka poruke za slanje i tako ne "krade" procesorsko vrijeme ostalim dretvama. Jednom kada je dretva primila poruku za slanje, dretva preuzima procesorsko vrijeme i šalje preko UART sučelja dane joj podatke. Jednom kad su svi podaci poslani, komunikacijska dretva ponovno ulazi u stanje čekanja.
+                
+                Na isti način se odvija komunikacija u suprotnom smijeru od korisnika prema satelitu. Jednom kad Bluetooth sučelje na satelitu primi podatak iz vana, komunikacijska dretva se budi iz stanja pripravnosti i pohranjuje sve podatke. Jednom kada je prikupila sve podatke, komunikacijska dretva će pročitati primljenu komandu i na temelju toga izvršiti funkcije (vidi komande).
+
+                Pseudokod dretve nalazi se u nastavku:
+
+                \begin{verbatim}
+                    TODO
+                    dodaj pseudokod komunikacijske dretve.
+                \end{verbatim}
+
+                % todo: dodaj sliku svih dretvi i mogucnost medjusobne komunikacije
+            }
+        }
     }
 
     \section{Matematički zapis orijentacije}{
