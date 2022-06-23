@@ -1168,7 +1168,7 @@
             \end{enumerate}
 
             \subsubsection{Dretva budnosti}{
-                Dretva budnosti je jednostavna dretva u kojoj se periodički pali i gasi LED statusna dioda koja se nalazi na samoj Nucleo pločici. Dretva budnosti nam omogućuje vizualnu provjeru rada sustava. Ako iz nekog razloga izvršavanje sustava prestane, jasno se na oko može vidjeti kako statusna LED-ica ne treperi. To je znak kako je sustav otišao u neodređeno stanje. Pseudokod dretve nalazi se u nastavku:
+                Dretva budnosti je jednostavna dretva u kojoj se periodički pali i gasi LED statusna dioda koja se nalazi na samoj Nucleo pločici. Dretva budnosti nam omogućuje vizualnu provjeru rada sustava. Ako iz nekog razloga izvršavanje sustava prestane, jasno se na oko može vidjeti kako statusna LED-ica ne treperi. To je znak kako je sustav otišao u neodređeno stanje. Pseudokod dretve budnosti nalazi se u nastavku:
 
                 \begin{lstlisting}[language=C]
 while(True) {
@@ -1178,7 +1178,7 @@ while(True) {
             }
     
             \subsubsection{Dretva za estimaciju i kontrolu orijentacije}{
-                Dretva za estimaciju i kontrolu orijentacije (ADCS dretva) sadrži programski kod koji periodički estimira trenutnu orijentaciju i na temelju toga upravlja regulacijskim petljama. Pseudokod dretve nalazi se u nastavku:
+                Dretva za estimaciju i kontrolu orijentacije (ADCS dretva) sadrži programski kod koji periodički estimira trenutnu orijentaciju i na temelju toga upravlja regulacijskim petljama. Pseudokod ADCS dretve nalazi se u nastavku:
         
                 \begin{lstlisting}[language=C]
 pričekaj_3_sekunde_za_stabilizaciju_satelita();
@@ -1257,14 +1257,35 @@ while(True) {
             \subsubsection{Dretva za komunikaciju}{
                 Dretva za komunikaciju sadrži programski kod koji je zaslužan za komunikaciju sa satelitom. Komunikacija sa satelitom odvija se u oba smjera: od korisnika prema sustavu i od sustava prema korisniku. Kao što je rečeno u poglavlju \ref{}, komunikacija se vrši preko Bluetooth-a i to nam omogućuje da jednostavno možemo pristupiti satelitu pomoću računala koji sadrži Bluetooth sučelje ili preko pametnog telefona. Za komunikaciju preko računala koristimo program TODO koji preko COM porta računala, jednostavno komunicira sa satelitom. Za komandno sučelje na pametnom telefonu preporučujemo aplikaciju TODO. 
 
-                Takva dretva nam omogućava slanje podataka o trenutnom stanju satelita npr. trenutne orijentacije, kutne brzine, izlaza upravljačkih regulatora i sl. Druga bitna funkcionalnost dretve je mogućnost upravljanja satelitom sa strane korisnika. Mogućnosti upravljanja satelitom su sljedeće:
+                Takva dretva nam omogućava slanje podataka o trenutnom stanju satelita npr. trenutne orijentacije, kutne brzine, izlaza upravljačkih regulatora i sl. Druga bitna funkcionalnost dretve je mogućnost upravljanja satelitom sa strane korisnika. Popis svih podržanih komandi upravljanja satelitom prikazani su u tablici \ref{tbl:lista_komandi}.
 
-                \begin{itemize}
-                \item TODO navedi sve komande i,
-                \item opiši što svaka radi.
-                \end{itemize}
+                \begin{table}[htb]
+                \caption{Lista komandi, njihov opis i primjer korištenja. \textbf{Obratite pažnju kako svaka komanda u primjeru mora završavati sa '\textbackslash n' ASCII znakom.}}
+                \label{tbl:lista_komandi}
+                \centering
+                \begin{tabular}{lll} 
+                \toprule
+                Komanda & Opis & Primjer korištenja \\ 
+                \midrule
+                echo                     & Vraća nazad korisniku sve primljeno          & \texttt{echo(ADCS)}                           \\
+                help                     & Ispisuje sve podržane komande                & \texttt{help()}                               \\
+                reset                    & Ponovno pokretanje sustava                   & \texttt{reset()}                              \\
+                set\_sending             & Omogućuje/onemogućuje slanje poruka          & \texttt{set\_sending(1)}, (ili \texttt{0})    \\
+                set\_reg\_angvel         & Pokreće regulaciju kutne brzine              & \texttt{set\_reg\_angvel()}                   \\
+                set\_reg\_attitude       & Pokreće regulaciju orijentacije              & \texttt{set\_reg\_attitude()}                 \\
+                set\_reg\_no\_reg        & Onemogućuje regulaciju                       & \texttt{set\_reg\_no\_reg()}                  \\
+                set\_pid\_p              & Postavlja P član aktivnog PID regulatora     & \texttt{set\_pid\_p(3.14)}                    \\
+                set\_pid\_i              & Postavlja I član aktivnog PID regulatora     & \texttt{set\_pid\_i(15)}                      \\
+                set\_pid\_d              & Postavlja D član aktivnog PID regulatora     & \texttt{set\_pid\_d(92.2)}                    \\
+                set\_pid\_v              & Postavlja V član aktivnog PID regulatora     & \texttt{set\_pid\_v(6.67)}                   \\
+                set\_ref\_angle\_z       & Postavlja ref. kut z-osi (stupnjevi)         & \texttt{set\_ref\_angle\_z(30)}               \\
+                set\_ref\_angvel\_z      & Postavlja ref. kutnu brzinu z-osi (rad/s)    & \texttt{set\_ref\_angvel\_z(-1.2)}            \\
+                set\_rw\_duty\_cycle\_z  & Postavlja Duty cycle zamašnjaka              & \texttt{set\_rw\_duty\_cycle\_z(99)}          \\
+                \bottomrule
+                \end{tabular}
+                \end{table}
 
-                Komunikacijska dretva će ignorirati bilo koju ostalu vrstu komandi.
+                Obratimo pažnju kako svaka komanda da bi je satelit primio, mora završavati sa ASCII znakom \texttt{\textbackslash n} odnosno novim redom \engl{new line, line feed - LF}. Također, komunikacijska dretva će ignorirati bilo koju drugu komandu koja nije opisana u tablici \ref{tbl:lista_komandi}.
 
                 Svi parametri (npr. kutna brzina, Eulerovi kutovi i sl.) koje želimo slati preko Bluetooth sučelja prolaze kroz komunikacijsku dretvu. Kako ADCS dretva jedina ima informaciju o npr. trenutnoj orijentaciji, morali smo implementirati način komunikacije između dretvi. Način komunikacije između dretvi odvija se pomoću TODO. Prikaz svih dretvi sa međusobnim komunikacijskim kanalima nalazi se na slici TODO. 
                 
@@ -1272,7 +1293,7 @@ while(True) {
                 
                 Na isti način se odvija komunikacija u suprotnom smjeru od korisnika prema satelitu. Jednom kad Bluetooth sučelje na satelitu primi podatak od korisnika, komunikacijska dretva se budi iz stanja pripravnosti i pohranjuje sve podatke. Jednom kada je prikupila sve podatke, komunikacijska dretva će pročitati primljenu komandu i na temelju toga izvršiti funkcije (vidi komande).
 
-                Pseudokod dretve nalazi se u nastavku:
+                Pseudokod komunikacijske dretve nalazi se u nastavku:
 
                 \begin{lstlisting}[language=C]
 inicijaliziraj_bluetooth();
@@ -1299,7 +1320,7 @@ while (True) {
     raspusti_dretvu();
 }           \end{lstlisting}
 
-            Funkcije koje provjeravaju ima li poruka za slanje ili poruke koje smo primili od korisnika nisu blokirajuće. Na kraju beskonačne petlje nalazi se funkcija koja raspušta izvršavanje dretve i daje procesorsko vrijeme drugim dretvama. Izvršavanje komunikacijske dretve odvija se onda kada sve dretve budu u stanju čekanja.
+                Funkcije koje provjeravaju ima li poruka za slanje ili poruke koje smo primili od korisnika nisu blokirajuće. Na kraju beskonačne petlje nalazi se funkcija koja raspušta izvršavanje dretve i daje procesorsko vrijeme drugim dretvama. Izvršavanje komunikacijske dretve odvija se onda kada sve dretve budu u stanju čekanja. Primanje komandi odvija se pomoću UART prekidne rutine gdje na svaki primljeni znak sa Bluetooth modula, mikroupravljač odlazi u prekidnu rutinu i puni spremnik znakova koji sadrži sve primljene znakove. Jednom kada komunikacijska dretva dobije procesorsko vrijeme ona će provjeriti ima li primljenih znakova u spremniku znakova i na temelju toga će ići u daljnju obradu tih znakova. 
 
                 % todo: dodaj sliku svih dretvi i mogucnost medjusobne komunikacije
             }
