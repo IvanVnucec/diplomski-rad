@@ -65,7 +65,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 \chapter{Uvod}{
     \section{Mali sateliti}{
         %- sto su mali sateliti
-        Mali sateliti su skupina satelita koji su, u usporedbi sa konvencionalnim satelitima, uvelike ograničeni prema masi, cijeni, kao i prema vremenu potrebnom da ih se razvije. Sve je to izravan rezultat revolucije u elektronici i računarstvu.\cite{hrvatskiVojnik}.
+        Mali sateliti su skupina satelita koji su, u usporedbi s konvencionalnim satelitima, uvelike ograničeni prema masi, cijeni, kao i prema vremenu potrebnom da ih se razvije. Sve je to izravan rezultat revolucije u elektronici i računarstvu.\cite{hrvatskiVojnik}.
 
         %- tko ih koristi
         Primjene malih satelita nalazimo u svim granama svemirske industrije: u telekomunikaciji, navigaciji, opservaciji Zemlje, znanstvenim istraživanjima i dr.
@@ -74,7 +74,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
         Njihova zastupljenost na tržištu raste iz godine u godinu jer pružaju jeftin i brz razvoj uz relativno male tehničke zahtjeve \cite{rastMalihSatelita}. Primjenom većeg broja malih satelita povezanih u konstelaciju, moguće je primjerice pokriti veću površinu zemlje i tako stvoriti uvijek dostupni internet ili navigacijski sustav.
         
         \subsection{Podjela}{
-            Iako postoje više vrsta podjela satelita u ovisnosti od izvora do izvora, navest ćemo podjelu prema FAA \engl{Federal Aviation Administration} koja uključuje satelite sa najvećom, pa sve do satelita sa najmanjom masom \cite{podjelaPremaMasi}. Podjelu je moguće vidjeti u tablici \ref{tbl:podjelaSatelita}.
+            Iako postoje više vrsta podjela satelita u ovisnosti od izvora do izvora, navest ćemo podjelu prema FAA \engl{Federal Aviation Administration} koja uključuje satelite s najvećom, pa sve do satelita s najmanjom masom \cite{podjelaPremaMasi}. Podjelu je moguće vidjeti u tablici \ref{tbl:podjelaSatelita}.
 
             \begin{table}[htb]
             \caption{Podjela malih satelita prema masi}
@@ -153,7 +153,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
     Ako govorimo o orijentaciji, važno je objasniti pojam referentnog sustava \engl{reference plane}. Referentni sustav je skup 3 međusobno ortogonalnih vektora prema kojima određujemo sve ostale vektore, bilo njihovu orijentaciju, bilo pomak. Jedan možda najpoznatiji primjer takvog referentnog sustava je Kartezijev referentni sustav gdje smo kao referentne vektore izabrali 3 jedinična vektora $\boldsymbol{i}$, $\boldsymbol{j}$ i $\boldsymbol{k}$ prema kojima onda određujemo sve ostale vektore koje definiramo u Kartezijevom prostoru. 
 
-    Moguće je imati više referentnih sustava. Prelazak iz jednog u drugi referentni sustav moguće je ostvariti transformacijama sa rotacijskim matricama o kojima ćemo govoriti kasnije. Referentne sustave najčešće označavamo kao npr. $\mathcal{F}_a$ ili $\mathcal{F}_b$. Rotacijska matrica koja bi određivala orijentaciju $\mathcal{F}_a$ referentnog sustava naspram $\mathcal{F}_b$ referentnog sustava označavamo kao $\boldsymbol{C}_{ab}$.
+    Moguće je imati više referentnih sustava. Prelazak iz jednog u drugi referentni sustav moguće je ostvariti transformacijama s rotacijskim matricama o kojima ćemo govoriti kasnije. Referentne sustave najčešće označavamo kao npr. $\mathcal{F}_a$ ili $\mathcal{F}_b$. Rotacijska matrica koja bi određivala orijentaciju $\mathcal{F}_a$ referentnog sustava naspram $\mathcal{F}_b$ referentnog sustava označavamo kao $\boldsymbol{C}_{ab}$.
 
     Da bi definirali orijentaciju satelita, prvo moramo definirati referentne sustave. Prvi referentni sustav kojeg definiramo je inercijski referentni sustav $\mathcal{F}_G$. U klasičnoj fizici, inercijski sustav označava referentni sustav koji ne posjeduje akceleraciju \cite{inertialFrame}. Drugi referentni sustav kojeg definiramo je tzv. \emph{body} referentni sustav $\mathcal{F}_b$ koji je nepomičan s obzirom na gibanje čvrstog tijela (satelita).
 
@@ -189,12 +189,12 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
         Eulerovi kutovi predstavljaju 3 kuta između nekog vektora i ortogonalnih osi koje razapinju Kartezijev koordinatni sustav. Ako želimo predstaviti rotaciju između jednog proizvoljnog vektora i nekog drugog vektora, onda to možemo napraviti na nekoliko načina. Jedan primjer takve rotacije navest ćemo u sljedećem primjeru:
 
         \begin{enumerate}
-            \item Rotacija za kut $\psi$ oko orginalne z-osi \engl{yaw}.
+            \item Rotacija za kut $\psi$ oko originalne z-osi \engl{yaw}.
             \item Rotacija za kut $\theta$ oko tranzicijske y-osi \engl{pitch}.
             \item Rotacija za kut $\phi$ oko transformirane x-osi \engl{roll}.
         \end{enumerate}
 
-        Uzmemo li za primjer 3 uzastopne rotacije: prve oko orginalne z-osi, zatim druge oko tranzicijske y-osi i na kraju treće oko transformirane x-osi dobivamo rotaciju prikazanu na slici ispod: 
+        Uzmemo li za primjer 3 uzastopne rotacije: prve oko originalne z-osi, zatim druge oko tranzicijske y-osi i na kraju treće oko transformirane x-osi dobivamo rotaciju prikazanu na slici ispod: 
 
         \begin{figure}[htb]
         \centering
@@ -205,7 +205,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
     }
 
     \section{Kvaternioni}{
-        Kvaternion je četvero-dimenzionalni vektor s kojim je moguće opisati orijentaciju tijela. Kvaternion u usporedbi sa Eulerovim kutovima posjeduje dvije prednosti (o kojima nešto više u nastavku): prva je da ne posjeduje singularnost, i druga da matematičke relacije modeliranja orijentacije više nisu trigonometrijske već algebarske prirode, što ih dodatno čini pogodnima za računanje.
+        Kvaternion je četvero-dimenzionalni vektor s kojim je moguće opisati orijentaciju tijela. Kvaternion u usporedbi s Eulerovim kutovima posjeduje dvije prednosti (o kojima nešto više u nastavku): prva je da ne posjeduje singularnost, i druga da matematičke relacije modeliranja orijentacije više nisu trigonometrijske već algebarske prirode, što ih dodatno čini pogodnima za računanje.
 
         Kvaternion opisuje dvije stvari potrebne za opis rotacije: glavnu os rotacije \engl{principal axis} $\overrightarrow{\boldsymbol{a}}$ i kuta rotacije $\phi$ kao što je vidljivo na slici \ref{fig:principal_axis_rotation}. Zbog toga, razlikujemo vektorski i skalarni dio koje definiramo kao:
 
@@ -235,7 +235,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
     }
 
     \section{Rotacijska matrica}{
-        Rotacijska matrica opisuje transformaciju vektora iz orginalnog u rotirani, za neku poznatu rotaciju. U nastavku ćemo navesti rotacijske matrice koje određujemo pomoću Eulerovih kutova i pomoću kvaterniona i dati ćemo primjer rotacije vektora.
+        Rotacijska matrica opisuje transformaciju vektora iz originalnog u rotirani, za neku poznatu rotaciju. U nastavku ćemo navesti rotacijske matrice koje određujemo pomoću Eulerovih kutova i pomoću kvaterniona i dati ćemo primjer rotacije vektora.
 
         \subsection{Prikaz pomoću Eulerovih kutova}{
             U nastavku ćemo navesti prikaze rotacijskih matrica pomoću Eulerovih kutova. Prvo ćemo navesti kako izgledaju rotacijske matrice kada imamo rotacije samo oko glavnih osi, a zatim ćemo navesti izraz za rotacijsku matricu za 3-2-1 uzastopnu rotacijsku sekvencu.
@@ -291,7 +291,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
             }
 
             \subsubsection{3-2-1 rotacijska sekvenca}{
-                Rotacija sekvenca koja je jako česta u zrakoplovno-svemirskoj industriji označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko orginalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
+                Rotacija sekvenca koja je jako česta u zrakoplovno-svemirskoj industriji označava se kao 3-2-1 orijentacijska sekvenca \engl{attitude sequence}. Takvo ime je uzeto zato što je prva rotacija oko originalne z-osi (oznaka 3), zatim slijedi rotacija oko tranzicijske y-osi (oznaka 2) te na kraju rotacija oko transformirane x-osi (oznaka 1).
 
                 3-2-1 rotacijsku matricu moguće je prikazati pomoću Eulerovih kutova kao:
 
@@ -398,7 +398,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
             \end{equation}
 
             \subsubsection{Određivanje kvaterniona iz rotacijske matrice}{
-                Pomoću rotacijske matrice definirane u jednadžbi \ref{eq:rotation_matrix} moguće je odrediti sva 4 člana kvaterniona na način da prvo odredimo skalarni član kao:
+                Pomoću rotacijske matrice definirane u jednadžbi \ref{eq:rotation_matrix} moguće je odrediti sva 4 člana kvaterniona tako da prvo odredimo skalarni član kao:
 
                 \begin{equation}
                     \eta = \pm\frac{(\text{trace}[\boldsymbol{C}] + 1)^{\frac{1}{2}}}{2}.
@@ -551,14 +551,14 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
     \section{Usporedba Eulerovih kutova i kvaterniona}{
         Kao što smo već pisali u poglavlju \ref{subsubsection:singularnost_eulerovih_kutova}, dva su problema prikazivanja orijentacije pomoću Eulerovih kutova. Prvi problem je singularitet, gdje za neke kutove koje reprezentiraju istu orijentaciju (vidi poglavlje \ref{subsubsection:singularnost_eulerovih_kutova}) nije moguće jednoznačno odrediti Eulerove kutove iz rotacijske matrice. Drugi problem je što za opisivanje orijentacije koristimo trigonometrijske funkcije koje je teže izračunati na računalima nego primjerice algebarske.
 
-        Prikaz orijentacije kvaternionom rješava nas problema singulariteta zbog dodatnog četvrtog člana. Kvaternionom smo također riješili problem računanja trigonometrijskih funkcija jer jednadžbe sa kvaternionima su algebarskog tipa.
+        Prikaz orijentacije kvaternionom rješava nas problema singulariteta zbog dodatnog četvrtog člana. Kvaternionom smo također riješili problem računanja trigonometrijskih funkcija jer jednadžbe s kvaternionima su algebarskog tipa.
 
         Pozitivna strana prikaza orijentacije pomoću Eulerovih kutova je njihova intuitivnost jer svaki kut označava kut orijentacije oko pojedine osi. Kod kvaterniona informacija o orijentaciji je ponešto sakrivena unutar kvaterniona. Skalarni član ne označava direktno kut zakreta oko osi rotacije već njegov kosinus kuta, a vektorski dio sadrži skaliranu os rotacije sinusom kuta (vidi jednadžbu \ref{eq:kvaternion}).
     }
 }
 
 \chapter{Sustav za određivanje i upravljanje orijentacijom satelita (ADCS)}{
-    U ovom poglavlju navest ćemo definiciju ADCS \engl{Attitude Determination and Control system} sustava. Navest ćemo osnovne dijelove sustava. Navest ćemo najčešće korištene senzore i aktuatore, objasnit njihove karakteristike, navest prednosti i mane. Također ćemo opisati načine i algoritme određivanja i kontrole orijentacije. Naposlijetku ćemo opisati sklopovlje koje smo razvili i navesti korištene senzore i aktuatore. 
+    U ovom poglavlju navest ćemo definiciju ADCS \engl{Attitude Determination and Control system} sustava. Navest ćemo osnovne dijelove sustava. Navest ćemo najčešće korištene senzore i aktuatore, objasniti njihove karakteristike, navest prednosti i mane. Također ćemo opisati načine i algoritme određivanja i kontrole orijentacije. Naposljetku ćemo opisati sklopovlje koje smo razvili i navesti korištene senzore i aktuatore. 
 
     \section{Uvod}{
         ADCS  sustav je sustav koji određuje orijentaciju satelita pomoću podataka iz senzora koji se nalaze na samom satelitu i na temelju tih podataka vrši korekciju orijentacije u željeni položaj. 
@@ -566,19 +566,19 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
         \subsection{Određivanje i upravljanje orijentacijom}{
             Senzori koje koristi ADCS sustav za određivanje orijentacije najčešće ne daju direktno vrijednost orijentacije već se orijentacija estimira pomoću estimacijskih algoritama. Problem senzora općenito je njihova neodređenost koja onda doprinosi da je estimacija orijentacije pogrešna. Zbog toga smo razvili estimacijske algoritme koje uzimaju grešku senzora u obzir te tako smanjuju neodređenost estimirane orijentacije.
 
-            Nakon što smo odredili orijentaciju, i ako ta orijentacija nije jednaka željenoj, slijedi postupak korekcije (kontrole). Postupak korekcije počinje računanjem razlike željene orijentacije i trenutno estimirane. Regulator orijentacije će pomoću te razlike orijentacije izračunati optimalnu korekciju koju je potrebno izvršiti kako bi došli u željenu orijentaciju. Korekciju orijentacije izvršavaju mehanički odnosno električni aktuatori. Aktuatori će stvoriti korekcijski moment koji satelit naposlijetku dovodi u željenu orijentaciju.
+            Nakon što smo odredili orijentaciju, i ako ta orijentacija nije jednaka željenoj, slijedi postupak korekcije (kontrole). Postupak korekcije počinje računanjem razlike željene orijentacije i trenutno estimirane. Regulator orijentacije će pomoću te razlike orijentacije izračunati optimalnu korekciju koju je potrebno izvršiti kako bi došli u željenu orijentaciju. Korekciju orijentacije izvršavaju mehanički odnosno električni aktuatori. Aktuatori će stvoriti korekcijski moment koji satelit naposljetku dovodi u željenu orijentaciju.
             Opisana estimacija i kontrola orijentacije ADCS sustava događa se u stvarnom vremenu kroz cijeli radni vijek satelita i ni u jednom trenu se ne smije dogoditi da satelit posjeduje neželjenu ili nekontroliranu orijentaciju jer to može značiti kraj misije.
         }
 
         \subsection{Važnost ADCS sustava}{
             NASA-ino istraživanje je pokazalo da je ADCS sustav zaslužan za 23\% grešaka na navigacijsko-kontrolnim sustavima \engl{Guidance, Navigation and Control - GN\&C}, i da je većina tih anomalija uzrokovala kraj misije \cite{greskeNaAdcsPostotak}. U nastavku ćemo navest jedan primjer greške na ADCS sustavu.
     
-            Lewis svemirska letjelica \cite{lewis} lansirana je 1997. godine s predviđenim radnim vijekom od 5 godina. Nakon postizanja uspješne orbite satelit je započeo sa normalnim radom i nije ga više bilo potrebno aktivno kontrolirati. U normalnom radu solarni paneli su bili upereni prema Suncu kako bi prikupili maksimalnu količinu energije. Zbog greške prilikom rada, jedan od aktuatora je stvarao konstantni moment oko jedne osi koju senzori nisu mogli prepoznati. Nakon nekoliko dana, satelit se je počeo nekontrolirano rotirat i solarni paneli nisu prikupljali dovoljno energije. Naposlijetku su inženjeri sa Zemlje uočili nekontroliranu orijentaciju ali je već bilo kasno jer se je baterija satelita potpuno ispraznila i komunikacija sa satelitom je bila zauvijek prekinuta \cite{greskeNaAdcsSlucajevi}.
+            Lewis svemirska letjelica \cite{lewis} lansirana je 1997. godine s predviđenim radnim vijekom od 5 godina. Nakon postizanja uspješne orbite satelit je započeo s normalnim radom i nije ga više bilo potrebno aktivno kontrolirati. U normalnom radu solarni paneli su bili upereni prema Suncu kako bi prikupili maksimalnu količinu energije. Zbog greške prilikom rada, jedan od aktuatora je stvarao konstantni moment oko jedne osi koju senzori nisu mogli prepoznati. Nakon nekoliko dana, satelit se je počeo nekontrolirano rotirati i solarni paneli nisu prikupljali dovoljno energije. Naposljetku su inženjeri sa Zemlje uočili nekontroliranu orijentaciju ali je već bilo kasno jer se je baterija satelita potpuno ispraznila i komunikacija sa satelitom je bila zauvijek prekinuta \cite{greskeNaAdcsSlucajevi}.
         }
     }
 
     \section{Osnovni dijelovi}{
-        Osnovni dijelovi ADCS sustava su računalo, senzori i aktuatori. U nastavku ćemo zasebno opisati svaki dio zasebno i navesti neke važne karakteristike.
+        Osnovni dijelovi ADCS sustava su računalo, senzori i aktuatori. U nastavku ćemo zasebno opisati svaki dio zasebno i navesti bitne karakteristike.
  
         \subsection{Računalo}{
             Računalo je zaslužno za prikupljanje i obradu podataka koje dolaze sa senzora, te kontrolu aktuatora. Prikupljanje podataka sa senzora vrši se preko komunikacijskih kanala (sabirnica). Obrada podataka se u suštini zasniva na računanju zahtjevnih matematičkih operacija koje na koncu daju podatak o trenutnoj orijentaciji. Na temelju razlike trenutne i željene orijentacije, računalo će izračunati kontrolni signal koji šalje aktuatorima također preko predviđenih sabirnica. 
@@ -631,7 +631,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
                 Kalibracija ima za cilj smanjiti utjecaj tzv. engl. \emph{Hard} i \emph{Soft} efekata. Prije nego objasnimo što su spomenuti efekti, važno je objasniti postupak kalibracije magnetometra. 
 
-                Kalibracija magnetometra započinje prikupljanjem podataka iz senzora i to tako što ćemo magnetometar rotirati u svim smjerovima. Nakon što smo prikupili dovoljno podataka možemo prikazati izmjerene vektore magnetskog polja kao skupinu točaka gdje svaka točka prikazuje vrh vektora očitane vrijednosti. Prikaz očitanih vrijednosti kod idealnog magnetometra biti će raspoređeni po sferi radijusa duljine vektora (apsolutna vrijednost magnetskog polja) čije središte leži u centru koordinatnog sustava (vidi sliku \ref{fig:mag_ideal}).
+                Kalibracija magnetometra započinje prikupljanjem podataka iz senzora i to tako što ćemo magnetometar rotirati u svim smjerovima. Nakon što smo prikupili dovoljno podataka možemo prikazati izmjerene vektore magnetskog polja kao skupinu točaka gdje svaka točka prikazuje vrh vektora očitane vrijednosti. Prikaz očitanih vrijednosti kod idealnog magnetometra bit će raspoređeni po sferi radijusa duljine vektora (apsolutna vrijednost magnetskog polja) čije središte leži u centru koordinatnog sustava (vidi sliku \ref{fig:mag_ideal}).
 
                 \begin{figure}[htb]
                 \centering
@@ -640,12 +640,12 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                 \label{fig:mag_ideal}
                 \end{figure}
 
-                Nakon što smo objasnili postupak prikupljanja podataka slijedi objašnjenje \emph{Hard} i \emph{Soft} efekata. \emph{Hard} efekt je pojava koja utječe na na mjerenja magnetskog polja i manifestira se kao translacija ishodišta svih vrijednosti mjerenog vektora magnetskog polja za neki fiksni vektor (vidi sliku \ref{fig:mag_hard}). Mogli bismo slobodno reći da su mjerenja pristrana, odnosno imaju tzv. engl. \emph{bias}. Uzrok \emph{Hard} efekta su najčešće stacionarne interferencije okolnih metalnih dijelova na samom magnetometru ili pripadajućoj elektronici. 
+                Nakon što smo objasnili postupak prikupljanja podataka slijedi objašnjenje \emph{Hard} i \emph{Soft} efekata. \emph{Hard} efekt je pojava koja utječe na mjerenja magnetskog polja i manifestira se kao translacija ishodišta svih vrijednosti mjerenog vektora magnetskog polja za neki fiksni vektor (vidi sliku \ref{fig:mag_hard}). Mogli bismo slobodno reći da su mjerenja pristrana, odnosno imaju tzv. engl. \emph{bias}. Uzrok \emph{Hard} efekta su najčešće stacionarne interferencije okolnih metalnih dijelova na samom magnetometru ili pripadajućoj elektronici. 
 
                 \begin{figure}[htb]
                 \centering
                 \includegraphics[width=0.7\textwidth]{images/mag_hard.png}
-                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra sa tzv. \emph{Hard} efektom. Vrijednosti mjerenja su u jedinici $\mu T$.}
+                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra s tzv. \emph{Hard} efektom. Vrijednosti mjerenja su u jedinici $\mu T$.}
                 \label{fig:mag_hard}
                 \end{figure}
 
@@ -654,7 +654,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                 \begin{figure}[htb]
                 \centering
                 \includegraphics[width=0.7\textwidth]{images/mag_hard_soft.png}
-                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra sa tzv. \emph{Hard} i \emph{Soft} efektima. Vrijednosti mjerenja su u jedinici $\mu T$.}
+                \caption{Točkasti prikaz mjerenja vektora Zemljinog magnetskog polja pomoću magnetometra s tzv. \emph{Hard} i \emph{Soft} efektima. Vrijednosti mjerenja su u jedinici $\mu T$.}
                 \label{fig:mag_hard_soft}
                 \end{figure}
 
@@ -675,7 +675,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
                 gdje A matrica tipa $3\times3$ transformira oblik elipsoida u pravilnu sferu (eliminira utjecaj \emph{Soft} efekta), a već definirani vektor $b$ translatira elipsoid u ishodište koordinatnog sustava (eliminira utjecaj \emph{Hard} efekta).
 
-                Problem pronalaska $A$ i $b$ parametra rješavamo pomoću \texttt{magcal} MATLAB funkcije \cite{magcal}, a kalibraciju vršimo u programskom kodu netom nakon primitka nekalibrirane vrijednosti sa magnetometra \cite{kalibracijaMagKod}.
+                Problem pronalaska $A$ i $b$ parametra rješavamo pomoću \texttt{magcal} MATLAB funkcije \cite{magcal}, a kalibraciju vršimo u programskom kodu netom nakon primitka nekalibrirane vrijednosti s magnetometra \cite{kalibracijaMagKod}.
 
                 Dodatna objašnjenja u vezi kalibracije magnetometra možete pronaći ovdje \cite{kalibracijaMatlabStranica}.
 
@@ -709,9 +709,9 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
         \subsection{Senzori kutne brzine}{
         \label{subsection:senzori_kutne_brzine}
-            Senzori kutne brzine mjere kutnu brzinu satelita. Kao što ćemo vidjeti u nastavku rada, većina algoritama za procjenu orijentacije koriste kutnu brzinu kao dodatnu informaciju. Kutna brzina može se izračunati kao vremenska derivacija orijentacije, ali takav izračun unosi neodređenost u obliku šuma. Senzori kutne brzine nemaju izražen šum, ali zato imaju problem sa tzv. \emph{bias}-om - konstantnoj srednjoj vrijednosti koja unosi grešku u račun. 
+            Senzori kutne brzine mjere kutnu brzinu satelita. Kao što ćemo vidjeti u nastavku rada, većina algoritama za procjenu orijentacije koriste kutnu brzinu kao dodatnu informaciju. Kutna brzina može se izračunati kao vremenska derivacija orijentacije, ali takav izračun unosi neodređenost u obliku šuma. Senzori kutne brzine nemaju izražen šum, ali zato imaju problem s tzv. \emph{bias}-om - konstantnoj srednjoj vrijednosti koja unosi grešku u račun. 
 
-            Osim niskog šuma, druga prednost senzora kutne brzine je što ne zahtijevaju eksterni izvor informacije. Primjerice, senzor Sunca uvijek mora imati prisutno Sunce ne bi li izračunali orijentaciju satelita. U tim situacijama kada ne možemo dobiti direktno podatak o orijentaciji satelita, integracijom kutne brzine moguće je odrediti orijentaciju. Problem takvog načina određivanja orijentacije je konstantni \emph{bias} koji unosi grešku u integraciju. Zbog toga se takav način određivanja orijentacije ograničava na kratka vremenska razdoblja u kojima je greška zbog integracije konstantnog člana zanemariva.
+            Osim niskog šuma, druga prednost senzora kutne brzine je što ne zahtijevaju eksterni izvor informacije. Primjerice, senzor Sunca uvijek mora imati prisutno Sunce ne bi li izračunali orijentaciju satelita. U tim situacijama kada ne možemo dobiti direktno podatak o orijentaciji satelita, integracijom kutne brzine moguće je odrediti orijentaciju. Problem takvog načina određivanja orijentacije je konstantni \emph{bias} koji unosi grešku u integraciju. Zbog toga se takav način određivanja orijentacije ograničava na kratke vremenske periode u kojima je greška zbog integracije konstantnog člana zanemariva.
 
             Senzora kutne brzine ima više vrsta, a tradicionalno su najpopularniji mehanički žiroskopi. Mane mehaničkih žiroskopa su mehanički pokretni dijelovi koji stvaraju vibracije, s vremenom im raste nepouzdanost i relativno velika potrošnja energije. Zbog toga, nedavno su u primjenu ušli laserski žiroskopi koji ne posjeduju pokretne dijelove \cite{adcsKnjiga}. 
 
@@ -753,7 +753,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                 \label{fig:magnetorquer_img}
                 \end{figure}
 
-                Zbog relativno slabe jakosti Zemljinog magnetskog polja, teško je generirati momente sa dovoljnom jačinom jakosti specificirane zahtjevima, pogotovo za satelite koji posjeduju velike momente tromosti. Zbog toga najčešće se kontrola orijentacije vrši pomoću zamašnjaka (vidi kasnije poglavlje) u sprezi sa magnetorkerima iz dva razloga. Prvi razlog je već spomenuta nedovoljna jakost generiranog momenta od strane magnetorkera, i drugi razlog, problem zasićenja zamašnjaka.
+                Zbog relativno slabe jakosti Zemljinog magnetskog polja, teško je generirati momente s dovoljnom jačinom jakosti specificirane zahtjevima, pogotovo za satelite koji posjeduju velike momente tromosti. Zbog toga najčešće se kontrola orijentacije vrši pomoću zamašnjaka (vidi kasnije poglavlje) u sprezi sa magnetorkerima iz dva razloga. Prvi razlog je već spomenuta nedovoljna jakost generiranog momenta od strane magnetorkera, i drugi razlog, problem zasićenja zamašnjaka.
 
                 Valja skrenuti pažnju i na problem utjecaja magnetorkera na mjerenja senzora magnetskog polja. Ako prilikom korekcije orijentacije pomoću magnetorkera mjerimo magnetsko polje, doći će do magnetske interferencije magnetorkera i senzora magnetskog polja (vidi poglavlje \ref{subsubsection:troosni_magnetometar}). Samim time direktno unosimo grešku u estimaciji orijentacije. Rješenje problemu leži u tome da za vrijeme mjerenja magnetskog polja magnetorker ne vrši korekciju orijentacije \cite{adcsKnjiga}.
 
@@ -770,9 +770,9 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                 \label{fig:zamasnjak_fig}
                 \end{figure}
 
-                Problem zamašnjaka manifestira se s vremenom. Da bi objasnili problem pretpostavimo da satelitu želimo održavati jednaku orijentaciju bez obzira na vanjske utjecaje (ne ulazeći u uzroke). Svaki vanjski utjecaj (smetnja) na satelit uzrokuje generiranim momentom. Kako bismo satelitu održali jednaku orijentaciju, zamašnjakom upravljamo na način da ćemo generirati jednaki moment ali u suprotnu stranu (zamašnjak će se zarotirati u istu stranu kao i vanjski moment). Jednom kada smo pomoću zamašnjaka uveli jednaku kutnu količinu gibanja kao što ju je uvela vanjska smetnja, zamašnjaku moramo konstantno održavati kutnu brzinu. Bilo kakva promjena kutne brzine uzrokuje promjenu kutne količine gibanja odnosno promjenu orijentacije. Ako se s vremenom smetnje akumuliraju, dolazi do pojave tzv. saturacije zamašnjaka gdje se zamašnjak nastoji okretati sve većom i većom brzinom sve dok ne dosegne maksimalnu moguću kutnu brzinu. Drugi suptilni problem je taj što rotirajućem zamašnjaku stalno moramo održavati kutnu brzinu što donosi negativnu energetsku računicu. Desaturaciju zamašnjaka vršimo pomoću drugih aktuatora (npr. magnetorkera).
+                Problem zamašnjaka manifestira se s vremenom. Da bi objasnili problem pretpostavimo da satelitu želimo održavati jednaku orijentaciju bez obzira na vanjske utjecaje (ne ulazeći u uzroke). Svaki vanjski utjecaj (smetnja) na satelit uzrokuje generiranim momentom. Kako bismo satelitu održali jednaku orijentaciju, zamašnjakom upravljamo tako da ćemo generirati jednaki moment ali u suprotnu stranu (zamašnjak će se zarotirati u istu stranu kao i vanjski moment). Jednom kada smo pomoću zamašnjaka uveli jednaku kutnu količinu gibanja kao što ju je uvela vanjska smetnja, zamašnjaku moramo konstantno održavati kutnu brzinu. Bilo kakva promjena kutne brzine uzrokuje promjenu kutne količine gibanja odnosno promjenu orijentacije. Ako se s vremenom smetnje akumuliraju, dolazi do pojave tzv. saturacije zamašnjaka gdje se zamašnjak nastoji okretati sve većom i većom brzinom sve dok ne dosegne maksimalnu moguću kutnu brzinu. Drugi suptilni problem je taj što rotirajućem zamašnjaku stalno moramo održavati kutnu brzinu što donosi negativnu energetsku računicu. Desaturaciju zamašnjaka vršimo pomoću drugih aktuatora (npr. magnetorkera).
 
-                Drugi problem zamašnjaka leži u činjenici da su zamašnjaci mehanički uređaji sa rotirajućim dijelovima te se očekuje da će s vremenom prestati raditi. Iz tog razloga umjesto 3 zamašnjaka za troosno upravljanje orijentacijom, uzimamo 4 zamašnjaka karakteristično položena (vidi sliku \ref{fig:cetiri_zamasnjaka}). Na taj način moguće je imati troosno upravljanje orijentacijom sa jednim zamašnjakom koji ne radi \cite{cetiriZamasnjaka}.
+                Drugi problem zamašnjaka leži u činjenici da su zamašnjaci mehanički uređaji s rotirajućim dijelovima te se očekuje da će s vremenom prestati raditi. Iz tog razloga umjesto 3 zamašnjaka za troosno upravljanje orijentacijom, uzimamo 4 zamašnjaka karakteristično položena (vidi sliku \ref{fig:cetiri_zamasnjaka}). Tako je moguće imati troosno upravljanje orijentacijom s jednim zamašnjakom koji ne radi \cite{cetiriZamasnjaka}.
 
                 \begin{figure}[htb]
                 \centering
@@ -791,9 +791,9 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
         \label{subsection:odredjivanje_orijentacije}
             Određivanje orijentacije je postupak u kojem iz odabranih orijentacijskih senzora (vidi poglavlje \ref{subsection:senzori_orijentacije}) prikupljamo podatke koje potom obrađujemo unutar posebno razvijenih algoritama koji kao rezultat računanja na izlazu daju podatak o orijentaciji. Orijentacija satelita nije jednoznačno određena već u njoj postoje neodređenosti (greške). Takve neodređenosti najviše proizlaze iz neodređenosti senzora iz kojih prikupljamo podatke. Druge, manje utjecajnije neodređenosti orijentacije proizlaze iz konačne preciznosti aritmetičkih operacija procesora na kojima se izvršavaju takvi algoritmi. Zbog svega toga, vrlo često u radu pišemo da orijentaciju estimiramo jer je podatak o orijentaciji (više ili manje) gruba procjena. Kako bi smanjili neodređenosti procjene orijentacije, najčešće uzimamo podatke iz više neovisnih senzora i vršimo postupak \emph{Sensor fusion}-a. \emph{Sensor fusion} će smanjiti neodređenosti pojedinih senzora te u konačnici dati bolji rezultat o procjeni orijentacije nego što bismo dobili kad bismo koristili podatak iz samo jednog senzora.
 
-            Algoritmi za estimaciju orijentacije vrlo često budu razvijeni na način da optimalno procjenjuju orijentaciju s obzirom na neki uvjet koji je unaprijed zadan. Možda najpoznatiji problem optimalne estimacije orijentacije satelita naziva se tzv. \emph{Wahba's Problem} iz 1965. godine \cite{wahbas_problem}. Nekoliko algoritama je razvijeno za potrebe rješavanja \emph{Wahba's} problema. Neke od njih navest ćemo u nastavku poglavlja.
+            Algoritmi za estimaciju orijentacije vrlo često budu razvijeni tako da optimalno procjenjuju orijentaciju s obzirom na neki uvjet koji je unaprijed zadan. Možda najpoznatiji problem optimalne estimacije orijentacije satelita naziva se tzv. \emph{Wahba's Problem} iz 1965. godine \cite{wahbas_problem}. Nekoliko algoritama je razvijeno za potrebe rješavanja \emph{Wahba's} problema. Neke od njih navest ćemo u nastavku poglavlja.
 
-            Pri estimaciji orijentacije važno je shvatiti nekoliko stvari. Algoritmi koje ćemo spomenuti, za svoj rad koriste podatke iz 2 različita troosna senzora položena u referentni sustav tijela (satelita). Za svaki od ta dva senzora unaprijed moraju biti poznate njihove tzv. referentne vrijednosti. Referentne vrijednosti senzora označavaju vektore koje smo unaprijed dobili ili izračunali. Razlika trenutno dobivene vrijednosti iz senzora i njegove referentne vrijednosti kolokvijalno nam govori za koliko smo zaokrenuli tijelo. Za lakše shvaćanje pojma referentnog vektora navest ćemo primjer referentnog vektora akcelerometra. Kao dogovor uzet ćemo primjer gdje je referentni vektor akcelerometra položen u referentni sustav kojemu Z komponenta gleda prema središtu Zemlje (X i Y komponenta za ovaj primjer nisu važne). U tom slučaju vrijedi kako će očitana vrijednost sa akcelerometra biti jednaka $\left[0 \; 0 \; -9.81\right] m/s^2$. Recimo da u jednom trenu promijenimo orijentaciju senzora tako da mu Z komponenta gleda u suprotnom smjeru. U tom ćemo slučaju sa akcelerometra pročitati vrijednost mjerenja iznosa $\left[0 \; 0 \; +9.81\right] m/s^2$ iz čega možemo zaključiti kako se je orijentacija akcelerometra promijenila.
+            Pri estimaciji orijentacije važno je shvatiti nekoliko stvari. Algoritmi koje ćemo spomenuti, za svoj rad koriste podatke iz 2 različita troosna senzora položena u referentni sustav tijela (satelita). Za svaki od ta dva senzora unaprijed moraju biti poznate njihove tzv. referentne vrijednosti. Referentne vrijednosti senzora označavaju vektore koje smo unaprijed dobili ili izračunali. Razlika trenutno dobivene vrijednosti iz senzora i njegove referentne vrijednosti kolokvijalno nam govori za koliko smo zaokrenuli tijelo. Za lakše shvaćanje pojma referentnog vektora navest ćemo primjer referentnog vektora akcelerometra. Kao dogovor uzet ćemo primjer gdje je referentni vektor akcelerometra položen u referentni sustav kojemu Z komponenta gleda prema središtu Zemlje (X i Y komponenta za ovaj primjer nisu važne). U tom slučaju vrijedi kako će očitana vrijednost s akcelerometra biti jednaka $\left[0 \; 0 \; -9.81\right] m/s^2$. Recimo da u jednom trenu promijenimo orijentaciju senzora tako da mu Z komponenta gleda u suprotnom smjeru. U tom ćemo slučaju s akcelerometra pročitati vrijednost mjerenja iznosa $\left[0 \; 0 \; +9.81\right] m/s^2$ iz čega možemo zaključiti kako se je orijentacija akcelerometra promijenila.
 
             Algoritme za estimaciju orijentacije dijelimo u dvije skupine: bezmemorijske i memorijske algoritme \cite{uvod_u_svemirske}. Bezmemorijski algoritmi ne uzimaju u obzir prošlo stanje orijentacije već podatak o orijentaciji estimiraju samo iz trenutnih vrijednosti senzora (naravno i njihovih referentnih vrijednosti). Memorijski algoritmi će na temelju prošlog stanja orijentacije i trenutnih vrijednosti senzora estimirati orijentaciju. Memorijski algoritmi su superiorniji jer rade na ideji rekurzije. Svaka iznova estimirana orijentacija biva sve točnija baš zato što senzor uzima u obzir i prošlu orijentaciju, a po logici očuvanja stanja sustava, prošlo stanje je ili isto ili vrlo slično trenutnom stanju. 
 
@@ -824,13 +824,13 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
             \subsubsection{Optimal-REQUEST algoritam}{
                 Optimal-REQUEST algoritam je preteča REQUEST algoritma. Kao što smo već napomenuli ranije, REQUEST algoritam sadrži empirički izabrane koeficijente zbog kojih je takav algoritam suboptimalan. Optimal-REQUEST algoritam će na optimalan način s vremenom, s obzirom na propagaciju greške na senzorima orijentacije i žiroskopu, sam estimirati spomenute koeficijente. Metoda estimacije koeficijenata zasniva se na Kalmanovom filtru \cite{opt_req_algo}.
 
-                Nećemo ulaziti u detalje implementacije već ćemo samo navesti kako smo u sklopu ovog projekta razvili Optimal-REQUEST algoritam u MATLAB kodu, te smo ga naposlijetku pretvorili u C kod. Cijeli programski kod dostupan je ovdje \cite{opt_req_kod} uz popratnu dokumentaciju ovdje \cite{opt_req_dokumen}. 
+                Nećemo ulaziti u detalje implementacije već ćemo samo navesti kako smo u sklopu ovog projekta razvili Optimal-REQUEST algoritam u MATLAB kodu, te smo ga naposljetku pretvorili u C kod. Cijeli programski kod dostupan je ovdje \cite{opt_req_kod} uz popratnu dokumentaciju ovdje \cite{opt_req_dokumen}. 
             }
 
             \subsubsection{Gradijentni spust \engl{Gradient descent}}{
                 Ako posjedujemo dva para vektora mjerenja $(\boldsymbol{v}_1^i, \; \boldsymbol{v}_1^b)$ i $(\boldsymbol{v}_2^i, \; \boldsymbol{v}_2^b)$ gdje $\boldsymbol{v}_i^b$ označava vektor definiran u referentnom sustavu tijela $\mathcal{F}_b$, a $\boldsymbol{v}_i^i$ označava vektor definiran u inercijskom referentnom sustavu $\mathcal{F}_i$, moguće je definirati tzv. rotacijsku matricu $\mathcal{R}_i^b$ (vidi jednadžbu \ref{eq:rot_mat_quat}) koja transformira vektor $\boldsymbol{v}^i $ u vektor $\boldsymbol{v}^b$. 
 
-                Cilj estimacijskog algoritma je izračunati orijentacijsku matricu na način da što više smanjimo pogrešku estimacije. Pogrešku estimacije $\boldsymbol{e_i} = \left[e_{x,i} \; e_{y,i} \; e_{z,i}\right]^T$ za svaki par mjerenih vektora definiramo kao:
+                Cilj estimacijskog algoritma je izračunati orijentacijsku matricu tako da što više smanjimo pogrešku estimacije. Pogrešku estimacije $\boldsymbol{e_i} = \left[e_{x,i} \; e_{y,i} \; e_{z,i}\right]^T$ za svaki par mjerenih vektora definiramo kao:
 
                 \begin{equation}
                 \begin{array}{rcl}
@@ -839,7 +839,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                 \end{array}
                 \end{equation} 
 
-                Nadalje, definirati ćemo funkciju cilja. Funkcija cilja u gradijentnom spustu je parametar kojeg želimo maksimalno smanjiti. Funkciju cilja definiramo kao:
+                Nadalje, definirat ćemo funkciju cilja. Funkcija cilja u gradijentnom spustu je parametar kojeg želimo maksimalno smanjiti. Funkciju cilja definiramo kao:
 
                 \begin{equation}
                     J(\boldsymbol{q}_i^b) = \boldsymbol{e}_1^T \boldsymbol{e}_1 + \boldsymbol{e}_2^T \boldsymbol{e}_2
@@ -902,7 +902,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
                 Procjena orijentacijskog kvaterniona započinje odabirom inicijalnog kvaterniona $\boldsymbol{q}_0$. Za inicijalni kvaternion najčešće se uzima proizvoljna vrijednost (ako drugačije nije moguće) npr. $\boldsymbol{q}_0 = \left[1, \; 0, \; 0, \; 0\right]^T$. Svaki sljedeći korak uključuje potraživanje mjerenih vektora iz orijentacijskih senzora i računanje procjene orijentacije jednadžbom \ref{eq:grad_des}.
 
-                Problem opisane procijene orijentacijskog kvaterniona metodom gradijentnog spusta je što takva procjena sadrži visokofrekventne komponente šuma. Takav šum moguće je filtrirati niskopropusnim filtrom. Međutim, postoji bolji način filtriranja. Naime, kao što što je bilo rečeno u poglavlju \ref{subsection:senzori_kutne_brzine}, orijentaciju je moguće izračunati iz mjerenog vektora kutne brzine (vidi jednadžbu \ref{eq:rot_qib_elem}) relacijom \cite{uvod_u_svemirske}:
+                Problem opisane procijene orijentacijskog kvaterniona metodom gradijentnog spusta je što takva procjena sadrži visokofrekventne komponente šuma. Takav šum moguće je filtrirati niskopropusnim filtrom. Međutim, postoji bolji način filtriranja. Naime, kao što je bilo rečeno u poglavlju \ref{subsection:senzori_kutne_brzine}, orijentaciju je moguće izračunati iz mjerenog vektora kutne brzine (vidi jednadžbu \ref{eq:rot_qib_elem}) relacijom \cite{uvod_u_svemirske}:
 
                 \begin{equation}
                     \boldsymbol{q}_k = \boldsymbol{q}_{k-1} + \Delta T \dot{\boldsymbol{q}}_k = \boldsymbol{q}_{k-1} + \frac{\Delta T}{2} \boldsymbol{S}(\boldsymbol{\omega}_{bG}) \boldsymbol{q}_{k-1},
@@ -910,13 +910,13 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
                 gdje je $\Delta T$ proteklo vrijeme od prošlog računanja.
 
-                No međutim, problem takvog načina određivanja orijentacije je akumulirana greška. Takvu akumuliranu grešku moguće je filtrirati visokopropusnim filtrom. 
+                Međutim, problem takvog načina određivanja orijentacije je akumulirana greška. Takvu akumuliranu grešku moguće je filtrirati visokopropusnim filtrom. 
 
-                Nadalje, pokušati ćemo spojiti obje metode procijene orijentacije u jednu metodu ne bi li tako u konačnici dobili procjenu sa manjom greškom. U tu svrhu uvest ćemo tzv. komplementarni filtar.
+                Nadalje, pokušat ćemo spojiti obje metode procijene orijentacije u jednu metodu ne bi li tako u konačnici dobili procjenu s manjom greškom. U tu svrhu uvest ćemo tzv. komplementarni filtar.
             }
 
             \subsubsection{Komplementarni filtar}{
-                Komplementarni filtar zasniva se na jednostavnoj ideji gdje izlaz filtra ovisi o dvoma ulaznim vrijednostima i to na način da filtru težinskim faktorom $K \in \left[ 0, \; 1\right]$ odredimo hoće li izlaz filtra više ovisiti o prvom, odnosno drugom ulaznom parametru. 
+                Komplementarni filtar zasniva se na jednostavnoj ideji gdje izlaz filtra ovisi o dvoma ulaznim vrijednostima i to tako da filtru težinskim faktorom $K \in \left[ 0, \; 1\right]$ odredimo hoće li izlaz filtra više ovisiti o prvom, odnosno drugom ulaznom parametru. 
 
                 Cijela logika računanja orijentacijskog kvaterniona može se opisati slikom \ref{fig:komp_filt_fig}. Obratimo pažnju na to kako, s obzirom na težinski faktor $K$, izlaz filtra ovisi o jednom ili o drugom ulaznom parametru. Ako vrijedi da je $K = 1$, izlaz komplementarnog filtra, odnosno procijenjena orijentacija, ovisi isključivo o algoritmu određivanja orijentacije pomoću vektora kutne brzine. Vrijedi i obrnuto, ako je $K = 0$, izlaz isključivo ovisi o algoritmu procijene orijentacije pomoću gradijentnog spusta \cite{grad_desc}. Parametar $K$ moguće je odrediti eksperimentalnim putem ili simulacijom. 
 
@@ -944,7 +944,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
                     TODO,
                 \end{equation}
 
-                gdje parametar $TODO$ označava maksimalnu kutnu brzinu s obzirom na upravljački signal PWM-a, a parametar $TODO$ možemo usporediti sa tromosti sustava.
+                gdje parametar $TODO$ označava maksimalnu kutnu brzinu s obzirom na upravljački signal PWM-a, a parametar $TODO$ možemo usporediti s tromosti sustava.
                 
                 Drugi pojednostavljeni model sustava opisuje nam orijentaciju satelita oko jedne osi, odnosno kut i definiramo je kao:
 
@@ -1008,7 +1008,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
     }
 
     \section{Razvijeni sustav}{
-        U ovom poglavlju biti će opisana razvijena tiskana pločica i sklopovlje. Također, navest ćemo izabrane orijentacijske senzore i aktuatore.
+        U ovom poglavlju bit će opisana razvijena tiskana pločica i sklopovlje. Također, navest ćemo izabrane orijentacijske senzore i aktuatore.
 
         \subsection{Tiskana pločica i sklopovlje}{
             %- ukratko o razvijenoj plocici
@@ -1063,7 +1063,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
 
 \chapter{Programska podrška ADCS sustava}{
-    U ovom poglavlju biti će opisana programska podrška ADCS sustava. Opisati ćemo ugradbeno računalo koje koristimo. Objasniti ćemo organizaciju projekta (programske podrške). Navest ćemo korištene biblioteke, operacijski sustav, opisati funkcionalnost programa i u konačnici ukratko opisati postupak razvijanja programske podrške.
+    U ovom poglavlju bit će opisana programska podrška ADCS sustava. Opisat ćemo ugradbeno računalo koje koristimo. Objasnit ćemo organizaciju projekta (programske podrške). Navest ćemo korištene biblioteke, operacijski sustav, opisati funkcionalnost programa i u konačnici ukratko opisati postupak razvijanja programske podrške.
 
     Napominjemo kako sljedeći opis sustava vrijedi isključivo za stanje sustava kojeg smo zatekli u trenutku pisanja ovog rada. Cijela programska podrška nalazi se na GitHub repozitoriju autora ovdje \cite{github_repo}. Programska podrška verzionirana je pomoću Git \cite{git} programa za verzioniranje. Objašnjenja i opisi programske podrške vrijede do \emph{TODO} \emph{commit}-a \cite{git_commit}. Postoji velika vjerojatnost kako će se sustav u budućnosti mijenjati i da opis u nastavku nužno neće odgovarati stanju u budućnosti. 
 
@@ -1234,7 +1234,7 @@ while(True) {
 
                 Nakon 3 sekunde čekanja slijedi inicijalizacija IMU jedinice, komplementarnog filtra, zamašnjaka i obje regulacijske petlje.
 
-                Nakon inicijalizacije slijedi beskonačna petlja gdje se prvo potražuje mjerenje sa IMU jedinice. IMU jedinica dat će podatke o vektorima akceleracije, magnetskog polja i kutne brzine za svaku os. 
+                Nakon inicijalizacije slijedi beskonačna petlja gdje se prvo potražuje mjerenje s IMU jedinice. IMU jedinica dat će podatke o vektorima akceleracije, magnetskog polja i kutne brzine za svaku os. 
 
                 Jednom kada smo dobili vrijednosti mjerenja, slijedi potraživanje stanja regulacije. Postoje 3 stanja regulacije: 
 
@@ -1286,9 +1286,9 @@ while(True) {
                 \end{tabular}
                 \end{table}
 
-                Obratimo pažnju kako svaka komanda da bi je satelit primio, mora završavati sa ASCII znakom \texttt{\textbackslash n} odnosno novim redom \engl{new line, line feed - LF}. Također, komunikacijska dretva će ignorirati bilo koju drugu komandu koja nije opisana u tablici \ref{tbl:lista_komandi}.
+                Obratimo pažnju kako svaka komanda da bi je satelit primio, mora završavati s ASCII znakom \texttt{\textbackslash n} odnosno novim redom \engl{new line, line feed - LF}. Također, komunikacijska dretva će ignorirati bilo koju drugu komandu koja nije opisana u tablici \ref{tbl:lista_komandi}.
 
-                Svi parametri (npr. kutna brzina, Eulerovi kutovi i sl.) koje želimo slati preko Bluetooth sučelja prolaze kroz komunikacijsku dretvu. Kako ADCS dretva jedina ima informaciju o npr. trenutnoj orijentaciji, morali smo implementirati način komunikacije između dretvi. Način komunikacije između dretvi odvija se pomoću TODO. Prikaz svih dretvi sa međusobnim komunikacijskim kanalima nalazi se na slici TODO. 
+                Svi parametri (npr. kutna brzina, Eulerovi kutovi i sl.) koje želimo slati preko Bluetooth sučelja prolaze kroz komunikacijsku dretvu. Kako ADCS dretva jedina ima informaciju o npr. trenutnoj orijentaciji, morali smo implementirati način komunikacije između dretvi. Način komunikacije između dretvi odvija se pomoću TODO. Prikaz svih dretvi s međusobnim komunikacijskim kanalima nalazi se na slici TODO. 
                 
                 Komunikacijska dretva u normalnom stanju čeka poruke za slanje i tako ne "krade" procesorsko vrijeme ostalim dretvama. Jednom kada je dretva primila poruku za slanje, dretva preuzima procesorsko vrijeme i šalje preko UART sučelja dane joj podatke. Jednom kad su svi podaci poslani, komunikacijska dretva ponovno ulazi u stanje čekanja.
                 
@@ -1321,7 +1321,7 @@ while (True) {
     raspusti_dretvu();
 }           \end{lstlisting}
 
-                Funkcije koje provjeravaju ima li poruka za slanje ili poruke koje smo primili od korisnika nisu blokirajuće. Na kraju beskonačne petlje nalazi se funkcija koja raspušta izvršavanje dretve i daje procesorsko vrijeme drugim dretvama. Izvršavanje komunikacijske dretve odvija se onda kada sve dretve budu u stanju čekanja. Primanje komandi odvija se pomoću UART prekidne rutine gdje na svaki primljeni znak sa Bluetooth modula, mikroupravljač odlazi u prekidnu rutinu i puni spremnik znakova koji sadrži sve primljene znakove. Jednom kada komunikacijska dretva dobije procesorsko vrijeme ona će provjeriti ima li primljenih znakova u spremniku znakova i na temelju toga će ići u daljnju obradu tih znakova. 
+                Funkcije koje provjeravaju ima li poruka za slanje ili poruke koje smo primili od korisnika nisu blokirajuće. Na kraju beskonačne petlje nalazi se funkcija koja raspušta izvršavanje dretve i daje procesorsko vrijeme drugim dretvama. Izvršavanje komunikacijske dretve odvija se onda kada sve dretve budu u stanju čekanja. Primanje komandi odvija se pomoću UART prekidne rutine gdje na svaki primljeni znak s Bluetooth modula, mikroupravljač odlazi u prekidnu rutinu i puni spremnik znakova koji sadrži sve primljene znakove. Jednom kada komunikacijska dretva dobije procesorsko vrijeme ona će provjeriti ima li primljenih znakova u spremniku znakova i na temelju toga će ići u daljnju obradu tih znakova. 
 
                 % todo: dodaj sliku svih dretvi i mogucnost medjusobne komunikacije
             }
@@ -1331,15 +1331,15 @@ while (True) {
     \section{Razvoj}{
         Ukratko ćemo objasniti na koji način se razvija programska podrška. Programska podrška napisana je u C programskom jeziku standarda C99 \cite{c99}. Sva programska logika nalazi se unutar već spomenutog \texttt{src} direktorija, a testovi se razvijaju unutar \texttt{tests} direktorija. 
         
-        Razvoj počinje tzv. kloniranjem projekta koji se nalazi na GitHub repozitoriju \cite{github_repo} pomoću Git programa. Kloniranje započinje komandom \texttt{git clone https://github.com/IvanVnucec/cubesat-adcs --recursive}. Git će pohraniti sve datoteke koje se nalaze na repozitoriju lokalno na disk razvojne mašine. Napominjemo kako nije nužno potrebno klonirati projekt pomoću Git programa već se program može jednostavno preuzeti sa GitHub repozitorija i ručno spremiti na disk. Autor preporučuje kloniranje Git-om jer je to jednostavniji postupak.  
+        Razvoj počinje tzv. kloniranjem projekta koji se nalazi na GitHub repozitoriju \cite{github_repo} pomoću Git programa. Kloniranje započinje komandom \texttt{git clone https://github.com/IvanVnucec/cubesat-adcs --recursive}. Git će pohraniti sve datoteke koje se nalaze na repozitoriju lokalno na disk razvojne mašine. Napominjemo kako nije nužno klonirati projekt pomoću Git programa već se program može jednostavno preuzeti s GitHub repozitorija i ručno spremiti na disk. Autor preporučuje kloniranje Git-om jer je to jednostavniji postupak.  
 
         Za pomoć pisanju programskog koda autor programske podrške odlučio se za \emph{VSCode} tekstualni uređivač \cite{vscode}. VSCode pruža mogućnost jednostavnijeg potraživanja programskog koda, bojanje programskih linija i slično.
         
         Jednom kada smo implementirali željenu funkcionalnost, slijedi postupak prevođenja \engl{compilation}. Za prevođenje koristimo \emph{GNU Arm Embedded Toolchain} prevodilac  verzije \emph{v10.3-2021.10} \cite{gnu_arm_toolchain}. Kao graditelj sustava \engl{build system} koristimo \emph{CMake} verzije \emph{v3.18.4} \cite{cmake}. Pomoću CMake-a je moguće jednostavnije postaviti sustav za prevođenje neovisno o tome koju vrstu operacijskog sustava koristimo na razvojnoj mašini (npr. Windows, Ubuntu itd.). Prilikom prvog prevođenja potrebno je postaviti projekt pomoću GNU Make programa tako što pokrenemo komandu \texttt{make setup\_cmake}. Nakon postavljanja projekta moguće je pokrenuti prevođenje pomoću komande \texttt{make build}, ili kraće \texttt{make}. 
 
-        Za provjeru rada programske podrške (debugiranje), koristimo \emph{OpenOCD} \cite{openocd} program koji u pozadini otvori GDB \cite{gdb} server na kojeg se je moguće spojiti. Debugiranje započinjemo unutar VSCode-a tako što otvorimo \emph{Run and Debug} karticu i pokrenemo debugiranje pritiskom na zelenu strelicu. VSCode će pokrenuti prevođenje i pohranu programa na mikroupravljač pod uvjetom da je Nucleo pločica priključena na razvojno računalo pomoću USB kabela. Postavimo li npr. glavnu funkciju zaustavnu točku \engl{breakpoint}, program bi morao na trenutak prestati sa izvođenjem i korisniku dati pristup vrijednostima svih varijabli koje program koristi. Pritiskom na tipku nastavi \engl{Continue}, program bi trebao nastaviti sa izvođenjem. Ako postupkom debugiranja vidimo neželjeno ponašanje programa, debugiranje se može prekinuti i greška se može prepraviti. Jednom kada smo prepravili grešku, možemo opet na isti način pokrenuti postupak debugiranja.
+        Za provjeru rada programske podrške (debugiranje), koristimo \emph{OpenOCD} \cite{openocd} program koji u pozadini otvori GDB \cite{gdb} server na kojeg se je moguće spojiti. Debugiranje započinjemo unutar VSCode-a tako što otvorimo \emph{Run and Debug} karticu i pokrenemo debugiranje pritiskom na zelenu strelicu. VSCode će pokrenuti prevođenje i pohranu programa na mikroupravljač pod uvjetom da je Nucleo pločica priključena na razvojno računalo pomoću USB kabela. Postavimo li npr. glavnu funkciju zaustavnu točku \engl{breakpoint}, program bi morao na trenutak prestati s izvođenjem i korisniku dati pristup vrijednostima svih varijabli koje program koristi. Pritiskom na tipku nastavi \engl{Continue}, program bi trebao nastaviti s izvođenjem. Ako postupkom debugiranja vidimo neželjeno ponašanje programa, debugiranje se može prekinuti i greška se može prepraviti. Jednom kada smo prepravili grešku, možemo opet na isti način pokrenuti postupak debugiranja.
 
-        Jednom kada smo zadovoljili sve zahtjeve programske podrške, preporuča se da se programski kod formatira. Formatiranje programskog koda je važno ako na istom sustavu surađuje više osoba. Svaka osoba ima svoj način pisanja programske podrške i zbog toga može doći do otežane čitljivosti koda. Da bi tome pribjegli koristimo \emph{ClangFormat} program za formatiranje programskog koda \cite{clang_format}. Formatiranje programskog koda pokreće se komandom \texttt{make clang\_format}.
+        Jednom kada smo zadovoljili sve zahtjeve programske podrške, preporučuje se da se programski kod formatira. Formatiranje programskog koda je važno ako na istom sustavu surađuje više osoba. Svaka osoba ima svoj način pisanja programske podrške i zbog toga može doći do otežane čitljivosti koda. Da bi tome pribjegli koristimo \emph{ClangFormat} program za formatiranje programskog koda \cite{clang_format}. Formatiranje programskog koda pokreće se komandom \texttt{make clang\_format}.
 
         Jednom kada smo napravili sve postupke kod je moguće verzionirati pomoću Git-a postupkom koji je objašnjen ovdje \cite{git_commit_instrukcije} ili poslati direktno autoru projekta.
 
@@ -1420,7 +1420,7 @@ while (True) {
     
         \subsection{PID regulator}{
             \subsubsection{Regulator kutne brzine}{
-                Pomoću spomenuta dva modela možemo eksperimentalno odrediti koeficijente PID regulatora. Otvorimo TODO MATLAB alat u kojemu prvo unosimo prvi kinematički model za modeliranje kutne brzine. Podešavanjem kliznika moguće je PID regulator ugoditi na željeni odziv u ovisnosti o tome želimo li brži odziv sa relativno velikim izdizanjem \engl{overshoot} ili sporiji odziv sa blažim izdizanjem. U drugom prozoru moguće je otvoriti graf na kojemu je prikazan izlaz regulatora \engl{controller effort}. Pomoću takvog grafa možemo provjeriti da nam izlaz iz regulatora ne prelazi DC zamašnjaka jer se u protivnom izlaz regulatora ograničava na 100\% DC zamašnjaka što uvodi dodatne nelinearnosti u sustav. 
+                Pomoću spomenuta dva modela možemo eksperimentalno odrediti koeficijente PID regulatora. Otvorimo TODO MATLAB alat u kojemu prvo unosimo prvi kinematički model za modeliranje kutne brzine. Podešavanjem kliznika moguće je PID regulator ugoditi na željeni odziv u ovisnosti o tome želimo li brži odziv s relativno velikim izdizanjem \engl{overshoot} ili sporiji odziv s blažim izdizanjem. U drugom prozoru moguće je otvoriti graf na kojemu je prikazan izlaz regulatora \engl{controller effort}. Pomoću takvog grafa možemo provjeriti da nam izlaz iz regulatora ne prelazi DC zamašnjaka jer se u protivnom izlaz regulatora ograničava na 100\% DC zamašnjaka što uvodi dodatne nelinearnosti u sustav. 
             }
 
             \subsubsection{Regulator orijentacije}{

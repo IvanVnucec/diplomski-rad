@@ -456,3 +456,6 @@ njenog
 Karli
 development
 Josipu
+pokušat
+definirat
+originalnog
