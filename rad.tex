@@ -91,45 +91,77 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
             \end{tabular}
             \end{table}
 
-            Maleni sateliti \engl{Small} teže manje od 1200 kilograma, cijena im je nešto manje od 30 milijuna GBP (britanskih funti) za izradu i lansiranje te je potrebno od 2 do 3 godine za njihov razvoj. Mini sateliti teže do 600 kilograma i njihov razvoj traje dvije godine po cijeni do 30 milijuna GBP. Micro sateliti su teški manje od 200 kilograma i koštaju manje od 10 milijuna GBP. Ispod te klase nalaze se Nano sateliti, težine do 10 kilograma, te Pico i Femto sateliti težine manje od 1 kilograma \cite{hrvatskiVojnik}.
+            Maleni sateliti \engl{Small} teže manje od 1200 kilograma, cijena im je nešto manje od 30 milijuna GBP (britanskih funti) za izradu i lansiranje te je potrebno od 2 do 3 godine za njihov razvoj. Mini sateliti teže do 600 kilograma i njihov razvoj traje dvije godine po cijeni do 30 milijuna GBP. Micro sateliti su teški manje od 200 kilograma i koštaju manje od 10 milijuna GBP. Ispod te klase nalaze se Nano sateliti, težine do 10 kilograma, te Pico i Femto sateliti težine manje od 1 kilograma \cite{hrvatskiVojnik}. Popularnost malih satelita iz godine u godinu raste što prikazuje slika \ref{fig:lansiranja_po_godini}.
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=1.0\textwidth]{images/lansiranja_po_godini.png}
+            \caption{Broj lansiranja različitih tipova malih satelita kroz godine \cite{nanosats}.}
+            \label{fig:lansiranja_po_godini}
+            \end{figure}
+        }
 
             \subsubsection{Cubesat format}{
-                %- sto je cubesat satelit
-                %- od cega se sastoji, 
-                %    - građa, 
-                %    - nacin slaganja dodatnih modula
-                %- kojih sve verzije cubesat satelita postoje
-                %- zasto bas kocka
-                %- prednosti i mane cubesat satelita
-                %- navesti negdje brojke o udijelu cubesat sateltia u ostalim satelitima kroz godine
-                %- zasto je popularan cubesat format
+                Cubesat format osmišljen je 1999. godine suradnjom Cal Poly sveučilišta u San Luis Obispu i sveučilište Stanford. Projekt je imao za zadatak standardizirati Cubesat format i definirati njegove specifikacije. Cubesat format definiramo kao kocku veličine 10 cm x 10 cm x 10 cm (1U) \cite{fersat}. Danas se mogu kombinirati tri (3U), šest (6U) i više takvih blokova. 1U, 2U i 3U Cubesat formati prikazani su na slici \ref{fig:cubesat_format}.
+
+                \begin{figure}[htb]
+                \centering
+                \includegraphics[width=0.7\textwidth]{images/cubesat_format.jpg}
+                \caption{Prikaz 1U, 2U i 3U Cubesat formata.}
+                \label{fig:cubesat_format}
+                \end{figure}
+
+                Nakon definicije Cubesat formata, 1U format postao je najpopularniji format za razvoj i lansiranje i kojim su se mogle ostvariti jednostavne funkcije, kao što su, na primjer: slikanje Zemlje i prijenos podataka na Zemlju te niz jednostavnijih mjerenja koje se trebaju prenijeti na zemlju \cite{fersat}.
             }
         }
-        
+
         \subsection{Metode lansiranja}{
-            %- objasniti kako se sateliti lansiraju
-            %    - objasni da oni nisu glavni payload
-            %    - objasni kako su pakirani
-            %    - objasni u koje orbite mogu ici
-            %    - objasni tvrtke koje se bave lansiranjem
-            %- navedi koliko najcesce kosta lansiranje
-            %- navedi kako najlakse iznajmit lansiranje
-            %- rast lansiranja nanosateltia iz godine u godinu
-            %    - pronaci negdje neke brojke o lansiranju cubesat satelita po godinama
-        }
+            Mali sateliti lansiraju se kao sekundarni teret i to u posebno izrađenim kavezima u kojima stane više malih satelita istovremeno. Za izbacivanje u svemir koristi se opruga, jer Cubesat sateliti nemaju propulziju. Nakon što je izdan izbacivački signal, mehanička opruga vrši silu na male satelite koji potom klizući šinama izlaze kroz vrata kaveza \cite{fersat}. Prikaz kaveza možemo vidjeti na slici \ref{fig:kavez}.
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=0.4\textwidth]{images/kavez.jpg}
+            \caption{Lansirni kavez Cubesat satelita \cite{kavez_cite}.}
+            \label{fig:kavez}
+            \end{figure}
+
+            Let rakete koja nosi primarni i sekundarni teret je zamišljen tako da primarni teret dovede na određenu orbitu iznad zemlje i pusti teret. Neko vrijeme nakon primarnog tereta, izbacuje se sekundarni teret (jedan ili više malih satelita). Lansiranja primarnog tereta su u današnje vrijeme vrlo česta: datumi lansiranja i orbita znaju se mjesecima unaprijed tako da korisnici sekundarnog tereta mogu planirati orbitu koju žele. Korisnici sekundarnog tereta mogu birati samo između ponuđenih orbita, ali ne mogu mijenjati orbitu ili datum lansiranja koje su odabrali. Cijene lansiranja 1U Cubesat-a se kreću oko €90.000, a za 3U Cubesat oko €200.000. Jedna raketa može u svemir ponijeti 10 ili više Cubesat satelita \cite{fersat}. 
+
+            Poslovanje lansiranja malih satelita je organizirano kroz pružatelje lansirnih usluga \engl{Launch Services Provider - LSP} koji zakupljuju prostor za sekundarni teret od poduzeća koje lansiraju rakete \engl{Launch Logistics Provider - LLP}. Danas postoji više LSP-ova i stranka koja želi lansirati satelit ima mogućnost izbora po cijeni i kvaliteti usluge. Poduzeća koja lansiraju satelite u svemir nalaze se po cijelom svijetu \cite{fersat}. Listu nekih pružatelja usluga lansiranja malih satelita moguće je vidjeti u tablici \ref{tbl:pru_lan_uslu}.
+
+            \begin{table}[htb]
+            \caption{Lista pružatelja usluga lansiranja malih satelita \cite{fersat}.}
+            \label{tbl:pru_lan_uslu}
+            \centering
+            \begin{tabular}{lll} 
+            \toprule
+            Ime & Lokacija & Web adresa \\ 
+            \midrule
+            Innovative Solutions in Space & Nizozemska & \url{www.isispace.nl} \\
+            ECM Space & Njemačka & \url{www.ecm-space.de} \\
+            UT AeroSpace Studies & Kanada & \url{www.utias-sfl.net} \\
+            CubeCab (3U+) & SAD & \url{www.cubecab.com} \\
+            Nano Avionics & Litva & \url{https://nanoavionics.com/} \\
+            Space Flight (3U+) & SAD & \url{https://spaceflight.com/} \\
+            \bottomrule
+            \end{tabular}
+            \end{table}
+
+            Postupak lansiranja započinje potpisivanjem ugovora pri kojem korisnik odabire jedan od ponuđenih datuma i orbita. Pri potpisivanju ugovora korisnik plaća oko 50\% cijene usluge. Potpisivanje ugovora se događa barem dvanaest mjeseci prije planiranog lansiranja. Tijekom slijedećih dva do šest mjeseci korisnik mora obaviti sva testiranja. Šest mjeseci prije lansiranja, korisnik dobiva potvrdu o mjestu na raketi i plaća dodatnih 20\% dogovorene cijene. Dva mjeseca prije lansiranja, korisnikov satelit se predaje pružatelju lansirnih usluga koji korisnikov satelit prevozi do lokacije lansiranja. Stigavši na lansirnu lokaciju, korisnik plaća dodatnih 20\% cijene. Konačno, u trenutku lansiranja, korisnik plaća zadnjih 10\% cijene. Ukoliko lansiranje ne uspije nema povrata sredstava. Obročna plaćanja ne vrijede za sve pružatelje usluga već neki imaju drugačije oblike plaćanja. Nakon lansiranja pružatelj lansirnih usluga definira i prati orbitu svakog lansiranog satelita i predaje korisniku informacije o točnoj orbiti u kojoj se satelit nalazi \cite{fersat}. 
         
         \subsection{Povijesni pregled misija}{
-            %- navesti neke komercijalne primjene do sada
-            %- navesti znanstvene misije do sada
+            Baza podataka Nano i Cubesat satelita \cite{nanosats} sadrži preko 2000 podataka o lansiranjima Cubesat satelita od 1998. godine. Prvo lansiranje Cubesat satelita zbilo se 2003. godine iz grada Plesetska u Rusiji pod zaslugom \emph{Eurockot Launch Services's Multiple Orbit} misije. Cubesat sateliti koji su pušteni u orbitu bili su sateliti nekoliko tvrtki iz Danske, Japana, Kanada i SAD-a \cite{prva_misija}.
+
+            Nekoliko godina kasnije, točnije 2012. godine, lansirano je 11 Cubesat satelita pomoću rakete Atlas V. To je do tada bio najveći broj istovremeno lansiranih satelita gdje je najveći bio čak 24U veličine \cite{najveci_lansirni_broj}.
+
+            Od tada do danas lansirano je preko 1000 malih satelita što je vidljivo na slici \ref{fig:lansiranja_po_godini}.
         }
     }
 
     \section{Korisni teret satelita}{
-        % sto je korisni teret satelita
         Korisni teret satelita \engl{payload} jest podsustav, ili skupina podsustava, koji imaju za cilj ispuniti zadaću koja im je dodijeljena (misija). Primjerice, ako je cilj satelita fotografiranje Zemljine površine, onda će njegov koristan teret biti sustav za fotografiranje (kamera). Ili primjerice ako želimo uspostaviti komunikaciju sa satelitom, što je gotovo uvijek slučaj, onda će njegov korisni sustav biti sustav za komunikaciju.
 
         \subsection{Vrste tereta}{
-            %- navesti korisne terete koje satelit ima u ovisnosti o tipu misije
             Ovisno o tipu misije, razlikujemo podsustave koje je moguće svrstati u nekoliko sljedećih kategorija:
 
             \begin{itemize}
