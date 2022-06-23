@@ -54,7 +54,8 @@
 \izvornik
 
 % TODO: Dodaj zahvalu
-\zahvala{Josip, Karla}
+\zahvala{Posebno hvala mentoru Josipu na razumijevanju, nesebičnoj pomoći i susretljivosti. Da nije bilo tebe Josipe, radio bi Web development. \\
+Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
 \tableofcontents
 
@@ -965,10 +966,10 @@
             \subsubsection{Korišteni algoritmi}{
                 Upravljanje orijentacijom satelita prvo započinje određivanjem orijentacije. Jednom kada je orijentacija određena, upravljački PWM signal upravlja elektromotorom.
 
-                Upravljački signal $u(t)$ ovisi o razlici trenutne i željene orijentacije $e(t)$. Razliku trenutne i željene orijentacije dovodimo na ulaz PID regulatora koji zatim na izlazu daje upravljački signal $u(t)$. Upravljački signal PID regulatora je u intervalu $u(t) \in \left[ 0, 100 \right]$ što nam direktno daje tzv. \emph{Duty cycle} (DT) PWM-a. DT računamo kao \cite{dt_pwm}:
+                Upravljački signal $u(t)$ ovisi o razlici trenutne i željene orijentacije $e(t)$. Razliku trenutne i željene orijentacije dovodimo na ulaz PID regulatora koji zatim na izlazu daje upravljački signal $u(t)$. Upravljački signal PID regulatora je u intervalu $u(t) \in \left[ 0, 100 \right]$ što nam direktno daje tzv. \emph{Duty cycle} (DC) PWM-a. DC računamo kao \cite{dc_pwm}:
 
                 \begin{equation}
-                    DT = \frac{T_{on}}{T_{on} + T_{off}} \times 100 \left[ \% \right],
+                    DC = \frac{T_{on}}{T_{on} + T_{off}} \times 100 \left[ \% \right],
                 \end{equation}
 
                 gdje je parametar $T_{on}$ jednak vremenu visokog stanja PWM signala, a parametar $T_{off}$ jednak vremenu niskog stanja PWM signala. Zbroj vremena visokog i niskog stanja PWM daje nam period PWM signala $T_{\text{PWM}} = T_{on} + T_{off}$. Ako vrijedi da je $T_{on}=T_{\text{PWM}}$ onda znači da je srednja vrijednost PWM signala jednaka naponu napajanja PWM-a. Vrijedi i obrnuto, ako vrijedi da je $T_{off}=T_{\text{PWM}}$ onda srednja vrijednost PWM signala iznosi 0.
@@ -1327,47 +1328,52 @@ while (True) {
         }
     }
 
-    \section{Matematički zapis orijentacije}{
-        %- jednadzbe koje koristimo u SW
-    }
-
-    \section{Izabrana metoda određivanja orijentacije}{
-        %- objasniti na koji nacin radimo senzor fuzion
-        %    - optimal request
-        %        - napisati nesto kratko o OR algoritmu
-        %        - navesti referencu na svu popratnu dokumentaciju
-    }
-
-    \section{Izabrana metoda upravljanja orijentacijom}{
-        %- odabrana metoda upravljanja orijentacijom
-        %    - spomeni quaternion regulator
-        %- odabrana metoda upravljanja kutnom brzinom
-        %    - spomeni zamasnjak
-        %    - pwm
-        %    - spomeni PID regulator
-        %    - PID regulator za kontrolu orijentacije satelita
-        %        - opisati kako ga mi koristimo
-        %        - ovo isto pokupi od Arduino projekta
-    }
-
     \section{Razvoj}{
-        %- objasniti koji compiler koristimo
-        %- objasniti koji programski jezik koristimo
-        %- objasniti da je cijeli kod na githubu
-        %- broj linija koda
-        %    - vidi kako to dobiti u linux-u sa nekom komandom
-        %- objasniti koje sve alate koristimo prilikom razvoja SW
-        %    - clang format i slicno
-        %    - vscode
-        %    - openocd
-        %- objasniti kako debugiramo
-        %- slikati graf razvoja programskog koda kroz vrijeme
+        Ukratko ćemo objasniti na koji način se razvija programska podrška. Programska podrška napisana je u C programskom jeziku standarda C99 \cite{c99}. Sva programska logika nalazi se unutar već spomenutog \texttt{src} direktorija, a testovi se razvijaju unutar \texttt{tests} direktorija. 
+        
+        Razvoj počinje tzv. kloniranjem projekta koji se nalazi na GitHub repozitoriju \cite{github_repo} pomoću Git programa. Kloniranje započinje komandom \texttt{git clone https://github.com/IvanVnucec/cubesat-adcs --recursive}. Git će pohraniti sve datoteke koje se nalaze na repozitoriju lokalno na disk razvojne mašine. Napominjemo kako nije nužno potrebno klonirati projekt pomoću Git programa već se program može jednostavno preuzeti sa GitHub repozitorija i ručno spremiti na disk. Autor preporučuje kloniranje Git-om jer je to jednostavniji postupak.  
+
+        Za pomoć pisanju programskog koda autor programske podrške odlučio se za \emph{VSCode} tekstualni uređivač \cite{vscode}. VSCode pruža mogućnost jednostavnijeg potraživanja programskog koda, bojanje programskih linija i slično.
+        
+        Jednom kada smo implementirali željenu funkcionalnost, slijedi postupak prevođenja \engl{compilation}. Za prevođenje koristimo \emph{GNU Arm Embedded Toolchain} prevodilac  verzije \emph{v10.3-2021.10} \cite{gnu_arm_toolchain}. Kao graditelj sustava \engl{build system} koristimo \emph{CMake} verzije \emph{v3.18.4} \cite{cmake}. Pomoću CMake-a je moguće jednostavnije postaviti sustav za prevođenje neovisno o tome koju vrstu operacijskog sustava koristimo na razvojnoj mašini (npr. Windows, Ubuntu itd.). Prilikom prvog prevođenja potrebno je postaviti projekt pomoću GNU Make programa tako što pokrenemo komandu \texttt{make setup\_cmake}. Nakon postavljanja projekta moguće je pokrenuti prevođenje pomoću komande \texttt{make build}, ili kraće \texttt{make}. 
+
+        Za provjeru rada programske podrške (debugiranje), koristimo \emph{OpenOCD} \cite{openocd} program koji u pozadini otvori GDB \cite{gdb} server na kojeg se je moguće spojiti. Debugiranje započinjemo unutar VSCode-a tako što otvorimo \emph{Run and Debug} karticu i pokrenemo debugiranje pritiskom na zelenu strelicu. VSCode će pokrenuti prevođenje i pohranu programa na mikroupravljač pod uvjetom da je Nucleo pločica priključena na razvojno računalo pomoću USB kabela. Postavimo li npr. glavnu funkciju zaustavnu točku \engl{breakpoint}, program bi morao na trenutak prestati sa izvođenjem i korisniku dati pristup vrijednostima svih varijabli koje program koristi. Pritiskom na tipku nastavi \engl{Continue}, program bi trebao nastaviti sa izvođenjem. Ako postupkom debugiranja vidimo neželjeno ponašanje programa, debugiranje se može prekinuti i greška se može prepraviti. Jednom kada smo prepravili grešku, možemo opet na isti način pokrenuti postupak debugiranja.
+
+        Jednom kada smo zadovoljili sve zahtjeve programske podrške, preporuča se da se programski kod formatira. Formatiranje programskog koda je važno ako na istom sustavu surađuje više osoba. Svaka osoba ima svoj način pisanja programske podrške i zbog toga može doći do otežane čitljivosti koda. Da bi tome pribjegli koristimo \emph{ClangFormat} program za formatiranje programskog koda \cite{clang_format}. Formatiranje programskog koda pokreće se komandom \texttt{make clang\_format}.
+
+        Jednom kada smo napravili sve postupke kod je moguće verzionirati pomoću Git-a postupkom koji je objašnjen ovdje \cite{git_commit_instrukcije} ili poslati direktno autoru projekta.
+
+        Kao rubriku zanimljivosti navest ćemo broj linija programskog koda za svaki direktorij unutar \texttt{src} direktorija. Broj linija koda nalazi se u tablici \ref{tbl:broj_linija}.
+
+        \begin{table}[htb]
+        \caption{Broj linija koda za svaki direktorij unutar \texttt{src} direktorija.}
+        \label{tbl:broj_linija}
+        \centering
+        \begin{tabular}{lll} 
+        \toprule
+        Direktorij & C99 & Assembly \\ 
+        \midrule
+        drivers     &     63330    &   0    \\
+        libs        &     6776     &   0    \\
+        rtos        &     13229    &   0    \\
+        middlewares &     1444     &   0    \\
+        core        &     633      &   283  \\
+        mcu         &     367      &   0    \\
+        bsp         &     125      &   0    \\
+        utils       &     53       &   0    \\
+        top\_dir    &     30       &   0    \\
+        \bottomrule
+        \end{tabular}
+        \end{table}
     }
 }
 
 \chapter{Eksperimentalna verifikacija ADCS sustava}{
+    U ovom poglavlju objasnit ćemo testni sustav za eksperimentalnu verifikaciju programske podrške. 
+
     \section{Opis sustava}{
         %- opisati zracni lezaj
+
         %- opisati kuglu
         %- opisati kako satelit stoji u kugli
         %- navesti reference za zracne lezaje
@@ -1379,27 +1385,58 @@ while (True) {
 
     \section{Određivanje parametara}{
         \subsection{Kinematički model}{
-            %- objasni kako smo dobili parametre
+            Kao što smo već pisali u poglavlju \ref{TODO}, pojednostavljeni kinematički model satelita definirali smo kao:
+
+            \begin{equation}
+                TODO Dodaj kinematički model satelita
+            \end{equation}
+
+            gdje su parametri $TODO$ i $TODO$ nepoznanice koje je potrebno odrediti. 
+            
+            Postupak određivanja parametara započinje pokretanjem ADCS sustava. Nakon što se ADCS sustav pokrenuo i kada je prošla sva inicijalizacija, satelit postavljamo na zračni ležaj i to tako da satelit miruje. Nakon što smo uspostavili sve uvjete za testiranje, možemo krenuti na snimanje odziva sustava na tzv. step pobudu.
+
+            Snimanje sustava na step pobudu započinje pokretanjem programa TODO pomoću kojeg je vrlo lako moguće snimiti sve vrijednosti u CSV format datoteke koje je potom lako analizirati pomoću alata kao što je MATLAB. Prilikom pokretanja TODO programa odaberemo COM port na kojemu je moguće dobiti podatke iz satelita. Namjestimo li automatsko primanje svih parametara na ekranu ćemo vidjeti 3 vrste signala: estimirani Eulerovi kutovi, mjerenje sa žiroskopa i Duty Cycle zamašnjaka. Pomoću mjerenja žiroskopa i vrijednosti DC zamašnjaka moguće je odrediti kinematički model satelita. Primijetimo kako u jednadžbi \ref{TODO} kao ulazni parametar sustava imamo DC zamašnjaka, a kao izlaz kutnu brzinu satelita. 
+
+            Ako sustavu u mirovanju pošaljemo komandu za promjenu DC zamašnjaka sa 0\% na 50\% (vidi popis komandi \ref{TODO}), odziv sustava na takvu pobudu prikazan je na slici \ref{TODO}. 
+
+            %TODO DODAJ GRAF ODZIVA NA STEP
+
+            Dade se pokazati kako odziv na step pobudu satelita u vremenskoj domeni možemo zapisati kao:
+
+            \begin{equation}
+                TODO Dodaj eksponencijalnu funkciju
+            \end{equation}
+
+            Pomoću MATLAB alata i pripadajućih MATLAB skripti koje se nalaze unutar \texttt{docs/step\_response} direktorija \cite{dodajLinkNaFolder}, moguće je na jednostavan način dobiti $$ i $$ parametre kinematičkog modela. Primjer dobivanja parametara preko MATLAB skripti moguće je vidjeti na slici \ref{TODO}. 
+
+            %TODO DODAJ GRAF REZULTATA FITA FUNKCIJE
+
+            Spomenute MATLAB skripte osim estimacije parametara kao rezultat daju i kinematičke modele. Prvi kinematički model odnosi se na modeliranje kutne brzine, a drugi na modeliranje orijentacije (kuta). Kinematički model za modeliranje orijentacije dobivamo integriranjem kutne brzine i definiramo ga kao:
+
+            \begin{equation}
+                TODO Dodaj kinematički model za orijentaciju
+            \end{equation}
         }
     
         \subsection{PID regulator}{
-            %- vidi cubesat na arduinu
-            %- objasni kako smo dobili parametre PID regulatora
-        }
-    }
+            \subsubsection{Regulator kutne brzine}{
+                Pomoću spomenuta dva modela možemo eksperimentalno odrediti koeficijente PID regulatora. Otvorimo TODO MATLAB alat u kojemu prvo unosimo prvi kinematički model za modeliranje kutne brzine. Podešavanjem kliznika moguće je PID regulator ugoditi na željeni odziv u ovisnosti o tome želimo li brži odziv sa relativno velikim izdizanjem \engl{overshoot} ili sporiji odziv sa blažim izdizanjem. U drugom prozoru moguće je otvoriti graf na kojemu je prikazan izlaz regulatora \engl{controller effort}. Pomoću takvog grafa možemo provjeriti da nam izlaz iz regulatora ne prelazi DC zamašnjaka jer se u protivnom izlaz regulatora ograničava na 100\% DC zamašnjaka što uvodi dodatne nelinearnosti u sustav. 
+            }
 
-    \section{Računanje razlike trenutne i željene orijentacije}{
-        \subsection{Eulerovi kutovi}{
-            %- staviti formulu iz matlaba
-        }
-
-        \subsection{Kvaternioni}{
-            %- staviti formule iz onog papera od josipa
+            \subsubsection{Regulator orijentacije}{
+                Jednaki postupak određivanja koeficijenata PID regulatora vrijedi i za regulaciju orijentacije (kuta). Skripta će na izlazu, osim modela kutne brzine, dati i model orijentacije. Taj model možemo također učitati u TODO MATLAB-ov alat i po potrebi ugoditi koeficijente PID regulatora.
+            }
         }
     }
 
     \section{Rezultati verifikacije}{
-        %- ovo nezz
+        Rezultate parametrizacije PID regulatora snimili smo prilikom testiranja sustava. Na slici \ref{TODO} prikazan je odziv sustava na promjenu željene kutne brzine u nekoliko navrata. Prvi put korisnik je komandom zadao željenu kutnu brzinu od TODO i to možemo vidjeti od TODO do TODO sekunde. TODO DODAJ JOŠ AKO TREBA. Na drugoj slici \ref{TODO} vidimo odziv regulatora na vanjske smetnje gdje smo u nekoliko navrata ručno pomaknuli satelit i tako mu doveli smetnju.
+
+        % TODO DODAJ SLIKE REGULACIJE KUTNE BRZINE (KORISNIK I VANJSKA SMETNJA)
+
+        Rezultate ugađanja PID regulatora za regulaciju kuta možemo vidjeti na slici \ref{TODO} gdje je korisnik zadao željeni kut od TODO. Na slici \ref{TODO} možemo vidjeti odziv regulatora na vanjske smetnje gdje smo ručno sustav pomaknuli iz referentnog položaja.
+
+        % TODO DODAJ SLIKE REGULACIJE KUTA (KORISNIK I VANJSKA SMETNJA)
     }
 }
 
