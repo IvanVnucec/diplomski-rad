@@ -59,9 +59,6 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
 
 \tableofcontents
 
-% TODO: delete me
-\nocite{*}
-
 \chapter{Uvod}{
     \section{Mali sateliti}{
         %- sto su mali sateliti
@@ -1429,9 +1426,14 @@ while (True) {
 
             Snimanje sustava na step pobudu započinje pokretanjem programa TODO pomoću kojeg je vrlo lako moguće snimiti sve vrijednosti u CSV format datoteke koje je potom lako analizirati pomoću alata kao što je MATLAB. Prilikom pokretanja TODO programa odaberemo COM port na kojemu je moguće dobiti podatke iz satelita. Namjestimo li automatsko primanje svih parametara na ekranu ćemo vidjeti 3 vrste signala: estimirani Eulerovi kutovi, mjerenje sa žiroskopa i Duty Cycle zamašnjaka. Pomoću mjerenja žiroskopa i vrijednosti DC zamašnjaka moguće je odrediti kinematički model satelita. Primijetimo kako u jednadžbi \ref{TODO} kao ulazni parametar sustava imamo DC zamašnjaka, a kao izlaz kutnu brzinu satelita. 
 
-            Ako sustavu u mirovanju pošaljemo komandu za promjenu DC zamašnjaka sa 0\% na 50\% (vidi popis komandi \ref{TODO}), odziv sustava na takvu pobudu prikazan je na slici \ref{TODO}. 
+            Ako sustavu u mirovanju pošaljemo komandu za promjenu DC zamašnjaka sa 0\% na 50\% (vidi popis komandi \ref{TODO}), odziv sustava na dvije takve pobude prikazan je na slici \ref{fig:step_response}. Primjetimo kako oko 20 sekunde kutna brzina počinje blago padati. Razlog tomu su blage nepravilnosti zračnog ležaja koje uzrokuju parazitni moment i tako usporavaju satelit. Modeliranje parazitnog momenta nismo uzimali u obzir radi jednostavnosti jednadžbi. 
 
-            %TODO DODAJ GRAF ODZIVA NA STEP
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=1.0\textwidth]{other/step_response.png}
+            \caption{Odzivi sustava na Step pobudu sa DC zamašnjaka na 50\%.}
+            \label{fig:step_response}
+            \end{figure}
 
             Dade se pokazati kako odziv na step pobudu satelita u vremenskoj domeni možemo zapisati kao:
 
