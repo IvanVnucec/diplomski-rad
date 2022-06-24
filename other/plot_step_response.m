@@ -8,7 +8,7 @@ wz = -wz;
 wz = wz ./ 1000.0; % to rad/s
 
 % create time vector
-t = 1:length(wz);
+t = 0:(length(wz)-1);
 t = t ./ 10.0; % convert to seconds
 t = t';
 
@@ -35,6 +35,11 @@ dc = [dc; zeros(length(wz) - length(dc), 1)];
 % plot
 font_size_title = 15;
 font_size = 12;
+time_step_size = 10;
+y1_lim = [-10 100];
+y2_lim = [-0.5 3.1];
+y1_step_size = 10;
+y2_step_size = 0.5;
 
 hf = figure();
 [hax, h1, h2] = plotyy(t, dc, t, wz);
@@ -46,8 +51,16 @@ set(hax(1), "fontsize", font_size)
 set(hax(2), "fontsize", font_size)
 set(h1, "linewidth", 2)
 set(h2, "linewidth", 1)
-ylim(hax(1), [0 100])
-ylim(hax(2), [-0.5 3.1])
+ylim(hax(1), y1_lim)
+ylim(hax(2), y2_lim)
+grid
+xbounds = xlim();
+set(hax, 'xtick', xbounds(1):time_step_size:xbounds(2))
+ybounds1 = ylim(hax(1));
+set(hax(1), 'ytick', ybounds1(1):y1_step_size:ybounds1(2))
+ybounds2 = ylim(hax(2));
+set(hax(2), 'ytick', ybounds2(1):y2_step_size:ybounds2(2))
+
 
 % printing to pdf
 print(hf, "step_response.png", '-dpng');
