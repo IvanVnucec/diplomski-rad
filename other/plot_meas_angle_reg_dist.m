@@ -23,7 +23,7 @@ font_size = 12;
 time_step_size = 10;
 y1_lim = [-60 60];
 y2_lim = [-180 180];
-y1_step_size = 20;
+y1_step_size = 10;
 y2_step_size = 50;
 
 hf = figure();
