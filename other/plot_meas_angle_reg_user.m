@@ -22,9 +22,9 @@ font_size_title = 15;
 font_size = 12;
 time_step_size = 10;
 y1_lim = [-180 180];
-y2_lim = [-1800 1800];
+y2_lim = [-2000 2000];
 y1_step_size = 20;
-y2_step_size = 250;
+y2_step_size = 500;
 
 hf = figure();
 [hax, h1, h2] = plotyy(t, a, t, cntrl);
