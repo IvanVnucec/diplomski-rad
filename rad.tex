@@ -1050,9 +1050,44 @@ okarakterizirati
     \section{Razvijeni sustav}{
         U ovom poglavlju bit će opisana razvijena tiskana pločica i sklopovlje. Također, navest ćemo izabrane orijentacijske senzore i aktuatore.
 
+        Cijeli razvijeni sustav unutar polusferične kugle položen na zračni ležaj prikazan je na slici \ref{fig:slika_sustava}.
+
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.5\textwidth]{images/slika_sustava.png}
+        \caption{Prikaz ADCS sustava sa pripadajućim zračnim ležajem.}
+        \label{fig:slika_sustava}
+        \end{figure}
+
         \subsection{Tiskana pločica i sklopovlje}{
-            %- ukratko o razvijenoj plocici
-            %- staviti kakvu shemu
+            Tiskana pločica sa sklopovljem prikazana na slici \ref{fig:plocica_3d} i sastoji se od nekoliko sastavnih dijelova:
+
+            \begin{itemize}
+            \item Baterija,
+            \item Napajanje,
+            \item Drajver za zamašnjak,
+            \item Elektromotor,
+            \item Bluetooth modul,
+            \item Inkrementalni enkoder,
+            \item IMU modul,
+            \item Nucleo pločica.
+            \end{itemize}
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=1.0\textwidth]{images/plocica_3d.jpg}
+            \caption{3D prikaz tiskane pločice ADCS sustava.}
+            \label{fig:plocica_3d}
+            \end{figure}
+
+            Shema tiskane pločice nalazi se na slici \ref{fig:plocica_shema}. Napon sa baterija dolazi do napajačkog sklopovlja (oznaka \texttt{Buck converter module}) koji smanjuju napon na razine pogodne za napajanje sklopovlja. Drajver za zamašnjak (\texttt{Motor driver module}) oznake Pololu DRV8838 \cite{pololu} je mali H-most modul za upravljanje elektromotorom zamašnjaka. Elektromotor je male snage i nalazi se u samoj sredini pločice (\texttt{Motor}). Na pločici se također nalazi i Bluetooth modul oznake TODO (\texttt{Bluetooth module}). Njegov položaj je na samom rubu pločice radi bolje transmisije antene koja se nalazi na istom modulu u obliku PCB linije. Osim Bluetooth modula tu je i inkrementalni enkoder (\texttt{Incremental encoder}) pomoću kojeg je moguće mjeriti kutnu brzinu zamašnjaka. Funkcionalnost inkrementalnog enkodera u trenutku pisanja rada još nije implementirana. Nadalje, na pločici se nalazi i IMU modul (\texttt{IMU unit module}) oznake TODO koji na sebi sadrži IMU senzor. Na kraju, pločica sadrži i utor za Nucleo pločicu (\texttt{STM32 Nucleo-32 board}) koju je moguće jednostavno izvaditi i natrag staviti. Radi lakšeg razvijanja programske podrške na pločici se nalazi nekoliko statusnih LED dioda.  
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=1.0\textwidth]{images/plocica_shema.png}
+            \caption{Shema tiskane pločice ADCS sustava.}
+            \label{fig:plocica_shema}
+            \end{figure}
         }
 
         \subsection{Izabrani senzori}{
@@ -1080,23 +1115,18 @@ okarakterizirati
             \subsubsection{Žiroskop}{
                 Unutar IMU senzora nalazi se i troosni žiroskop. Kao što smo ranije spomenuli u poglavlju \ref{}, za uspješniju estimaciju orijentacije koristimo i žiroskop. Žiroskop kojeg koristimo se također nalazi unutar IMU senzora.
             }
-
-            %- zasto koristimo IMU
-            %- napisati da akcelerometar ne moze raditi u svemiru
-            %- mane ziroskopa
-            %    - bias
-            %- mane akcelerometra
-            %    - sum
-            %- magnetometar
-            %    - model magnetskog polja zemlje
-            %        - mijenja se s vremenom
         }
 
         \subsection{Izabrani aktuatori}{
-            %- zasto koristimo bas (stavi ime) aktuator 
-            %    - a ne magnetorqer npr
-            %    - za magnetorqer navesti referencu na izracun parametara koji je radio Ivan Indir
-            %    - navesti karlin rad, pitaj ju sto je ona radila pa ju citiraj
+            Za aktuator smo izabrali zamašnjak kojeg je moguće vidjeti na slici \ref{fig:zamasnjak}. Elektromotor zamašnjaka položen je na tiskanu pločicu ADCS sustava. Rotirajuću masu zamašnjaka smo izradili pomoću 3D printera. 
+
+            Zamašnjak smo izabrali zato što je to aktuator kojeg je lako izraditi, dijelovi su lako dostupni, za pogon je potrebna samo električna energija koja dolazi iz baterije i drajver elektromotora je jednostavne izvedbe. 
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=0.7\textwidth]{images/zamasnjak.png}
+            \caption{Prikaz zamašnjaka sa ADCS sustavom.}
+            \label{fig:zamasnjak}
+            \end{figure}
         }
     }
 }
@@ -1412,27 +1442,54 @@ while (True) {
     U ovom poglavlju objasnit ćemo testni sustav za eksperimentalnu verifikaciju programske podrške. 
 
     \section{Opis sustava i korištenih alata}{
-        Verifikacijski sustav sastoji se od nekoliko dijelova. Prvi i najvažniji je tzv. zračni ležaj sa pripadajućom plastičnom kuglom prikazan na slici \ref{fig:TODO}.
+        Verifikacijski sustav sastoji se od nekoliko dijelova. Prvi i najvažniji je tzv. zračni ležaj sa pripadajućom plastičnom kuglom prikazan na slici \ref{fig:fotka_zracni}.
 
-        % TODO DODAJ SLIKU ZRACNOG LEZAJA
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/fotka_zracni.jpg}
+        \caption{Prikaz zračnog ležaja sa pripadajućom kuglom.}
+        \label{fig:fotka_zracni}
+        \end{figure}
 
-        Zračni ležaj sastoji se od 3D isprintane polusferične podloge koja je napajana stlačenim zrakom koji dolazi iz kompresora zraka. Stlačeni zrak koji dolazi na površinu zračnog ležaja stvara tanki film zračne struje koji smanjuje trenje između ležaja i plastične kugle. Plastična kugla sastoji se od vanjske ljuske i plastičnog držača satelita. Plastična vanjska ljuska sastavljena je od dvije polusfere koje je vrlo lako moguće sastaviti i rastaviti. Plastični držač izrađen je od laserski rezanog plexiglasa i prikazan je na slici \ref{fig:TODO}. Posebnim navojnim odstojnicima satelit je pričvršćen na plastični držač \cite{zracni_lezaj}.
+        Zračni ležaj sastoji se od 3D isprintane polusferične podloge koja je napajana stlačenim zrakom koji dolazi iz kompresora zraka. Stlačeni zrak koji dolazi na površinu zračnog ležaja stvara tanki film zračne struje koji smanjuje trenje između ležaja i plastične kugle. Plastična kugla sastoji se od vanjske ljuske i plastičnog držača satelita. Plastična vanjska ljuska sastavljena je od dvije polusfere koje je vrlo lako moguće sastaviti i rastaviti. Plastični držač izrađen je od laserski rezanog plexiglasa i prikazan je na slici \ref{fig:drzac}. Posebnim navojnim odstojnicima satelit je pričvršćen na plastični držač \cite{zracni_lezaj}.
 
-        Za komuniciranje sa satelitom koristimo računalo ili pametni mobilni telefon koji sadrže Bluetooth sučelje. Za klasično komandno sučelje na računalu koristimo program Termite \cite{termite} prikazan na slici \ref{TODO}, a na mobilnom telefonu aplikaciju TODO \cite{TODO} prikazanu na slici \ref{TODO}.
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.6\textwidth]{images/drzac.png}
+        \caption{Prikaz plastičnog držača satelita \cite{zracni_lezaj}.}
+        \label{fig:drzac}
+        \end{figure}
 
-        % TODO DODAJ SLIKU TERMITE
+        Za komuniciranje sa satelitom koristimo računalo ili pametni mobilni telefon koji sadrže Bluetooth sučelje. Za klasično komandno sučelje na računalu koristimo program \emph{Termite} \cite{termite} prikazan na slici \ref{fig:termite}, a na mobilnom telefonu aplikaciju \emph{Serial Bluetooth Terminal} \cite{mobilna_app} prikazanu na slici \ref{fig:mobilna_app}.
 
-        Podešavanje Termite programa je vrlo jednostavno. Postupak započinje spajanjem računala i satelita preko Bluetooth sučelja čiji postupak nećemo objašnjavati jer ovisi o tipu i verziji operacijskog sustava. Nakon što smo se priključili sa računalom na Bluetooth satelita, odabiremo pripadajući COM port unutar Termite aplikacije. Ako je sve uspješno obavljeno moguće je vidjeti podatke koje dolaze sa satelita. Jednako tako moguće je slanje komandi prema satelitu. Važno je napomenuti kako svaka komanda mora završavati sa $'\backslash n'$ znakom što je moguće podesiti kao postavku unutar Termite programa. 
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/termite.png}
+        \caption{Prikaz \emph{Termite} aplikacije za pristup COM komandnom sučelju \cite{termite}.}
+        \label{fig:termite}
+        \end{figure}
+
+        Podešavanje \emph{Termite} programa je vrlo jednostavno. Postupak započinje spajanjem računala i satelita preko Bluetooth sučelja čiji postupak nećemo objašnjavati jer ovisi o tipu i verziji operacijskog sustava. Nakon što smo se priključili sa računalom na Bluetooth satelita, odabiremo pripadajući COM port unutar \emph{Termite} aplikacije. Ako je sve uspješno obavljeno moguće je vidjeti podatke koje dolaze sa satelita. Jednako tako moguće je slanje komandi prema satelitu. Važno je napomenuti kako svaka komanda mora završavati sa $'\backslash n'$ znakom što je moguće podesiti kao postavku unutar \emph{Termite} programa. 
         
-        Podešavanje TODO mobilne aplikacije još je jednostavnije. Spajanje na satelit je vrlo jednostavno i neće biti objašnjeno. Nakon uspješnog spajanja unutar aplikacije pojavljuju se podaci sa satelita. Slanje komandi prema satelitu jednostavno se šalju upisivanjem u komandi u za to predviđeni prozor. Napominjemo kako je u postavkama aplikacije potrebno podesiti da svaka komanda završava sa $'\backslash n'$ znakom. 
+        Podešavanje \emph{Serial Bluetooth Terminal} mobilne aplikacije još je jednostavnije. Spajanje na satelit je vrlo jednostavno i neće biti objašnjeno. Nakon uspješnog spajanja unutar aplikacije pojavljuju se podaci sa satelita. Slanje komandi prema satelitu jednostavno se šalju upisivanjem u komandi u za to predviđeni prozor. Napominjemo kako je u postavkama aplikacije potrebno podesiti da svaka komanda završava sa $'\backslash n'$ znakom. 
 
-        % TODO DODAJ SLIKU MOBILNE APLIKACIJE
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.4\textwidth]{images/mobilna_app.png}
+        \caption{Prikaz \emph{Serial Bluetooth Terminal} Android aplikacije \cite{mobilna_app}.}
+        \label{fig:mobilna_app}
+        \end{figure}
         
-        Ako želimo grafički prikazivati vrijednosti koje dolaze sa satelita, to možemo učiniti sa TODO programom \cite{}. TODO program pruža različite mogućnosti: primanje i slanje komandi, grafičko prikazivanje vrijednosti, spremanje podataka u CSV datoteku i još mnogo toga. Program je besplatan i otvorenog koda. Sučelje TODO programa prikazano je na slici \ref{TODO}.
+        Ako želimo grafički prikazivati vrijednosti koje dolaze sa satelita, to možemo učiniti sa \emph{SerialPlot} programom \cite{serialplot}. \emph{SerialPlot} program pruža različite mogućnosti: primanje i slanje komandi, grafičko prikazivanje vrijednosti, spremanje podataka u CSV datoteku i još mnogo toga. Program je besplatan i otvorenog koda. Sučelje \emph{SerialPlot} programa prikazano je na slici \ref{fig:serialplot}.
 
-        % TODO DODAJ SLIKU SUČELJA ZA PLOTANJE
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/serialplot.png}
+        \caption{Prikaz \emph{SerialPlot} aplikacije za grafički prikaz vrijednosti sa COM sučelja \cite{serialplot}.}
+        \label{fig:serialplot}
+        \end{figure}
 
-        Postupak spajanja TODO programa i satelita praktično je isto kao i spajanje sa Termite programom. Prilikom uspješnog spajanja na ekranu se pojavljuju grafičke vrijednosti sa satelita. U programu je moguće odabrati automatsku detekciju broja podataka u ovisnosti o tome na koji način šaljemo vrijednosti. U našem slučaju vrijednosti šaljemo kao cijele brojeve odvojene znakom zareza. Takvu postavku moramo odabrati i unutar TODO programa. Nakon uspješnog podešavanja postavki na ekranu bi se trebali prikazivati grafovi vrijednosti koje dolaze sa satelita. Svaku pojedinačnu vrijednost moguće je sakriti ili prikazati. 
+        Postupak spajanja \emph{SerialPlot} programa i satelita praktično je isto kao i spajanje sa Termite programom. Prilikom uspješnog spajanja na ekranu se pojavljuju grafičke vrijednosti sa satelita. U programu je moguće odabrati automatsku detekciju broja podataka u ovisnosti o tome na koji način šaljemo vrijednosti. U našem slučaju vrijednosti šaljemo kao cijele brojeve odvojene znakom zareza. Takvu postavku moramo odabrati i unutar \emph{SerialPlot} programa. Nakon uspješnog podešavanja postavki na ekranu bi se trebali prikazivati grafovi vrijednosti koje dolaze sa satelita. Svaku pojedinačnu vrijednost moguće je sakriti ili prikazati. 
     }
 
     \section{Određivanje parametara}{
