@@ -530,3 +530,14 @@ drajver
 STM
 Incremental
 encoder
+KBU
+kratkospojnik
+kratkospojnike
+odlemiti
+oscilator
+konfigurirali
+bits
+baudrate
+Tuner
+Message
+Queue
