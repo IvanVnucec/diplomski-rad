@@ -189,6 +189,7 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
     Orijentacija satelita u referentnom sustavu $\mathcal{F}_b$ naspram inercijskog referentnog sustava $\mathcal{F}_G$ označavamo rotacijskom matricom $\boldsymbol{C}_{bG}$.
 
     \section{Osnovni parametri satelita}{
+    \label{section:osnovni_parametri_satelita}
         Inercijska matrica \engl{Moment of inertia tensor} u pojednostavljenom smislu označava moment tromosti krutog tijela oko pojedine osi rotacije. Naglašavamo da je u pitanju pojednostavljena definicija i da ona nije strogo točna, no za naše potrebe je ona dovoljna. Inercijsku matricu predstavljamo kao:
 
         \begin{equation}
@@ -212,6 +213,16 @@ Jednako tako hvala i Karli, bez njenog truda moj softver ne bi imao hardver.}
         \end{bmatrix}
         .
         \end{equation}
+
+        Radi jednostavnosti, pretpostavit ćemo da model kutne brzine satelita u Laplaceovoj domeni izgleda kao sustav prvog reda:
+        
+        \begin{equation}
+        \label{eq:laplace_prvi_red}
+        H(s) = \frac{Y(s)}{X(s)} = K \frac{1/\tau}{s + 1/\tau},
+        \end{equation}
+
+okarakterizirati
+        gdje su $K$ i $\tau$ koeficijenti prijenosne funkcije. Parametar $K$ mogli bi okarakterizirati kao koeficijent pretvorbe mjernih jedinica ulaza $X(s)$ i izlaza $Y(s)$, a parametar $\tau$ kao koeficijent tromosti sustava (vremenska ovisnost).
     }
 
     \section{Eulerovi kutovi}{
@@ -1400,33 +1411,45 @@ while (True) {
 \chapter{Eksperimentalna verifikacija ADCS sustava}{
     U ovom poglavlju objasnit ćemo testni sustav za eksperimentalnu verifikaciju programske podrške. 
 
-    \section{Opis sustava}{
-        %- opisati zracni lezaj
+    \section{Opis sustava i korištenih alata}{
+        Verifikacijski sustav sastoji se od nekoliko dijelova. Prvi i najvažniji je tzv. zračni ležaj sa pripadajućom plastičnom kuglom prikazan na slici \ref{fig:TODO}.
 
-        %- opisati kuglu
-        %- opisati kako satelit stoji u kugli
-        %- navesti reference za zracne lezaje
-        %- parser
-        %- program za iscrtavanje
-        %- bluetooth modul za komunikaciju
-        %- iscrtavanje orijentacije papirnatog avioncica u Octave programu
+        % TODO DODAJ SLIKU ZRACNOG LEZAJA
+
+        Zračni ležaj sastoji se od 3D isprintane polusferične podloge koja je napajana stlačenim zrakom koji dolazi iz kompresora zraka. Stlačeni zrak koji dolazi na površinu zračnog ležaja stvara tanki film zračne struje koji smanjuje trenje između ležaja i plastične kugle. Plastična kugla sastoji se od vanjske ljuske i plastičnog držača satelita. Plastična vanjska ljuska sastavljena je od dvije polusfere koje je vrlo lako moguće sastaviti i rastaviti. Plastični držač izrađen je od laserski rezanog plexiglasa i prikazan je na slici \ref{fig:TODO}. Posebnim navojnim odstojnicima satelit je pričvršćen na plastični držač \cite{zracni_lezaj}.
+
+        Za komuniciranje sa satelitom koristimo računalo ili pametni mobilni telefon koji sadrže Bluetooth sučelje. Za klasično komandno sučelje na računalu koristimo program Termite \cite{termite} prikazan na slici \ref{TODO}, a na mobilnom telefonu aplikaciju TODO \cite{TODO} prikazanu na slici \ref{TODO}.
+
+        % TODO DODAJ SLIKU TERMITE
+
+        Podešavanje Termite programa je vrlo jednostavno. Postupak započinje spajanjem računala i satelita preko Bluetooth sučelja čiji postupak nećemo objašnjavati jer ovisi o tipu i verziji operacijskog sustava. Nakon što smo se priključili sa računalom na Bluetooth satelita, odabiremo pripadajući COM port unutar Termite aplikacije. Ako je sve uspješno obavljeno moguće je vidjeti podatke koje dolaze sa satelita. Jednako tako moguće je slanje komandi prema satelitu. Važno je napomenuti kako svaka komanda mora završavati sa $'\backslash n'$ znakom što je moguće podesiti kao postavku unutar Termite programa. 
+        
+        Podešavanje TODO mobilne aplikacije još je jednostavnije. Spajanje na satelit je vrlo jednostavno i neće biti objašnjeno. Nakon uspješnog spajanja unutar aplikacije pojavljuju se podaci sa satelita. Slanje komandi prema satelitu jednostavno se šalju upisivanjem u komandi u za to predviđeni prozor. Napominjemo kako je u postavkama aplikacije potrebno podesiti da svaka komanda završava sa $'\backslash n'$ znakom. 
+
+        % TODO DODAJ SLIKU MOBILNE APLIKACIJE
+        
+        Ako želimo grafički prikazivati vrijednosti koje dolaze sa satelita, to možemo učiniti sa TODO programom \cite{}. TODO program pruža različite mogućnosti: primanje i slanje komandi, grafičko prikazivanje vrijednosti, spremanje podataka u CSV datoteku i još mnogo toga. Program je besplatan i otvorenog koda. Sučelje TODO programa prikazano je na slici \ref{TODO}.
+
+        % TODO DODAJ SLIKU SUČELJA ZA PLOTANJE
+
+        Postupak spajanja TODO programa i satelita praktično je isto kao i spajanje sa Termite programom. Prilikom uspješnog spajanja na ekranu se pojavljuju grafičke vrijednosti sa satelita. U programu je moguće odabrati automatsku detekciju broja podataka u ovisnosti o tome na koji način šaljemo vrijednosti. U našem slučaju vrijednosti šaljemo kao cijele brojeve odvojene znakom zareza. Takvu postavku moramo odabrati i unutar TODO programa. Nakon uspješnog podešavanja postavki na ekranu bi se trebali prikazivati grafovi vrijednosti koje dolaze sa satelita. Svaku pojedinačnu vrijednost moguće je sakriti ili prikazati. 
     }
 
     \section{Određivanje parametara}{
         \subsection{Kinematički model}{
-            Kao što smo već pisali u poglavlju \ref{TODO}, pojednostavljeni kinematički model satelita definirali smo kao:
+            Kao što smo već pisali u poglavlju \ref{section:osnovni_parametri_satelita}, pojednostavljeni kinematički model satelita (jednadžba \ref{eq:laplace_prvi_red}) definiramo kao:
 
             \begin{equation}
-                TODO Dodaj kinematički model satelita
+                H(s) = \frac{Y(s)}{X(s)} = K \frac{1/\tau}{s + 1/\tau},
             \end{equation}
 
-            gdje su parametri $TODO$ i $TODO$ nepoznanice koje je potrebno odrediti. 
+            gdje su parametri $K$ i $\tau$ nepoznanice koje je potrebno odrediti. 
             
             Postupak određivanja parametara započinje pokretanjem ADCS sustava. Nakon što se ADCS sustav pokrenuo i kada je prošla sva inicijalizacija, satelit postavljamo na zračni ležaj i to tako da satelit miruje. Nakon što smo uspostavili sve uvjete za testiranje, možemo krenuti na snimanje odziva sustava na tzv. step pobudu.
 
             Snimanje sustava na step pobudu započinje pokretanjem programa TODO pomoću kojeg je vrlo lako moguće snimiti sve vrijednosti u CSV format datoteke koje je potom lako analizirati pomoću alata kao što je MATLAB. Prilikom pokretanja TODO programa odaberemo COM port na kojemu je moguće dobiti podatke iz satelita. Namjestimo li automatsko primanje svih parametara na ekranu ćemo vidjeti 3 vrste signala: estimirani Eulerovi kutovi, mjerenje sa žiroskopa i Duty Cycle zamašnjaka. Pomoću mjerenja žiroskopa i vrijednosti DC zamašnjaka moguće je odrediti kinematički model satelita. Primijetimo kako u jednadžbi \ref{TODO} kao ulazni parametar sustava imamo DC zamašnjaka, a kao izlaz kutnu brzinu satelita. 
 
-            Ako sustavu u mirovanju pošaljemo komandu za promjenu DC zamašnjaka sa 0\% na 50\% (vidi popis komandi \ref{TODO}), odziv sustava na dvije takve pobude prikazan je na slici \ref{fig:step_response}. Primjetimo kako oko 20 sekunde kutna brzina počinje blago padati. Razlog tomu su blage nepravilnosti zračnog ležaja koje uzrokuju parazitni moment i tako usporavaju satelit. Modeliranje parazitnog momenta nismo uzimali u obzir radi jednostavnosti jednadžbi. 
+            Odziv sustava na dvije pobude prikazan je na slici \ref{fig:step_response}. Oko 7. sekunde poslali smo satelitu naredbu da zavrti zamašnjak na 50\% DC nakon koje kutna brzina naglo raste do nekih 3 rad/s. Primijetimo kako oko 20. sekunde kutna brzina počinje blago padati. Razlog tomu su blage nepravilnosti zračnog ležaja koje uzrokuju parazitni moment koji onda usporava satelit. Modeliranje parazitnog momenta nismo uzimali u obzir radi jednostavnosti jednadžbi. Postupak snimanja step pobude napravili smo još jednom od 60. do 85. sekunde.
 
             \begin{figure}[htb]
             \centering
@@ -1435,20 +1458,33 @@ while (True) {
             \label{fig:step_response}
             \end{figure}
 
-            Dade se pokazati kako odziv na step pobudu satelita u vremenskoj domeni možemo zapisati kao:
+            Eksperimentalno se dade pokazati kako odziv na step pobudu satelita u Laplaceovoj domeni možemo zapisati kao:
 
             \begin{equation}
-                TODO Dodaj eksponencijalnu funkciju
+                Y(t) = H(s)X(s) = K \frac{1/\tau}{s + 1/\tau} \; \frac{1}{s},
             \end{equation}
 
-            Pomoću MATLAB alata i pripadajućih MATLAB skripti koje se nalaze unutar \texttt{docs/step\_response} direktorija \cite{dodajLinkNaFolder}, moguće je na jednostavan način dobiti $$ i $$ parametre kinematičkog modela. Primjer dobivanja parametara preko MATLAB skripti moguće je vidjeti na slici \ref{TODO}. 
-
-            %TODO DODAJ GRAF REZULTATA FITA FUNKCIJE
-
-            Spomenute MATLAB skripte osim estimacije parametara kao rezultat daju i kinematičke modele. Prvi kinematički model odnosi se na modeliranje kutne brzine, a drugi na modeliranje orijentacije (kuta). Kinematički model za modeliranje orijentacije dobivamo integriranjem kutne brzine i definiramo ga kao:
+            odnosno u vremenskoj domeni:
 
             \begin{equation}
-                TODO Dodaj kinematički model za orijentaciju
+                y(t) = (h \ast x)(t) = K (1 - e^{-\frac{t}{\tau}}),
+            \end{equation}
+
+            Parametar $K$ označuje koeficijent pretvorbe između DC zamašnjaka i izlazne kutne brzine. Parametar $\tau$ označava koeficijent tromosti sustava: što je sustav tromiji to je parametar veći, i obrnuto.
+
+            Pomoću MATLAB alata i pripadajućih MATLAB skripti koje se nalaze unutar \texttt{docs/step\_response} direktorija \cite{link_na_fit}, moguće je na jednostavan način dobiti $K$ i $\tau$ parametre kinematičkog modela. Primjer dobivanja parametara preko MATLAB skripti moguće je vidjeti na slici \ref{fig:fittana_funkcija}. Napisana skripta prvo učitava već snimljene podatke (vidi sliku \ref{fig:step_response}) i izlučuje trenutak eksponencijalnog rasta kutne brzine. Na temelju tog vremenskog odsječka skripta će kao rezultat dati $K$ i $\tau$ koeficijente. 
+
+            \begin{figure}[htb]
+            \centering
+            \includegraphics[width=1.0\textwidth]{other/fittana_funkcija.png}
+            \caption{Graf odziva na Step i graf funkcije kojoj smo pronašli nepoznate parametre.}
+            \label{fig:fittana_funkcija}
+            \end{figure}
+
+            Spomenute MATLAB skripte osim estimacije parametara kao rezultat daju i kinematičke modele. Prvi kinematički model odnosi se na modeliranje kutne brzine, a drugi na modeliranje orijentacije (kuta). Kinematički model za modeliranje orijentacije dobivamo integriranjem modela kutne brzine satelita (jednadžba \ref{eq:laplace_prvi_red}) i definiramo ga kao:
+
+            \begin{equation}
+                Y(t) = \frac{1}{s} \; H(s) =  \frac{1}{s} \; K \frac{1/\tau}{s + 1/\tau}.
             \end{equation}
         }
     
@@ -1464,13 +1500,41 @@ while (True) {
     }
 
     \section{Rezultati verifikacije}{
-        Rezultate parametrizacije PID regulatora snimili smo prilikom testiranja sustava. Na slici \ref{TODO} prikazan je odziv sustava na promjenu željene kutne brzine u nekoliko navrata. Prvi put korisnik je komandom zadao željenu kutnu brzinu od TODO i to možemo vidjeti od TODO do TODO sekunde. TODO DODAJ JOŠ AKO TREBA. Na drugoj slici \ref{TODO} vidimo odziv regulatora na vanjske smetnje gdje smo u nekoliko navrata ručno pomaknuli satelit i tako mu doveli smetnju.
+        Rezultate parametrizacije PID regulatora snimili smo prilikom testiranja sustava. Na slici \ref{fig:ang_vel_reg_user} prikazan je odziv sustava na promjenu željene kutne brzine u nekoliko navrata. U prvom navratu korisnik je u 5. sekundi komandom zadao željenu kutnu brzinu od 1 rad/s. Kutna brzina naglo počinje rasti sve dok satelit ne dosegne željenu brzinu oko 20. sekunde. Neposredno nakon toga satelitu je poslana naredba za referentnu brzinu od 0 rad/s i to se jasno može vidjeti naglim ali kontroliranim padom do 0 rad/s. Jednaki postupak izveli smo u 55. sekundi gdje smo satelitu zadali kutnu brzinu od 1 rad/s ali sada u suprotnom smjeru. Žuto obojana linija predstavlja vrijednosti izlaza regulatora. Izlaz regulatora direktno utječe na DC zamašnjaka. Negativna vrijednost označava suprotni smjer vrtne zamašnjaka. Primijetimo kako graf izlaza regulatora ne prelazi $\pm$100\%. Primijetimo još činjenicu da oko 30. i 85. sekunde postoji blago nadvišenje s obzirom na referentnu kutnu brzinu koje traje relativno dugo. Uzrok tog nadvišenja je mala greška koja dolazi na ulaz PID regulatora. PID regulator množi tu malu grešku sa K članom ali to i dalje nije dovoljno za značajniju korekciju. O D članu nema govora jer je sustav u stacionarnom stanju i ne postoje visokofrekventne komponente na koje bi D član reagirao. Primijetimo kako je izlaz PID regulatora u početku relativno mali i da raste s vremenom. To je upravo I član koji integrira malu grešku i koji će nakon nekoliko vremena postati značajan faktor izlaza regulatora koji onda vrši korekciju kutne brzine. 
 
-        % TODO DODAJ SLIKE REGULACIJE KUTNE BRZINE (KORISNIK I VANJSKA SMETNJA)
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1.0\textwidth]{other/ang_vel_reg_user.png}
+        \caption{Odzivi sustava na promjenu referentne kutne brzine.}
+        \label{fig:ang_vel_reg_user}
+        \end{figure}
 
-        Rezultate ugađanja PID regulatora za regulaciju kuta možemo vidjeti na slici \ref{TODO} gdje je korisnik zadao željeni kut od TODO. Na slici \ref{TODO} možemo vidjeti odziv regulatora na vanjske smetnje gdje smo ručno sustav pomaknuli iz referentnog položaja.
+        Na drugoj slici \ref{fig:ang_vel_reg_dist} vidimo odziv regulatora na vanjske smetnje gdje smo u nekoliko navrata ručno pomaknuli satelit i tako mu doveli smetnju. Dva su trenutka smetnje: jedna oko 10. sekunde i druga oko 32. sekunde. Prva smetnja ima različitu orijentaciju u odnosu na drugu ne bi li ustanovili simetričnost regulacije. Vidimo kako je referentna kutna brzina cijelo vrijeme postavljena u 0 rad/s. Primijetimo kako regulator vrlo brzo vrši korekciju i da je tranzijentno vrijeme vrlo kratko. Zanimljivo je još jednom primijetiti manifestacije nepravilnosti zračnog ležaja. Jasno je vidljivo na samom početku grafa da izlaz regulatora nije 0\% već neka vrijednost. Razlog tomu je što zračni ležaj daje konstantni moment kojeg regulator pokušava kompenzirati. Primijetimo i to kako oko 40. sekunde postoji značajno nadvišenje kutne brzine što je u svakom slučaju negativna karakteristika. Daljnja eksperimentalna verifikacija mogla bi pokazati kako postoje bolji parametri PID regulatora koji bi dali bolju regulacijsku karakteristiku.
 
-        % TODO DODAJ SLIKE REGULACIJE KUTA (KORISNIK I VANJSKA SMETNJA)
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1.0\textwidth]{other/ang_vel_reg_dist.png}
+        \caption{Odzivi sustava na vanjsku smetnju kutne brzine.}
+        \label{fig:ang_vel_reg_dist}
+        \end{figure}
+
+        Nadalje, rezultate ugađanja PID regulatora za regulaciju kuta možemo vidjeti na slici \ref{fig:angle_reg_user} gdje je korisnik prvi put u 3. sekundi zadao referentni kut od 90 stupnjeva. Vidimo kako od tog trenutka imamo nagli skok iz mjerenog (zapravo estimiranog) kuta do oko 90 stupnjeva u 16. sekundi od početka snimanja. Nakon toga korisnik daje naredbu za referentnom orijentacijom od -90 stupnjeva. Primijetimo kako orijentacija počinje naglo padati i prelazi u drugu stranu. Na grafu je vidljivo kako postoji relativno veliko nadvišenje. Uzrok tog nadvišenja je u početku relativno velika izlazna komponenta PID regulatora gdje PID regulator zamašnjaku daje naredbu brzine vrtnje od 1500 DC. To je naravno nemoguće jer DC zamašnjaka maksimalno može biti 100\%. Razlog toliko velikog izlaza leži u relativno velikom D članu koji zapravo i mora biti velik ne bi li mogao kompenzirati veliku integralnu komponentu unutar pojednostavljenog kinematičkog modela za orijentaciju satelita (jednadžba \ref{TODO}). Bez obzira što regulator traži od zamašnjaka da se zavrti nerealnim brzinama, sustav je tako razvijen da će, slobodnim rječnikom, odrezati \engl{clamp} vrijednosti više/niže od $\pm$100\% DC zamašnjaka. Vidimo na grafu kako regulatoru treba relativno dugo vrijeme da kompenzira željeni kut. Razlog tomu je što su K i P komponente relativno malog iznosa te mora proći duže vrijeme sve dok I komponenta PID regulatora ne postane dovoljno velika da kompenzira nadvišenje. Tijekom eksperimentiranja pokušali smo različite kombinacije vrijednosti PID parametara ali s niti jednom nismo dobili zadovoljavajući rezultat. Pretpostavljamo kako se sustavi 2. reda, kao što je sustav modela orijentacije satelita, teško reguliraju konvencionalnim PID regulatorom kojega mi koristimo već se rabe neke druge vrste regulatora koji se bolje ponašanju od PID regulatora za sustave 2. reda \cite{reg_2_red}. 
+        
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1.0\textwidth]{other/angle_reg_user.png}
+        \caption{Odzivi sustava na promjenu referentnog Eulerovog kuta.}
+        \label{fig:angle_reg_user}
+        \end{figure}
+
+        Na slici \ref{fig:angle_reg_dist} možemo vidjeti odziv regulatora na vanjske smetnje gdje smo ručno sustav pomaknuli iz referentnog položaja. Prvi put u 5. sekundi pomaknuli smo sustav za oko -20 stupnjeva i vidimo po žutom grafu kako regulator reagira. Zbog visokofrekventne komponente smetnje, D član u početku prevladava sve dok I član s vremenom ne prevlada. Drugu vanjsku smetnju generirali smo u 42. sekundi gdje smo satelit ručno pomakli za oko 57 stupnjeva. Regulator kompenzira razliku referentnog i estimiranog kuta za oko 50 sekundi. I ovdje se jasno vidi negativni utjecaj nepravilnosti zračnog ležaja. 
+
+        \begin{figure}[htb]
+        \centering
+        \includegraphics[width=1.0\textwidth]{other/angle_reg_dist.png}
+        \caption{Odzivi sustava na vanjsku smetnju Eulerovog kuta.}
+        \label{fig:angle_reg_dist}
+        \end{figure}
     }
 }
 
