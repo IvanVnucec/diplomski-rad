@@ -513,6 +513,7 @@ tranzijentno
 integrira
 učitava
 Laplaceovoj
+Laplaceov
 parazitnog
 parazitni
 parazitne
@@ -570,7 +571,7 @@ most
 important
 systems
 this
-paper
+thesis
 the
 software
 presented
@@ -607,6 +608,7 @@ feromagnetske
 elipsoidu
 nakošenom
 rezultantne
+rezultantna
 modulira
 Generalno
 prekasno
@@ -622,3 +624,8 @@ nanosats
 satellites
 tvog
 Sever
+radijan
+radijanima
+orbitira
+pogonimo
+frame
